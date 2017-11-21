@@ -1,25 +1,11 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-
-export const red          = '#FF1818'
-export const darkRed      = '#C1272D'
-export const white        = '#ffffff'
-export const black        = '#000000'
-export const darkGrey     = '#757575'
-export const grey         = '#DEDEDE'
-export const grey50       = 'rgba(222, 222, 222, 0.5)'
-export const grey30       = 'rgba(222, 222, 222, 0.7)'
-
+import {red500, red900} from 'material-ui/styles/colors';
 
 export const palette = {
-  primary1Color: red,
-  primary2Color: red,
-  primary3Color: red,
-  accent1Color: darkRed,
-  textColor: black,
-  alternateTextColor: white,
-  canvasColor: white,
-  borderColor: grey,
-  disabledColor: grey30
+  primary1Color: red500,
+  primary2Color: red500,
+  primary3Color: red500,
+  accent1Color: red900
 }
 
 export default getMuiTheme({ palette })
