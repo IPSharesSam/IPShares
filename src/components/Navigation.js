@@ -1,46 +1,49 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { push } from 'react-router-redux'
+import signOut from '../actions/user/sign-out'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 
 
 class Navigation extends PureComponent {
-  static propTypes = {
-    signedIn: PropTypes.bool.isRequired,
-  }
+    static propTypes = {
+        signedIn: PropTypes.bool.isRequired,
+        push: PropTypes.func.isRequired,
+        signOut: PropTypes.func.isRequired,
+    }
 
-  signOut = (event) => {
-    event.preventDefault()
-    // implement later
-  }
+    signOut = (event) => {
+        event.preventDefault()
+        this.props.signOut()
+    }
 
-  signUp = () => {
-    // implement later
-  }
+    signUp = () => {
+        this.props.push('/sign-up')
+    }
 
-  goHome = () => {
-    // implement later
-  }
+    goHome = () => {
+        this.props.push('/')
+    }
 
-  render() {
-    const { signedIn } = this.props
-    return (
-      <AppBar
-        title='IP Shares'
+    render() {
+        const { signedIn } = this.props
+        return (
+            <AppBar
+                title='IP Shares'
 
-        iconElementRight={signedIn ?
-          <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :
-          <FlatButton label="Sign up" onClick={this.signUp} />
-        }
-      />
-    )
-  }
+                iconElementRight={signedIn ?
+                    <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :
+                    <FlatButton label="Sign up" onClick={this.signUp} />
+                }
+            />
+        )
+    }
 }
 
 const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id)
+    signedIn: (!!currentUser && !!currentUser._id)
 })
 
-export default connect(mapStateToProps)(Navigation)
+export default connect(mapStateToProps, { push, signOut })(Navigation)
