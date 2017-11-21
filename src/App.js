@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import muiTheme from './styles/theme'
+import Navigation from './components/Navigation.js'
 import './App.css';
 
 class App extends Component {
+  static childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
+  }
+
+  getChildContext() {
+    return { muiTheme }
+  }
+
   render() {
     return (
-      <MuiThemeProvider>      
+      <MuiThemeProvider muiTheme={muiTheme}>      
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">IP Shares</h1>
-        </header>
+        <Navigation />
       </div>
       </MuiThemeProvider>
     );
