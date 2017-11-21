@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import signOut from '../actions/user/sign-out'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
+import FlatButton from 'material-ui/FlatButton'
 import './Navigation.css'
 
 
@@ -28,10 +29,15 @@ class Navigation extends PureComponent {
     }
 
     render() {
+        const { signedIn } = this.props
         return (
             <AppBar
                 className="appbar-custom"
                 title='IP Shares'
+                iconElementRight={signedIn ?
+                    <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} /> :
+                    null
+                }
             />
         )
     }

@@ -1,10 +1,13 @@
 .appbar-custom {
     background-color: #ffffff!important;
     border-bottom: 2px solid #F44336!important;
-    text-align: right;
     }
 
 .appbar-custom h1 {
     color: #F44336!important;
     
+}
+
+.flat-button {
+    color: #F44336!important;
 }
