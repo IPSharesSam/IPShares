@@ -1,11 +1,19 @@
+.signup-paper {
+    margin: 2em auto;
+    width: 400px;
+    padding: 40px;
+}
+
+.street-name {
+    width:240px!important;
+}
+.street-number {
+    margin-left: 20px;
+    width:60px!important;
+}
 .Checkbox {
     text-align: left;
     padding: 1em 0;
 }
 
-.street-input {
-    width:100%;
-}
-.street-name  {
-    width:50%;
-}
+

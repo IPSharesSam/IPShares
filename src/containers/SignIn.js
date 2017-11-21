@@ -7,17 +7,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import signIn from '../actions/user/sign-in'
-
-const dialogStyle = {
-  width: '400px',
-  margin: '50px auto',
-  padding: '2rem',
-}
-
-const buttonStyle = {
-  float: 'right',
-  marginLeft: '2rem',
-}
+import './SignIn.css'
 
 export class SignIn extends PureComponent {
   static propTypes = {
@@ -46,24 +36,19 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
-      <Paper style={ dialogStyle }>
+      <Paper className="signin-paper">
         <h1>Sign in</h1>
         <form onSubmit={this.submitForm.bind(this)}>
-          <div className="input">
-            <TextField ref="email" type="email" hintText="Email address" />
-          </div>
-          <div className="input">
-            <TextField ref="password" type="password" hintText="Password"  />
-          </div>
+            <TextField ref="email" type="email" hintText="Email address" fullWidth={true}/>
+            <TextField ref="password" type="password" hintText="Password"  fullWidth={true}/>
         </form>
-        <FlatButton
-          onClick={ this.signUp.bind(this) }
-          label="Sign up" />
         <RaisedButton
-          style={ buttonStyle }
           onClick={ this.submitForm.bind(this) }
           label="Sign in"
           primary={true} />
+          <FlatButton
+          onClick={ this.signUp.bind(this) }
+          label="Sign up" />
       </Paper>
     )
   }
