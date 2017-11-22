@@ -16,8 +16,9 @@ export default (state = currentUserFromLocalStorage, { type, payload } = {}) => 
     case USER_SIGNED_OUT :
       window.localStorage.removeItem(CURRENT_USER_KEY)
       return null
-
+      
     default :
       return state
   }
 }
+
