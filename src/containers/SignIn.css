@@ -1,5 +1,10 @@
+.landing-text {
+    padding:5em;
+    text-align: center;
+}
+
 .signin-paper {
-    margin: 2em auto;
+    margin: 5em auto;
     width: 400px;
     padding: 40px;
 }

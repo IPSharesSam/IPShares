@@ -34,10 +34,11 @@ class Navigation extends PureComponent {
         return (
             <AppBar
                 className="appbar-custom"
+                showMenuIconButton={false}
                 title={ <div><img className="logo" src={ logo } alt=""/> <span className="brand">IP Shares</span></div>}
                 iconElementRight={signedIn ?
                     <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} /> :
-                    null
+                    <FlatButton className="flat-button" label="Sign up" primary={true} onClick={this.signUp.bind(this)} />
                 }
             />
         )
