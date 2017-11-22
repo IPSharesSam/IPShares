@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authenticate from '../actions/authenticate'
 
-
 class Home extends PureComponent {
   componentWillMount() {
     this.props.authenticate()
   }
   render() {
-
+    console.log(this.props)
+    
     return (
       <div className="Home">
-        <h1>homepage</h1>
+        <h1>Homepage</h1>
       </div>
     )
   }
