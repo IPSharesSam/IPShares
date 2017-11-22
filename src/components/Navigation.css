@@ -1,11 +1,22 @@
+
+
 .appbar-custom {
     background-color: #ffffff!important;
     border-bottom: 2px solid #F44336!important;
     }
 
-.appbar-custom h1 {
+.appbar-custom .logo {
+        height:48px;
+        position: relative;
+        top:8px;
+        
+}
+.appbar-custom .brand {
     color: #F44336!important;
-    
+    font-family: boltssf;
+    position: relative;
+    font-size: 1.1em;
+    top:-8px;
 }
 
 .flat-button {

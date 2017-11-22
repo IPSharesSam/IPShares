@@ -2,17 +2,18 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authenticate from '../actions/authenticate'
-
+import Header from '../components/Header'
 
 class Home extends PureComponent {
   componentWillMount() {
     this.props.authenticate()
   }
   render() {
-
+    console.log(this.props)
+    
     return (
       <div className="Home">
-        <h1>homepage</h1>
+        <Header content="Homepage"/>
       </div>
     )
   }

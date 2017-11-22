@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
 import './Navigation.css'
+import logo from '../images/logo.svg'
 
 
 class Navigation extends PureComponent {
@@ -33,7 +34,7 @@ class Navigation extends PureComponent {
         return (
             <AppBar
                 className="appbar-custom"
-                title='IP Shares'
+                title={ <div><img className="logo" src={ logo } alt=""/> <span className="brand">IP Shares</span></div>}
                 iconElementRight={signedIn ?
                     <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} /> :
                     null
