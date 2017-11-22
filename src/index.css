@@ -1,7 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+@font-face {
+  font-family: boltssf;
+  src: url(./fonts/boltssf.ttf)
+ }
+
+ @font-face {
+  font-family: franklin;
+  src: url(./fonts/franklingothicmediumregular.ttf)
+ }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: franklin;
 }

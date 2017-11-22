@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 const styles = {
     color: '#595959',
+    textAlign: 'center'
 }
 
 class Title extends PureComponent {

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authenticate from '../actions/authenticate'
+import Header from '../components/Header'
 
 class Home extends PureComponent {
   componentWillMount() {
@@ -12,7 +13,7 @@ class Home extends PureComponent {
     
     return (
       <div className="Home">
-        <h1>Homepage</h1>
+        <Header content="Homepage"/>
       </div>
     )
   }
