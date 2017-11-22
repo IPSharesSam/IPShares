@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
-import NumberInput from 'material-ui-number-input'
+// import NumberInput from 'material-ui-number-input'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
@@ -162,7 +162,7 @@ export class SignUp extends PureComponent {
 
           <TextField className="street-name" ref="streetName" type="text" hintText="Street" />
 
-          <NumberInput className="street-number" ref="streetNumber" type="number" hintText="Number" />
+          <TextField className="street-number" ref="streetNumber" type="number" hintText="Number" />
 
           <TextField ref="postalCode" type="text" hintText="Postal Code" fullWidth={true}/>
 
