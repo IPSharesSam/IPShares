@@ -6,18 +6,23 @@ import authenticate from '../actions/authenticate'
 import Header from '../components/Header'
 
 class Home extends PureComponent {
+  static PropTypes = {
+    authenticated: PropTypes.object
+  }
   componentWillMount() {
     this.props.authenticate()
   }
+  
   render() {
-    console.log(this.props)
-    
+    const { authenticated } = this.props
     return (
+      
       <div className="Home">
-        <Header content="Homepage"/>
+        <Header content={ authenticated.firstName + ' ' + authenticated.lastName }/>
       </div>
     )
   }
 }
 
-export default connect(null, { authenticate, push })(Home)
+const mapStateToProps = ({ authenticated }) => ({ authenticated })
+export default connect( mapStateToProps, { authenticate, push })(Home)
