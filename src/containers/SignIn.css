@@ -1,9 +1,16 @@
 
 .gridlist-signin {
-    background: url(/images/signin-background.png) no-repeat;
+    background: url(/images/ship-bg.png) no-repeat center center;
     background-size: 100%;
-    padding-top: 10em;
-    padding-bottom: 4em;
+    padding: 10em 5em 4em 5em;
+}
+
+.gridlist-creators {
+    padding: 2em 5em 2em 5em;
+}
+
+.gridlist-advisors {
+    padding: 2em 5em 4em 5em;
 }
 
 .gridtile-signin {
@@ -11,10 +18,13 @@
     text-align: center;
 }
 
+.gridtile-signin:first-child {
+    padding-left:5em!important;
+}
 .gridtile-signin img {
     display: block;
     margin: 0 auto;
-    width:128px;
+    width:96px;
 }
 .signin-paper {
     margin: 0 auto;
