@@ -16,7 +16,18 @@ export class SignUp extends PureComponent {
     signUp: PropTypes.func.isRequired,
   }
 
-  state = {}
+  state = {
+    checked: true,
+  }
+
+  updateCheck() {
+    this.setState((oldState) => {
+      console.log(this.state.checked)
+      return {
+        checked: !oldState.checked,
+      };
+    });
+  }
 
   submitForm(event) {
     event.preventDefault()
@@ -29,9 +40,10 @@ export class SignUp extends PureComponent {
         streetName: this.refs.streetName.getValue(),
         streetNumber: this.refs.streetNumber.getValue(),
         postalCode: this.refs.postalCode.getValue(),
+        city: this.refs.city.getValue(),
         country: this.refs.country.getValue(),
         phoneNumber: this.refs.phoneNumber.getValue(),
-        subscribed: true
+        subscribed: this.state.checked
       }
       this.props.signUp(user)
     }
@@ -147,23 +159,23 @@ export class SignUp extends PureComponent {
 
         <form onSubmit={this.submitForm.bind(this)}>
 
-          <TextField ref="firstName" type="text" hintText="First Name"
+          <TextField className="left-inline" ref="firstName" type="text" hintText="First Name"
             onChange={this.validateFirstName.bind(this)}
             errorText={this.state.nameError}
-            fullWidth={true}
             />
 
-          <TextField ref="lastName" type="text" hintText="Last Name"
+          <TextField className="right-inline" ref="lastName" type="text" hintText="Last Name"
             onChange={this.validateLastName.bind(this)}
             errorText={this.state.nameError}
-            fullWidth={true}
              />
 
-          <TextField className="street-name" ref="streetName" type="text" hintText="Street" />
+          <TextField className="left-inline" ref="streetName" type="text" hintText="Street" />
 
-          <TextField className="street-number" ref="streetNumber" type="text" hintText="Number" />
+          <TextField className="right-inline" ref="streetNumber" type="text" hintText="Number" />
 
-          <TextField ref="postalCode" type="text" hintText="Postal Code" fullWidth={true}/>
+          <TextField className="left-inline" ref="postalCode" type="text" hintText="Postal Code" />
+
+          <TextField className="right-inline" ref="city" type="text" hintText="City"/>
 
           <TextField ref="country" type="text" hintText="Country" fullWidth={true}/>
 
@@ -188,8 +200,9 @@ export class SignUp extends PureComponent {
             fullWidth={true}
              />
           <Checkbox ref="subscribed" className="Checkbox" label="Subscribe to newsletter"
-            checked={true}
-            onCheck={null}
+            checked={this.state.checked}
+            onCheck={this.updateCheck.bind(this)}
+            labelPosition="left"
           />
         </form>
         <RaisedButton
