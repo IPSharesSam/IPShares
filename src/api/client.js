@@ -38,7 +38,7 @@ export default class ApiClient {
   // GET path
   //
   // Example:
-  //  api.get('/batches')
+  //  api.get('/trademarks')
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //
@@ -52,7 +52,7 @@ export default class ApiClient {
   // POST path
   //
   // Example:
-  //  api.post('/batches', { number: '11', ... })
+  //  api.post('/trademarks', { number: '11', ... })
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //
@@ -67,7 +67,7 @@ export default class ApiClient {
   // PUT path
   //
   // Example:
-  //  api.put('/batches/39820384', { number: '12', ... })
+  //  api.put('/trademarks/39820384', { number: '12', ... })
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //
@@ -82,7 +82,7 @@ export default class ApiClient {
   // PATCH path
   //
   // Example:
-  //  api.patch('/batches/39820384', { number: '12', ... })
+  //  api.patch('/trademarks/39820384', { number: '12', ... })
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //
@@ -97,7 +97,7 @@ export default class ApiClient {
   // DELETE path
   //
   // Example:
-  //  api.delete('/batches/39820384')
+  //  api.delete('/trademarks/39820384')
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //
