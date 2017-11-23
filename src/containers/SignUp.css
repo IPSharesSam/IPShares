@@ -1,19 +1,20 @@
 .signup-paper {
     margin: 2em auto;
-    width: 400px;
+    width: 500px;
     padding: 40px;
 }
 
-.street-name {
-    width:240px!important;
+.left-inline {
+    width:200px!important;
 }
-.street-number {
+.right-inline {
     margin-left: 20px;
-    width:60px!important;
+    width:200px!important;
 }
+
 .Checkbox {
-    text-align: left;
     padding: 1em 0;
+    width:54%!important;
 }
 
 

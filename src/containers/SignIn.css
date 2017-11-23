@@ -2,7 +2,8 @@
 .gridlist-signin {
     background: url(/images/signin-background.png) no-repeat;
     background-size: 100%;
-    padding: 6em;
+    padding-top: 10em;
+    padding-bottom: 4em;
 }
 
 .gridtile-signin {
