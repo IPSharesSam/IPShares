@@ -64,8 +64,8 @@ export class SignIn extends PureComponent {
           </GridTile>
         </GridList>
         <Title content="For creators..." />
-        <GridList cols={12}>
-          <GridTile className="gridtile-signin" cols={4} rows={3}>
+        <GridList className="gridlist-creators"cols={12}>
+          <GridTile className="gridtile-signin" cols={4} rows={2}>
             <img src={ registered } alt="" />
             <h2>Design, Patents & properties</h2>
             <p>
@@ -79,7 +79,7 @@ export class SignIn extends PureComponent {
               like, directly from your IPS account
           </p>
           </GridTile>
-          <GridTile className="gridtile-signin" cols={4} rows={3}>
+          <GridTile className="gridtile-signin" cols={4} rows={2}>
             <img src={ copyright} alt="" />
             <h2>Copyright</h2>
             <p>
@@ -94,7 +94,7 @@ export class SignIn extends PureComponent {
             </p>
 
           </GridTile>
-          <GridTile className="gridtile-signin" cols={4} rows={3}>
+          <GridTile className="gridtile-signin" cols={4} rows={2}>
             <img src={ information} alt="" />
             <h2>
               Connect with an expert
@@ -113,7 +113,7 @@ export class SignIn extends PureComponent {
         </GridList>
         <Title content="For advisors" />
         <GridList cols={12}>
-          <GridTile className="gridtile-signin" cols={4} rows={3}>
+          <GridTile className="gridtile-signin" cols={4} rows={2}>
             <img src={ contact } alt="" />
             <h2>Manage your portfolio</h2>
             <p>

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 const styles = {
     color: '#595959',
     textAlign: 'center',
+    fontSize: '2.5em',
     fontFamily: 'boltssf',
     fontWeight: '400'
 }
