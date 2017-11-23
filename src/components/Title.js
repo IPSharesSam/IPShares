@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 const styles = {
     color: '#595959',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'boltssf',
+    fontWeight: '400'
 }
 
 class Title extends PureComponent {
