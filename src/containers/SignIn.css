@@ -1,12 +1,22 @@
-.landing-text {
-    padding:5em;
+
+.gridlist-signin {
+    padding: 5em;
+}
+
+.gridtile-signin {
+    padding: 2.5em;
     text-align: center;
 }
 
+.gridtile-signin img {
+    display: block;
+    margin: 0 auto;
+    width:128px;
+}
 .signin-paper {
-    margin: 5em auto;
-    width: 400px;
+    margin: 0 auto;
     padding: 40px;
+    width:400px;
 }
 
 .signin-paper form {
