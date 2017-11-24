@@ -5,9 +5,8 @@ import { push } from 'react-router-redux'
 import authenticate from '../actions/authenticate'
 import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import searchTrademarks from '../actions/search'
+import { GridList, GridTile } from 'material-ui/GridList'
+import { copyrightsm, registered } from '../images'
 
 import './Home.css'
 const styles = {
@@ -20,14 +19,17 @@ const styles = {
     marginBottom: 12,
     fontWeight: 400
   },
+  list: {
+    padding: '0 10em',
+    margin: '0 auto'
+  }
 };
 
 class Home extends PureComponent {
   static PropTypes = {
     authenticated: PropTypes.object,
-    searchTrademarks: PropTypes.func
   }
-  
+
   componentWillMount() {
     this.props.authenticate()
   }
@@ -41,6 +43,11 @@ class Home extends PureComponent {
 
     console.log(search)
     this.props.searchTrademarks(search)
+  }
+
+
+  goRoute() {
+    this.props.push(`/trademarks`)
   }
 
   render() {
@@ -63,23 +70,34 @@ class Home extends PureComponent {
             </div>
           </Tab>
           <Tab className="tab-custom" label="Your IP" >
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Search properties</h2>
-
-              <form onSubmit={this.submitForm.bind(this)}>
-                <TextField ref="searchBar" type="text" hintText="Search"/>
-              </form>
-
-              <RaisedButton
-                onClick={this.submitForm.bind(this)}
-                label="Search"
-                primary={true} 
-              />
-
-              <p>
-                You can put any sort of HTML or react component in here. It even keeps the component state!
-              </p>
-            </div>
+            <GridList style={ styles.list } cellHeight='auto' cols={4}>
+              <GridTile
+                ref="trademarks"
+                title="Trademarks"
+                subtitle="Subtitle"
+                onClick={ this.goRoute.bind(this) }
+              >
+                <img src={registered} style={styles.img}alt="" />
+              </GridTile>
+              <GridTile
+                title="Copyrights"
+                subtitle="Subtitle"
+              >
+                <img src={copyrightsm} alt="" />
+              </GridTile>
+              <GridTile
+                title="Designs"
+                subtitle="Subtitle"
+              >
+                <img src={registered} alt="" />
+              </GridTile>
+              <GridTile
+                title="Patents"
+                subtitle="Subtitle"
+              >
+                <img src={copyrightsm} alt="" />
+              </GridTile>
+            </GridList>
           </Tab>
           <Tab className="tab-custom" label="Wallet" >
             <div style={styles.tab}>
@@ -106,4 +124,4 @@ class Home extends PureComponent {
 }
 
 const mapStateToProps = ({ authenticated }) => ({ authenticated })
-export default connect(mapStateToProps, { authenticate, push, searchTrademarks })(Home)
+export default connect(mapStateToProps, { authenticate, push })(Home)
