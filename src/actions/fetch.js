@@ -1,6 +1,4 @@
-import { push } from 'react-router-redux'
 import API from '../api/client'
-import { AUTH_ERROR } from './loading'
 import {
   APP_LOADING,
   APP_DONE_LOADING,
@@ -8,29 +6,18 @@ import {
   LOAD_SUCCESS
 } from './loading'
 
-export const FETCHED_USER = 'FETCHED_USER'
 const api = new API()
 
 export default () => {
 
-  return (dispatch) => {
-
-    if (!api.isAuthenticated()) {
-      dispatch({ type: AUTH_ERROR })
-      dispatch(push('/sign-in'))
-      return
-    }
-
+  return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get('/users/me')
+    api.get(`/trademarks/`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        dispatch({
-          type: FETCHED_USER,
-          payload: result.body
-        })
+        console.log(result.body)
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
@@ -41,4 +28,3 @@ export default () => {
       })
   }
 }
-

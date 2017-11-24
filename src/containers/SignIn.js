@@ -67,10 +67,10 @@ export class SignIn extends PureComponent {
         <GridList className="gridlist-creators"cols={12}>
           <GridTile className="gridtile-signin" cols={4} rows={2}>
             <img src={ registered } alt="" />
-            <h2>Design, Patents & properties</h2>
+            <h2>Design, Patents & Trademarks</h2>
             <p>
               One-click import all of your
-              registered properties, patents
+              registered trademarks, patents
               and designs.
             </p>
             <p>
