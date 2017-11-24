@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Title from './Title'
 
 const styles = {
-    backgroundImage: 'url("/images/header-background.png")',
+    backgroundImage: 'url("/images/header-bg.png")',
     backgroundSize: '100%',
     height: '128px',
     paddingTop: '48px'
