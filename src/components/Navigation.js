@@ -21,13 +21,11 @@ class Navigation extends PureComponent {
         this.props.signOut()
     }
 
-    signUp = () => {
-        this.props.push('/sign-up')
-    }
-
-    goHome = () => {
-        this.props.push('/')
-    }
+    signUp = () => this.props.push('/sign-up')
+    goHome = () => this.props.push('/')
+    goWallet = () => this.props.push('/wallet')
+    goCreators = () => this.props.push('/creators')
+    goAdvisors = () => this.props.push('/advisors')
 
     render() {
         const { signedIn } = this.props
@@ -37,7 +35,13 @@ class Navigation extends PureComponent {
                 showMenuIconButton={false}
                 title={ <div><img className="logo" src={ logo } alt=""/> <span className="brand">IP Shares</span></div>}
                 iconElementRight={signedIn ?
-                    <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} /> :
+                    <div>
+                    <FlatButton className="flat-button" label="Home" primary={true} onClick={this.goHome.bind(this)} />
+                    <FlatButton className="flat-button" label="Creators" primary={true} onClick={this.goCreators.bind(this)} />
+                    <FlatButton className="flat-button" label="Advisors" primary={true} onClick={this.goAdvisors.bind(this)} />
+                    <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} />
+                    
+                    </div> :
                     <FlatButton className="flat-button" label="Sign up" primary={true} onClick={this.signUp.bind(this)} />
                 }
             />

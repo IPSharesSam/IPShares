@@ -6,8 +6,8 @@ import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { GridList, GridTile } from 'material-ui/GridList'
 import { copyrightsm, registered } from '../images'
-
 import './Home.css'
+
 const styles = {
   tab: {
     textAlign: 'center'
@@ -83,11 +83,8 @@ class Home extends PureComponent {
             </GridList>
           </Tab>
           <Tab className="tab-custom" label="Wallet" >
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Wallet Info</h2>
-              <p>
-                This is another example tab.
-              </p>
+            <div className="wallet">
+              
             </div>
           </Tab>
           <Tab className="tab-custom"
