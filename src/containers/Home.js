@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authenticate from '../actions/authenticate'
@@ -26,25 +25,10 @@ const styles = {
 };
 
 class Home extends PureComponent {
-  static PropTypes = {
-    authenticated: PropTypes.object,
-  }
 
   componentWillMount() {
     this.props.authenticate()
   }
-
-  submitForm(event) {
-    event.preventDefault()
-
-    const search = {
-      input: this.refs.searchBar.getValue(),
-    }
-
-    console.log(search)
-    this.props.searchTrademarks(search)
-  }
-
 
   goRoute() {
     this.props.push(`/trademarks`)
