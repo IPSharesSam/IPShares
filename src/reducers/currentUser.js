@@ -1,5 +1,6 @@
 import { USER_SIGNED_IN } from '../actions/user/sign-in'
 import { USER_SIGNED_OUT } from '../actions/user/sign-out'
+import { FETCHED_USER } from '../actions/user/fetch'
 
 const CURRENT_USER_KEY = 'supercomplexkey'
 const currentUserFromLocalStorage = JSON.parse(
@@ -9,6 +10,8 @@ const currentUserFromLocalStorage = JSON.parse(
 export default (state = currentUserFromLocalStorage, { type, payload } = {}) => {
   switch (type) {
     case USER_SIGNED_IN :
+    case FETCHED_USER :
+
       const currentUser = { ...payload }
       window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser))
       return currentUser

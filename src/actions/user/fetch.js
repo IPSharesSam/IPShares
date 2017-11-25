@@ -1,12 +1,12 @@
 import { push } from 'react-router-redux'
-import API from '../api/client'
-import { AUTH_ERROR } from './loading'
+import API from '../../api/client'
+import { AUTH_ERROR } from '../loading'
 import {
   APP_LOADING,
   APP_DONE_LOADING,
   LOAD_ERROR,
   LOAD_SUCCESS
-} from './loading'
+} from '../loading'
 
 export const FETCHED_USER = 'FETCHED_USER'
 const api = new API()
