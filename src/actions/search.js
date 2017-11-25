@@ -10,8 +10,6 @@ import {
 const api = new API()
 
 export default (search) => {
-
-  console.log('action received: ', search)
   return dispatch => {
     dispatch({ type: APP_LOADING })
 

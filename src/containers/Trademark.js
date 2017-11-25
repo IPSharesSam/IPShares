@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import searchTrademarks from '../actions/search'
+import TrademarkList from '../components/TrademarkList'
 import './Trademark.css'
 
 const styles = {
@@ -35,7 +36,6 @@ class Trademark extends PureComponent {
       input: this.refs.searchBar.getValue(),
     }
 
-    console.log(search)
     this.props.searchTrademarks(search)
   }
 
@@ -59,9 +59,7 @@ class Trademark extends PureComponent {
                 primary={true}
               />
 
-              <p>
-                You can put any sort of HTML or react component in here. It even keeps the component state!
-              </p>
+              <TrademarkList />
             </div>
       </div>
     )
