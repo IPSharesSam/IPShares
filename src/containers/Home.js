@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import authenticate from '../actions/authenticate'
+import fetchUser from '../actions/user/fetch'
 import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { GridList, GridTile } from 'material-ui/GridList'
@@ -25,9 +25,8 @@ const styles = {
 };
 
 class Home extends PureComponent {
-
   componentWillMount() {
-    this.props.authenticate()
+    this.props.fetchUser()
   }
 
   goRoute() {
@@ -35,12 +34,12 @@ class Home extends PureComponent {
   }
 
   render() {
-    console.log(this.props)
-    const { authenticated } = this.props
+    const { currentUser } = this.props
+    if (!currentUser) return null
     return (
 
       <div className="Home">
-        <Header content={authenticated.firstName + ' ' + authenticated.lastName} />
+        <Header content={currentUser.firstName + ' ' + currentUser.lastName} />
         <Tabs className="tabs-custom" >
           <Tab className="tab-custom" label="Timeline" >
             <div style={styles.tab}>
@@ -107,5 +106,5 @@ class Home extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ authenticated }) => ({ authenticated })
-export default connect(mapStateToProps, { authenticate, push })(Home)
+const mapStateToProps = ({ currentUser }) => ({ currentUser })
+export default connect(mapStateToProps, { fetchUser, push })(Home)

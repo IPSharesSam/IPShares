@@ -7,12 +7,11 @@ class TrademarkItem extends PureComponent {
     trademark_name: PropTypes.string,
     application_date: PropTypes.string,
     application_number: PropTypes.string,
-    application_language: PropTypes.bool
+    application_language: PropTypes.string
   }
 
   render() {
     const { trademark_name, application_date, application_number, application_language } = this.props
-    console.log('Item: ', this.props)
     return(
       <div>
         <ul>

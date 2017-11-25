@@ -1,4 +1,4 @@
-import FETCHED_TRADEMARKS from '../actions/trademarks/fetch'
+import { FETCHED_TRADEMARKS } from '../actions/trademarks/fetch'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -6,6 +6,6 @@ export default (state = [], { type, payload } = {}) => {
       return [...payload]
 
     default:
-      return [payload]
+      return state
   }
 }

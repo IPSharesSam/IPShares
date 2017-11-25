@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import authenticate from '../actions/authenticate'
 import Header from '../components/Header'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -19,10 +18,6 @@ const styles = {
 };
 
 class Trademark extends PureComponent {
-
-  componentWillMount() {
-    this.props.authenticate()
-  }
 
   submitForm(event) {
     event.preventDefault()
@@ -62,6 +57,6 @@ class Trademark extends PureComponent {
 }
 
 const mapStateToProps = ({ authenticated }) => ({ authenticated })
-const mapDispatchToProps = ({ authenticate, push, searchTrademarks })
+const mapDispatchToProps = ({ push, searchTrademarks })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)

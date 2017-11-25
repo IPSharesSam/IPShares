@@ -12,6 +12,7 @@ export class TrademarkList extends PureComponent {
   }
 
   renderTrademarks(trademark, index) {
+    console.log(trademark)
     return (
       <TrademarkItem key={index} {...trademark} />
     )
@@ -19,12 +20,9 @@ export class TrademarkList extends PureComponent {
 
   render() {
     const { trademarks } = this.props
-    console.log('Trademarks: ', trademarks)
     return(
       <div className="TrademarkList">
-          {/* { this.props.trademarks.map(this.renderTrademarks) } */}
-          <TrademarkItem/>
-
+          { trademarks.map(this.renderTrademarks) }
       </div>
     )
   }
