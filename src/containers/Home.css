@@ -3,7 +3,10 @@
     background-color: #C0C0C0!important;
     color: #000000!important;
 }
-
+.gridtile-custom:hover {
+    cursor: pointer!important;
+    background-color: #F0F0F0;
+}
 .wallet {
     background: url("/images/wallet.png"); 
     background-size: 100%;
