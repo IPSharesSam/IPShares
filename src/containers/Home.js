@@ -55,26 +55,30 @@ class Home extends PureComponent {
           <Tab className="tab-custom" label="Your IP" >
             <GridList style={ styles.list } cellHeight='auto' cols={4}>
               <GridTile
+                className="gridtile-custom"
                 ref="trademarks"
                 title="Trademarks"
                 subtitle="Subtitle"
                 onClick={ this.goRoute.bind(this) }
               >
-                <img src={registered} style={styles.img}alt="" />
+                <img src={copyrightsm} style={styles.img}alt="" />
               </GridTile>
               <GridTile
+                className="gridtile-custom"
                 title="Copyrights"
                 subtitle="Subtitle"
               >
                 <img src={copyrightsm} alt="" />
               </GridTile>
               <GridTile
+                className="gridtile-custom"
                 title="Designs"
                 subtitle="Subtitle"
               >
-                <img src={registered} alt="" />
+                <img src={copyrightsm} alt="" />
               </GridTile>
               <GridTile
+                className="gridtile-custom"
                 title="Patents"
                 subtitle="Subtitle"
               >
