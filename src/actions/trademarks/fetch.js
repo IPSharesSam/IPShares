@@ -1,23 +1,29 @@
-import API from '../api/client'
+import API from '../../api/client'
 import {
   APP_LOADING,
   APP_DONE_LOADING,
   LOAD_ERROR,
   LOAD_SUCCESS
-} from './loading'
+} from '../loading'
 
+export const FETCHED_TRADEMARKS = 'FETCHED_TRADEMARKS'
 
 const api = new API()
 
-export default (search) => {
+export default () => {
+
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/trademarks/search/${search.input}`)
+    api.get(`/trademarks`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        console.log(result.body)
+        dispatch({ 
+          type: FETCHED_TRADEMARKS,
+          payload: result.body
+        })
+        
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
