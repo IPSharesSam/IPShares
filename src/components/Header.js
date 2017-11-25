@@ -6,7 +6,8 @@ const styles = {
     backgroundImage: 'url("/images/header-bg.png")',
     backgroundSize: '100%',
     height: '128px',
-    paddingTop: '48px'
+    paddingTop: '48px',
+    borderBottom: '2px solid #C0C0C0'
 }
 class Header extends PureComponent {
     static PropTypes = {

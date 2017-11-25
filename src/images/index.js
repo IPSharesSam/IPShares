@@ -5,6 +5,7 @@ import registered from './registered.png'
 import contact from './contact.png'
 import find from './find.png'
 import infinity from './infinity.png'
+import wallet from './wallet.png'
 
 export {
     copyright,
@@ -13,5 +14,6 @@ export {
     registered,
     contact,
     find,
-    infinity
+    infinity,
+    wallet
 }
