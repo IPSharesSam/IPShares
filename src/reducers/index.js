@@ -2,10 +2,13 @@ import loading from './loading'
 import loadError from './loadError'
 import currentUser from './currentUser'
 import trademarks from './trademarks'
+import searches from './searches'
+
 
 export default {
     loading,
     loadError,
     currentUser,
-    trademarks
+    trademarks,
+    searches
 }
