@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import SwipeableViews from 'react-swipeable-views';
 import fetchUser from '../actions/user/fetch'
 import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -25,6 +26,19 @@ const styles = {
 };
 
 class Home extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slideIndex: 0,
+    };
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      slideIndex: value,
+    });
+  };
+
   componentWillMount() {
     this.props.fetchUser()
   }
@@ -40,28 +54,34 @@ class Home extends PureComponent {
 
       <div className="Home">
         <Header content={currentUser.firstName + ' ' + currentUser.lastName} />
-        <Tabs className="tabs-custom" >
-          <Tab className="tab-custom" label="Timeline" >
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Timeline</h2>
-              <p>
-                This is an example tab.
+        <Tabs className="tabs-custom" onChange={this.handleChange} value={this.state.slideIndex} >
+          <Tab className="tab-custom" label="Timeline" value={0} />
+          <Tab className="tab-custom" label="Your IP" value={1} />
+          <Tab className="tab-custom" label="Wallet" value={2} />
+          <Tab className="tab-custom" label="Profile" value={3} />
+        </Tabs>
+        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
+
+          <div style={styles.tab}>
+            <h2 style={styles.headline}>Timeline</h2>
+            <p>
+              This is an example tab.
               </p>
-              <p>
-                You can put any sort of HTML or react component in here. It even keeps the component state!
+            <p>
+              You can put any sort of HTML or react component in here. It even keeps the component state!
             </p>
-            </div>
-          </Tab>
-          <Tab className="tab-custom" label="Your IP" >
-            <GridList style={ styles.list } cellHeight='auto' cols={4}>
+          </div>
+
+          <div style={styles.tab}>
+            <GridList style={styles.list} cellHeight='auto' cols={4}>
               <GridTile
                 className="gridtile-ip"
                 ref="trademarks"
                 title="Trademarks"
                 subtitle="Subtitle"
-                onClick={ this.goRoute.bind(this) }
+                onClick={this.goRoute.bind(this)}
               >
-                <img src={copyrightSmall} style={styles.img}alt="" />
+                <img src={copyrightSmall} style={styles.img} alt="" />
               </GridTile>
               <GridTile
                 className="gridtile-ip"
@@ -85,23 +105,18 @@ class Home extends PureComponent {
                 <img src={copyrightSmall} alt="" />
               </GridTile>
             </GridList>
-          </Tab>
-          <Tab className="tab-custom" label="Wallet" >
-            <div className="wallet">
-              
-            </div>
-          </Tab>
-          <Tab className="tab-custom"
-            label="Profile"
-          >
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Profile Settings</h2>
-              <p>
-                This is another example tab.
-              </p>
-            </div>
-          </Tab>
-        </Tabs>
+          </div>
+
+          <div className="wallet"></div>
+
+          <div style={styles.tab}>
+            <h2 style={styles.headline}>Profile Settings</h2>
+            <p>
+              Add Profile settings here
+            </p>
+          </div>
+
+        </SwipeableViews>
       </div>
     )
   }
