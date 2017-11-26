@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { replace, push } from 'react-router-redux'
 import { GridList, GridTile } from 'material-ui/GridList';
+import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,9 +11,14 @@ import FlatButton from 'material-ui/FlatButton'
 import Title from '../components/Title'
 import signIn from '../actions/user/sign-in'
 import './SignIn.css'
-import { copyright, find, infinity, information, registered, contact } from '../images'
+import { copyright, find, infinity, information, registered, contact, logo } from '../images'
 
 export class SignIn extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
+  }
+
   static propTypes = {
     push: PropTypes.func.isRequired,
     signIn: PropTypes.func.isRequired,
@@ -24,6 +30,8 @@ export class SignIn extends PureComponent {
     if (signedIn) replace('/')
   }
 
+  handleToggle = () => this.setState({open: !this.state.open});
+
   submitForm(event) {
     event.preventDefault()
     const user = {
@@ -33,6 +41,9 @@ export class SignIn extends PureComponent {
     this.props.signIn(user)
   }
 
+  cancel() {
+    this.props.push('/')
+  }
   signUp() {
     this.props.push('/sign-up')
   }
@@ -40,14 +51,26 @@ export class SignIn extends PureComponent {
   render() {
     return (
       <div className="SignIn">
-        <GridList className="gridlist-signin" cols={12}>
-          <GridTile className="gridtile-signin" cols={6} rows={2}>
+        <GridList className="gridlist-signin" cols={12} cellHeight="auto">
+          <GridTile className="gridtile-signin landing-text" cols={6}>
             <h1>IP Shares, a decentral intellectual property economy</h1>
             <p>Uniting creators, advisors, all IP facets and the market using it's own cryptotoken, the IP Share. From licensing your patent to auctioning your painting...</p>
             <p> Welcome to the next big thing.</p>
+            <RaisedButton label="Sign in" onClick={this.handleToggle} primary={true} />
+            <RaisedButton onClick={this.signUp.bind(this)} label="Sign up" />
           </GridTile>
-          <GridTile className="gridtile-signin" cols={6} rows={2}>
-            <Paper className="signin-paper">
+          <GridTile className="gridtile-signin landing-logo" cols={6}>
+            <img className="logo-big" src={ logo } alt="" />
+          </GridTile>
+        </GridList>
+        <Drawer
+          docked={false}
+          open={this.state.open}
+          openSecondary={true}
+          onRequestChange={(open) => this.setState({open})}
+          width={480}
+        >
+        <Paper className="signin-paper">
               <h1>Sign in</h1>
               <form onSubmit={this.submitForm.bind(this)}>
                 <TextField ref="email" type="email" hintText="Email address" fullWidth={true} />
@@ -57,16 +80,15 @@ export class SignIn extends PureComponent {
                 onClick={this.submitForm.bind(this)}
                 label="Sign in"
                 primary={true} />
-              <FlatButton
-                onClick={this.signUp.bind(this)}
-                label="Sign up" />
-            </Paper>
-          </GridTile>
-        </GridList>
+                <FlatButton
+          onClick={this.cancel.bind(this)}
+          label="Cancel" />
+        </Paper>
+        </Drawer>
         <Title content="For creators..." />
-        <GridList className="gridlist-creators"cols={12}>
-          <GridTile className="gridtile-signin" cols={4} rows={2}>
-            <img src={ registered } alt="" />
+        <GridList className="gridlist-creators" cols={12} cellHeight="auto">
+          <GridTile className="gridtile-signin" cols={4}>
+            <img className="icons" src={ registered } alt="" />
             <h2>Design, Patents & Trademarks</h2>
             <p>
               One-click import all of your
@@ -79,8 +101,8 @@ export class SignIn extends PureComponent {
               like, directly from your IPS account
           </p>
           </GridTile>
-          <GridTile className="gridtile-signin" cols={4} rows={2}>
-            <img src={ copyright} alt="" />
+          <GridTile className="gridtile-signin" cols={4}>
+            <img className="icons" src={ copyright} alt="" />
             <h2>Copyright</h2>
             <p>
               Timestamp all types of work,
@@ -92,10 +114,9 @@ export class SignIn extends PureComponent {
               songs, artwork, video's
               and 3D designs.
             </p>
-
           </GridTile>
-          <GridTile className="gridtile-signin" cols={4} rows={2}>
-            <img src={ information} alt="" />
+          <GridTile className="gridtile-signin" cols={4}>
+            <img className="icons" src={ information} alt="" />
             <h2>
               Connect with an expert
             </h2>
@@ -112,9 +133,9 @@ export class SignIn extends PureComponent {
           </GridTile>
         </GridList>
         <Title content="For advisors" />
-        <GridList cols={12}>
-          <GridTile className="gridtile-signin" cols={4} rows={2}>
-            <img src={ contact } alt="" />
+        <GridList cols={12} cellHeight="auto">
+          <GridTile className="gridtile-signin" cols={4}>
+            <img className="icons" src={ contact } alt="" />
             <h2>Manage your portfolio</h2>
             <p>
               As the IP Shares platform is linked to the
@@ -128,7 +149,7 @@ export class SignIn extends PureComponent {
             </p>
           </GridTile>
           <GridTile className="gridtile-signin" cols={4} rows={3}>
-            <img src={ find } alt="" />
+            <img className="icons" src={ find } alt="" />
             <h2>Get found</h2>
             <p>
               Your company will be indexed based
@@ -143,7 +164,7 @@ export class SignIn extends PureComponent {
             </p>
           </GridTile>
           <GridTile className="gridtile-signin" cols={4} rows={3}>
-            <img src={ infinity } alt="" />
+            <img className="icons" src={ infinity } alt="" />
             <h2>Be part of the future</h2>
             <p>
               The IP Shares platform is build as a

@@ -3,9 +3,14 @@
     background-color: #C0C0C0!important;
     color: #000000!important;
 }
-.gridtile-custom:hover {
-    cursor: pointer!important;
+
+.gridtile-ip {
     background-color: #F0F0F0;
+    margin: 1em;
+}
+.gridtile-ip:hover {
+    cursor: pointer!important;
+    background-color: #DDDDDD;
 }
 .wallet {
     background: url("/images/wallet.png"); 

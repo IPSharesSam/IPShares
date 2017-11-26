@@ -22,7 +22,6 @@ export class SignUp extends PureComponent {
 
   updateCheck() {
     this.setState((oldState) => {
-      console.log(this.state.checked)
       return {
         checked: !oldState.checked,
       };

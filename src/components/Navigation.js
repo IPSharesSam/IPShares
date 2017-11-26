@@ -42,8 +42,10 @@ class Navigation extends PureComponent {
                     <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} />
                     
                     </div> :
+                    <div>
                     <FlatButton className="flat-button" label="Sign up" primary={true} onClick={this.signUp.bind(this)} />
-                }
+                    </div>
+               }
             />
         )
     }

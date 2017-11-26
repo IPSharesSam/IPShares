@@ -1,4 +1,9 @@
 
+.logo-big { 
+    width: 60%!important;
+    display:block;
+}
+
 .gridlist-signin {
     background: url(/images/ship-bg.png) no-repeat center center;
     background-size: 100%;
@@ -14,14 +19,11 @@
 }
 
 .gridtile-signin {
-    padding: 0 5em;
+    padding:0 5em 5em 5em!important;
     text-align: center;
 }
 
-.gridtile-signin:first-child {
-    padding-left:5em!important;
-}
-.gridtile-signin img {
+.icons {
     display: block;
     margin: 0 auto;
     width:96px;

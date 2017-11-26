@@ -3,6 +3,8 @@
 .appbar-custom {
     background-color: #ffffff!important;
     border-bottom: 2px solid #F44336!important;
+    position: fixed!important;
+    top: 0!important;
     }
 
 .appbar-custom .logo {

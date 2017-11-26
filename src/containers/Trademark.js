@@ -42,14 +42,14 @@ class Trademark extends PureComponent {
         <Tabs className="tabs-custom" >
           <Tab className="tab-custom" label="Your Trademarks" >
             <div style={styles.tab}>
-              <h2 style={styles.headline}>Trademarks</h2>
+              <h2 style={styles.headline}>Your Trademarks</h2>
               <TrademarkList />
             </div>
           </Tab>
 
           <Tab className="tab-custom" label="Search">
             <div style={styles.tab}>
-              <h2 style={styles.headline}>Search</h2>
+              <h2 style={styles.headline}>Search for trademarks</h2>
 
               <form onSubmit={this.submitForm.bind(this)}>
                 <TextField ref="searchBar" type="text" hintText="Search" />
