@@ -5,7 +5,7 @@ import fetchUser from '../actions/user/fetch'
 import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { GridList, GridTile } from 'material-ui/GridList'
-import { copyrightsm, registered } from '../images'
+import { copyrightSmall } from '../images'
 import './Home.css'
 
 const styles = {
@@ -55,34 +55,34 @@ class Home extends PureComponent {
           <Tab className="tab-custom" label="Your IP" >
             <GridList style={ styles.list } cellHeight='auto' cols={4}>
               <GridTile
-                className="gridtile-custom"
+                className="gridtile-ip"
                 ref="trademarks"
                 title="Trademarks"
                 subtitle="Subtitle"
                 onClick={ this.goRoute.bind(this) }
               >
-                <img src={copyrightsm} style={styles.img}alt="" />
+                <img src={copyrightSmall} style={styles.img}alt="" />
               </GridTile>
               <GridTile
-                className="gridtile-custom"
+                className="gridtile-ip"
                 title="Copyrights"
                 subtitle="Subtitle"
               >
-                <img src={copyrightsm} alt="" />
+                <img src={copyrightSmall} alt="" />
               </GridTile>
               <GridTile
-                className="gridtile-custom"
+                className="gridtile-ip"
                 title="Designs"
                 subtitle="Subtitle"
               >
-                <img src={copyrightsm} alt="" />
+                <img src={copyrightSmall} alt="" />
               </GridTile>
               <GridTile
-                className="gridtile-custom"
+                className="gridtile-ip"
                 title="Patents"
                 subtitle="Subtitle"
               >
-                <img src={copyrightsm} alt="" />
+                <img src={copyrightSmall} alt="" />
               </GridTile>
             </GridList>
           </Tab>

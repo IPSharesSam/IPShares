@@ -1,5 +1,6 @@
+import logo from './logo-transparent.png'
 import copyright from './copyright.png'
-import copyrightsm from './copyright-sm.png'
+import copyrightSmall from './copyright-sm.png'
 import information from './information.png'
 import registered from './registered.png'
 import contact from './contact.png'
@@ -8,8 +9,9 @@ import infinity from './infinity.png'
 import wallet from './wallet.png'
 
 export {
+    logo,
     copyright,
-    copyrightsm,
+    copyrightSmall,
     information,
     registered,
     contact,

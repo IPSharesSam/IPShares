@@ -7,7 +7,8 @@ const styles = {
     backgroundSize: '100%',
     height: '128px',
     paddingTop: '48px',
-    borderBottom: '2px solid #C0C0C0'
+    borderBottom: '2px solid #C0C0C0',
+    marginTop: '72px'
 }
 class Header extends PureComponent {
     static PropTypes = {
