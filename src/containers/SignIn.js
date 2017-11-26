@@ -68,7 +68,7 @@ export class SignIn extends PureComponent {
           open={this.state.open}
           openSecondary={true}
           onRequestChange={(open) => this.setState({open})}
-          width={480}
+          width={720}
         >
         <Paper className="signin-paper">
               <h1>Sign in</h1>
