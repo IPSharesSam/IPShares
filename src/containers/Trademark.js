@@ -44,6 +44,10 @@ class Trademark extends PureComponent {
     };
   }
 
+  static PropTypes = {
+    slideIndex: 0
+  }
+  
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
@@ -135,6 +139,6 @@ class Trademark extends PureComponent {
 }
 
 const mapStateToProps = ({ authenticated, searches }) => ({ authenticated, searches })
-const mapDispatchToProps = ({ push, searchTrademarks })
+const mapDispatchToProps = { push, searchTrademarks }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)

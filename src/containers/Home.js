@@ -65,10 +65,7 @@ class Home extends PureComponent {
           <div style={styles.tab}>
             <h2 style={styles.headline}>Timeline</h2>
             <p>
-              This is an example tab.
-              </p>
-            <p>
-              You can put any sort of HTML or react component in here. It even keeps the component state!
+              Add timeline here.
             </p>
           </div>
 
