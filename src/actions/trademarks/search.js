@@ -6,6 +6,7 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
+export const FETCHED_SEARCHES = 'FETCHED_SEARCHES'
 
 const api = new API()
 
@@ -17,7 +18,10 @@ export default (search) => {
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        console.log(result.body)
+        dispatch( {
+          type: FETCHED_SEARCHES,
+          payload: result.body
+        })
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

@@ -21,13 +21,16 @@ export class TrademarkList extends PureComponent {
   renderTrademarks(trademark, index) {
     console.log(trademark)
   
-    const { trademark_name, application_date, application_number, application_language } = {...trademark}
+    const { owner_id, owner_name, trademark_number, trademark_name, application_date, registration_date, status } = {...trademark}
     return (
       <TableRow key={index}>
+        <TableRowColumn>{owner_id}</TableRowColumn>
+        <TableRowColumn>{owner_name}</TableRowColumn>
+        <TableRowColumn>{trademark_number}</TableRowColumn>
         <TableRowColumn>{trademark_name}</TableRowColumn>
         <TableRowColumn>{application_date}</TableRowColumn>
-        <TableRowColumn>{application_number}</TableRowColumn>
-        <TableRowColumn>{application_language}</TableRowColumn>
+        <TableRowColumn>{registration_date}</TableRowColumn>
+        <TableRowColumn>{status}</TableRowColumn>
       </TableRow>
     )
   }
@@ -39,10 +42,13 @@ export class TrademarkList extends PureComponent {
       <Table >
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
+            <TableHeaderColumn>Owner ID</TableHeaderColumn>
+            <TableHeaderColumn>Owner name</TableHeaderColumn>
+            <TableHeaderColumn>Trademark number</TableHeaderColumn>
             <TableHeaderColumn>Trademark name</TableHeaderColumn>
             <TableHeaderColumn>Application date</TableHeaderColumn>
-            <TableHeaderColumn>Application number</TableHeaderColumn>
-            <TableHeaderColumn>Application language</TableHeaderColumn>
+            <TableHeaderColumn>Registration date</TableHeaderColumn>
+            <TableHeaderColumn>Status</TableHeaderColumn>
           </TableRow>
         </TableHeader>
 

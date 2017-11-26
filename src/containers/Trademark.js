@@ -7,6 +7,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import searchTrademarks from '../actions/trademarks/search'
 import TrademarkList from '../components/TrademarkList'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 import './Trademark.css'
 
 const styles = {
@@ -18,6 +26,12 @@ const styles = {
     paddingTop: 16,
     marginBottom: 12,
     fontWeight: 400
+  },
+  form: {
+    margin: '2em'
+  },
+  search: {
+    marginLeft: '2em'
   }
 };
 
@@ -30,11 +44,28 @@ class Trademark extends PureComponent {
       input: this.refs.searchBar.getValue(),
     }
 
+    if (search.input.length < 1) return null
+
     this.props.searchTrademarks(search)
   }
-
+  renderSearches(search, index) {
+  
+    const { owner_id, owner_name, trademark_number, trademark_name, application_date, registration_date, status } = {...search}
+    return (
+      <TableRow key={index}>
+        <TableRowColumn>{owner_id}</TableRowColumn>
+        <TableRowColumn>{owner_name}</TableRowColumn>
+        <TableRowColumn>{trademark_number}</TableRowColumn>
+        <TableRowColumn>{trademark_name}</TableRowColumn>
+        <TableRowColumn>{application_date}</TableRowColumn>
+        <TableRowColumn>{registration_date}</TableRowColumn>
+        <TableRowColumn>{status}</TableRowColumn>
+      </TableRow>
+    )
+  }
 
   render() {
+    const { searches } = this.props
     return (
 
       <div className="Trademark">
@@ -51,16 +82,35 @@ class Trademark extends PureComponent {
             <div style={styles.tab}>
               <h2 style={styles.headline}>Search for trademarks</h2>
 
-              <form onSubmit={this.submitForm.bind(this)}>
+              <form style={ styles.form} onSubmit={this.submitForm.bind(this)}>
                 <TextField ref="searchBar" type="text" hintText="Search" />
-              </form>
-
-              <RaisedButton
+                <RaisedButton
+                style={ styles.search }
                 onClick={this.submitForm.bind(this)}
                 label="Search"
                 primary={true}
               />
+              </form>
+
               
+              <Table multiSelectable={true}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderColumn>Owner ID</TableHeaderColumn>
+                    <TableHeaderColumn>Owner name</TableHeaderColumn>
+                    <TableHeaderColumn>Trademark number</TableHeaderColumn>
+                    <TableHeaderColumn>Trademark name</TableHeaderColumn>
+                    <TableHeaderColumn>Application date</TableHeaderColumn>
+                    <TableHeaderColumn>Registration date</TableHeaderColumn>
+                    <TableHeaderColumn>Status</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+
+                <TableBody>
+                  { searches.map(this.renderSearches) }
+                </TableBody>
+
+              </Table>
             </div>
           </Tab>
         </Tabs>
@@ -70,7 +120,7 @@ class Trademark extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ authenticated }) => ({ authenticated })
+const mapStateToProps = ({ authenticated, searches }) => ({ authenticated, searches })
 const mapDispatchToProps = ({ push, searchTrademarks })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)
