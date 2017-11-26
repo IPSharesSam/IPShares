@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import SwipeableViews from 'react-swipeable-views';
 import searchTrademarks from '../actions/trademarks/search'
 import TrademarkList from '../components/TrademarkList'
 import {
@@ -36,6 +37,18 @@ const styles = {
 };
 
 class Trademark extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slideIndex: 0,
+    };
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      slideIndex: value,
+    });
+  };
 
   submitForm(event) {
     event.preventDefault()
@@ -49,8 +62,8 @@ class Trademark extends PureComponent {
     this.props.searchTrademarks(search)
   }
   renderSearches(search, index) {
-  
-    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = {...search}
+
+    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...search }
     return (
       <TableRow key={index}>
         <TableRowColumn>{owner_name}</TableRowColumn>
@@ -69,50 +82,53 @@ class Trademark extends PureComponent {
 
       <div className="Trademark">
         <Header content="Trademarks" />
-        <Tabs className="tabs-custom" >
-          <Tab className="tab-custom" label="Your Trademarks" >
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Your Trademarks</h2>
-              <TrademarkList />
-            </div>
-          </Tab>
 
-          <Tab className="tab-custom" label="Search">
-            <div style={styles.tab}>
-              <h2 style={styles.headline}>Search for trademarks</h2>
+        <Tabs className="tabs-custom" onChange={this.handleChange} value={this.state.slideIndex} >
+          <Tab className="tab-custom" label="Your Trademarks" value={0} ></Tab>
+          <Tab className="tab-custom" label="Search" value={1}></Tab>
+        </Tabs>
 
-              <form style={ styles.form} onSubmit={this.submitForm.bind(this)}>
-                <TextField ref="searchBar" type="text" hintText="Search" />
-                <RaisedButton
-                style={ styles.search }
+        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
+
+          <div style={styles.tab}>
+            <h2 style={styles.headline}>Your Trademarks</h2>
+            <TrademarkList />
+          </div>
+
+          <div style={styles.tab}>
+            <h2 style={styles.headline}>Search for trademarks</h2>
+
+            <form style={styles.form} onSubmit={this.submitForm.bind(this)}>
+              <TextField ref="searchBar" type="text" hintText="Search" />
+              <RaisedButton
+                style={styles.search}
                 onClick={this.submitForm.bind(this)}
                 label="Search"
                 primary={true}
               />
-              </form>
+            </form>
 
-              
-              <Table multiSelectable={true}>
-                <TableHeader>
-                  <TableRow>
-                    <TableHeaderColumn>Owner name</TableHeaderColumn>
-                    <TableHeaderColumn>Trademark name</TableHeaderColumn>
-                    <TableHeaderColumn>Trademark number</TableHeaderColumn>
-                    <TableHeaderColumn>Application date</TableHeaderColumn>
-                    <TableHeaderColumn>Registration date</TableHeaderColumn>
-                    <TableHeaderColumn>Status</TableHeaderColumn>
-                  </TableRow>
-                </TableHeader>
 
-                <TableBody>
-                  { searches.map(this.renderSearches) }
-                </TableBody>
+            <Table multiSelectable={true}>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderColumn>Owner name</TableHeaderColumn>
+                  <TableHeaderColumn>Trademark name</TableHeaderColumn>
+                  <TableHeaderColumn>Trademark number</TableHeaderColumn>
+                  <TableHeaderColumn>Application date</TableHeaderColumn>
+                  <TableHeaderColumn>Registration date</TableHeaderColumn>
+                  <TableHeaderColumn>Status</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
 
-              </Table>
-            </div>
-          </Tab>
-        </Tabs>
+              <TableBody>
+                {searches.map(this.renderSearches)}
+              </TableBody>
 
+            </Table>
+          </div>
+
+        </SwipeableViews>
       </div>
     )
   }
