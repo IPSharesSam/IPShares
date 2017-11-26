@@ -7,6 +7,7 @@ import contact from './contact.png'
 import find from './find.png'
 import infinity from './infinity.png'
 import wallet from './wallet.png'
+import loading from './loading.gif'
 
 export {
     logo,
@@ -17,5 +18,6 @@ export {
     contact,
     find,
     infinity,
-    wallet
+    wallet,
+    loading
 }
