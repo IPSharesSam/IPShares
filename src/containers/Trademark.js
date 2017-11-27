@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SwipeableViews from 'react-swipeable-views';
 import searchTrademarks from '../actions/trademarks/search'
-import TrademarkList from '../components/TrademarkList'
+import { TrademarkList } from '../components'
 import {
   Table,
   TableBody,
@@ -94,10 +94,9 @@ class Trademark extends PureComponent {
 
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
 
-          <div style={styles.tab}>
-            <h2 style={styles.headline}>Your Trademarks</h2>
-            <TrademarkList />
-          </div>
+          
+          <TrademarkList />
+          
 
           <div style={styles.tab}>
             <h2 style={styles.headline}>Search for trademarks</h2>
