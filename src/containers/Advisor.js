@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import { Header } from '../components'
 
 const styles = {
-
+  map: {
+    border: 'none'
+  }
 }
 class Advisor extends PureComponent {
 
@@ -12,9 +14,7 @@ class Advisor extends PureComponent {
 
       <div className="Advisor">
         <Header content="Creators / Advisors" />
-            <div style={styles}>
-    
-            </div>
+        <iframe src="https://snazzymaps.com/embed/31388" width="100%" height="600px" style={ styles.map } title="map"></iframe>
       </div>
     )
   }
