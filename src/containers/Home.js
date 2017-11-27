@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import SwipeableViews from 'react-swipeable-views';
 import fetchUser from '../actions/user/fetch'
-import Header from '../components/Header'
+import { Header, Timeline } from '../components'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { GridList, GridTile } from 'material-ui/GridList'
 import { copyrightSmall } from '../images'
@@ -62,12 +62,8 @@ class Home extends PureComponent {
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChange}>
 
-          <div style={styles.tab}>
-            <h2 style={styles.headline}>Timeline</h2>
-            <p>
-              Add timeline here.
-            </p>
-          </div>
+          
+          <Timeline />
 
           <div style={styles.tab}>
             <GridList style={styles.list} cellHeight='auto' cols={4}>
