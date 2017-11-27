@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { GridList, GridTile } from 'material-ui/GridList'
-import { copyrightSmall } from '../images'
+import { copyrightSmall, designSmall, patentSmall, trademarkSmall } from '../images'
 
 const styles = {
     tab: {
@@ -31,7 +31,7 @@ class Properties extends PureComponent {
                 subtitle="Subtitle"
                 onClick={this.goRoute.bind(this)}
               >
-                <img src={copyrightSmall} style={styles.img} alt="" />
+                <img src={trademarkSmall} style={styles.img} alt="" />
               </GridTile>
               <GridTile
                 className="gridtile-ip"
@@ -45,14 +45,14 @@ class Properties extends PureComponent {
                 title="Designs"
                 subtitle="Subtitle"
               >
-                <img src={copyrightSmall} alt="" />
+                <img src={designSmall} alt="" />
               </GridTile>
               <GridTile
                 className="gridtile-ip"
                 title="Patents"
                 subtitle="Subtitle"
               >
-                <img src={copyrightSmall} alt="" />
+                <img src={patentSmall} alt="" />
               </GridTile>
             </GridList>
           </div>
