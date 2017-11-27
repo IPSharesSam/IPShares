@@ -6,6 +6,7 @@ import fetchUser from '../actions/user/fetch'
 import { Header, Timeline, Properties, Wallet, Profile } from '../components'
 import { Tabs, Tab } from 'material-ui/Tabs';
 
+
 import './Home.css'
 
 class Home extends PureComponent {
