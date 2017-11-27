@@ -11,7 +11,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Title from '../components/Title'
 import signIn from '../actions/user/sign-in'
 import './SignIn.css'
-import { copyright, find, infinity, information, registered, contact, logo } from '../images'
+import { copyright, find, infinity, information, registered, contact, logo, ipshare } from '../images'
 
 export class SignIn extends PureComponent {
   constructor(props) {
@@ -59,7 +59,7 @@ export class SignIn extends PureComponent {
             <RaisedButton label="Sign in" onClick={this.handleToggle} primary={true} />
             <RaisedButton onClick={this.signUp.bind(this)} label="Sign up" />
           </GridTile>
-          <GridTile className="gridtile-signin landing-logo" cols={6}>
+          <GridTile className="gridtile-signin" cols={6}>
             <img className="logo-big" src={ logo } alt="" />
           </GridTile>
         </GridList>
@@ -180,6 +180,7 @@ export class SignIn extends PureComponent {
             
           </GridTile>
         </GridList>
+        <div><img className="ip-share" src={ ipshare } alt=""/></div>
       </div>
     )
   }

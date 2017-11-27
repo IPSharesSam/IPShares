@@ -3,9 +3,7 @@ import React, { PureComponent } from 'react'
 const styles = {
     backgroundColor: '#595959',
     height: '256px',
-    marginTop: '5em',
     position: 'relative',
-    top: '72px'
 }
 class Footer extends PureComponent {
     

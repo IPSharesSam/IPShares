@@ -1,8 +1,6 @@
 
-.logo-big { 
-    width: 60%!important;
-    display:block;
-}
+
+
 
 .gridlist-signin {
     background: url(/images/ship-bg.png) no-repeat center center;
@@ -23,6 +21,16 @@
     text-align: center;
 }
 
+.gridtile-signin.landing-text {
+    padding-top:5em;
+}
+
+.logo-big { 
+    width: 66%!important;
+    display:block;
+    padding-bottom:5em;
+}
+
 .icons {
     display: block;
     margin: 0 auto;
@@ -37,3 +45,7 @@
 .signin-paper form {
     margin-bottom:1em;
 }
+.ip-share {
+    width:100%;
+  }
+  

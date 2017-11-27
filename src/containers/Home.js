@@ -104,7 +104,7 @@ class Home extends PureComponent {
             </GridList>
           </div>
 
-          <div className="wallet"></div>
+          <div className="wallet" ></div>
 
           <div style={styles.tab}>
             <h2 style={styles.headline}>Profile Settings</h2>

@@ -8,6 +8,7 @@ import find from './find.png'
 import infinity from './infinity.png'
 import wallet from './wallet.png'
 import loading from './loading.gif'
+import ipshare from './ipshare.png'
 
 export {
     logo,
@@ -19,5 +20,6 @@ export {
     find,
     infinity,
     wallet,
-    loading
+    loading,
+    ipshare
 }

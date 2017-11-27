@@ -37,8 +37,7 @@ class Navigation extends PureComponent {
                 iconElementRight={signedIn ?
                     <div>
                     <FlatButton className="flat-button" label="Home" primary={true} onClick={this.goHome.bind(this)} />
-                    <FlatButton className="flat-button" label="Creators" primary={true} onClick={this.goCreators.bind(this)} />
-                    <FlatButton className="flat-button" label="Advisors" primary={true} onClick={this.goAdvisors.bind(this)} />
+                    <FlatButton className="flat-button" label="Creators / Advisors" primary={true} onClick={this.goAdvisors.bind(this)} />
                     <FlatButton className="flat-button" label="Sign out" primary={true} onClick={this.signOut.bind(this)} />
                     
                     </div> :

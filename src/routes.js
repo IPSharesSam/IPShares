@@ -6,7 +6,6 @@ import {
   SignIn,
   SignUp,
   Trademark,
-  Creator,
   Advisor
 } from './containers'
 
@@ -18,7 +17,6 @@ export default class Routes extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/trademarks" component={Trademark} />
-        <Route path="/creators" component={Creator} />
         <Route path="/advisors" component={Advisor} />
         
       </div>

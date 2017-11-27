@@ -11,7 +11,7 @@ class Advisor extends PureComponent {
     return (
 
       <div className="Advisor">
-        <Header content="Advisors" />
+        <Header content="Creators / Advisors" />
             <div style={styles}>
     
             </div>
