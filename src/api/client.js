@@ -7,7 +7,7 @@ export default class ApiClient {
 
   constructor(host, options = {}) {
     this.host = process.env.NODE_ENV === 'production'
-      ? 'https://ipshares-api.codaisseur.cloud'
+      ? 'https://ipshares-api.herokuapp.com'
       : (host || 'http://localhost:3030')
 
     this.options = { ...this.defaultOptions, ...options }
