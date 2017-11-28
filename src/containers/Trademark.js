@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import PropTypes from 'prop-types'
 import Header from '../components/Header'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -37,7 +38,9 @@ const styles = {
 };
 
 class Trademark extends PureComponent {
-  
+  static PropTypes = {
+    searches: PropTypes.array
+  }
 
   componentWillMount() {
     this.setState({
@@ -77,7 +80,8 @@ class Trademark extends PureComponent {
     const { searches } = this.props
     const { selected } = this.state
     const tmToSave = []
-    
+    console.log('SEARCHES: ', searches)
+    console.log('SELECTED: ', selected)
     for (let i=0; i < selected.length; i++) {
       tmToSave.push(searches[selected[i]])
     }
@@ -132,7 +136,7 @@ class Trademark extends PureComponent {
               />
               <RaisedButton
                 style={styles.search}
-                onClick={this.saveTrademarks()}
+                onClick={this.saveTrademarks.bind(this)}
                 label="Save selected trademarks"
                 secondary={true}
               />

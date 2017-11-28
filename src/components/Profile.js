@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import {List, ListItem} from 'material-ui/List';
-import { GridList, GridTile } from 'material-ui/GridList';
 import Toggle from 'material-ui/Toggle';
 import './Profile.css'
 import Paper from 'material-ui/Paper'
@@ -44,13 +42,13 @@ class Profile extends PureComponent {
           <div className="profile-element">
             <Paper className = "profile-paper">
 
-              <p>  Username: <text className="inside-item">{ currentUser.firstName } { currentUser.lastName }</text></p>
-              <p>  Adress: <text className="inside-item">{ currentUser.streetName } { currentUser.streetNumber }, { currentUser.postalCode }, { currentUser.country }</text></p>
-              <p>  Email: <text className="inside-item">{ currentUser.email }</text></p>
-              <p>  Phonenumber: <text className="inside-item">{ currentUser.phoneNumber }</text></p>
-              <p>  <Toggle className = "profile-toggle" labelPosition="left" iconStyle= {{alignText: 'left'}}label = "Subcribed to newsletter:" defaultToggled={ this.checkStatus(currentUser.subscribed) } style={styles.toggle} /></p>
-              <p>  <Toggle className = "profile-toggle" labelPosition="left" label = "Public profile:" defaultToggled ={ this.checkStatus(currentUser.public) } style={styles.toggle} /></p>
-              <p>  Tags: <text className="inside-item">{ currentUser.tags }</text></p>
+              <p>Username: { currentUser.firstName } { currentUser.lastName }</p>
+              <p>Adress: { currentUser.streetName } { currentUser.streetNumber }, { currentUser.postalCode }, { currentUser.country }</p>
+              <p>Email: { currentUser.email }</p>
+              <p>Phonenumber: { currentUser.phoneNumber }</p>
+              <Toggle className = "profile-toggle" labelPosition="left" iconStyle= {{alignText: 'left'}}label = "Subcribed to newsletter:"  style={styles.toggle} />
+              <Toggle className = "profile-toggle" labelPosition="left" label = "Public profile:"  style={styles.toggle} />
+              <p>Tags: { currentUser.tags }</p>
             </Paper>
 
           </div>
