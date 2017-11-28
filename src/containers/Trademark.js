@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SwipeableViews from 'react-swipeable-views';
 import searchTrademarks from '../actions/trademarks/search'
+import { createTrademarks } from '../actions/trademarks/create'
 import { TrademarkList } from '../components'
 import {
   Table,
@@ -36,14 +37,14 @@ const styles = {
 };
 
 class Trademark extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
+  
+
+  componentWillMount() {
+    this.setState({
       slideIndex: 0,
       selected: []
-    };
+    });
   }
-
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
@@ -73,7 +74,15 @@ class Trademark extends PureComponent {
   }
 
   saveTrademarks() {
-    console.log(this.state)
+    const { searches } = this.props
+    const { selected } = this.state
+    const tmToSave = []
+    
+    for (let i=0; i < selected.length; i++) {
+      tmToSave.push(searches[selected[i]])
+    }
+    console.log(tmToSave)
+    // this.props.createTrademarks(tmToSave) ///NOT WORKING!!!!
   }
 
   renderSearches(searchItem, index) {
@@ -156,6 +165,6 @@ class Trademark extends PureComponent {
 }
 
 const mapStateToProps = ({ searches }) => ({ searches })
-const mapDispatchToProps = { push, searchTrademarks }
+const mapDispatchToProps = { push, searchTrademarks, createTrademarks }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)
