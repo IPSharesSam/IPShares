@@ -1,0 +1,28 @@
+.timeline {
+  text-align: center;
+  font-size: 2em;
+  padding-top: 5em;
+  color: grey;
+}
+
+.timeline-logo {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+
+
+}
+.timeline-item{
+  height: 100px;
+}
+
+.timeline-item p {
+  display: inline-block;
+  line-height: 100px;
+  position: relative;
+  top: -38px;
+  margin: 0;
+  padding: 0px 20px;
+
+
+}
