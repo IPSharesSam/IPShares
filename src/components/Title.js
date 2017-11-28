@@ -6,8 +6,7 @@ const styles = {
     textAlign: 'center',
     fontSize: '2.5em',
     fontFamily: 'boltssf',
-    fontWeight: '400',
-    paddingTop: '2em'
+    fontWeight: '400'
 }
 
 class Title extends PureComponent {
