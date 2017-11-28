@@ -4,7 +4,6 @@ import currentUser from './currentUser'
 import trademarks from './trademarks'
 import searches from './searches'
 
-
 export default {
     loading,
     loadError,
