@@ -53,7 +53,7 @@ export class SignIn extends PureComponent {
       <div className="SignIn">
         <GridList className="gridlist-signin" cols={12} cellHeight="auto">
           <GridTile className="gridtile-signin landing-text" cols={6}>
-            <h1>IP Shares, a decentral intellectual property economy</h1>
+            <Title content="IP Shares, a decentral intellectual property economy"/>
             <p>Uniting creators, advisors, all IP facets and the market using it's own cryptotoken, the IP Share. From licensing your patent to auctioning your painting...</p>
             <p> Welcome to the next big thing.</p>
             <RaisedButton label="Sign in" onClick={this.handleToggle} primary={true} />
@@ -132,6 +132,7 @@ export class SignIn extends PureComponent {
             </p>
           </GridTile>
         </GridList>
+        <div><img className="ip-share" src={ ipshare } alt=""/></div>
         <Title content="For advisors" />
         <GridList cols={12} cellHeight="auto">
           <GridTile className="gridtile-signin" cols={4}>
@@ -180,7 +181,7 @@ export class SignIn extends PureComponent {
             
           </GridTile>
         </GridList>
-        <div><img className="ip-share" src={ ipshare } alt=""/></div>
+        
       </div>
     )
   }
