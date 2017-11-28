@@ -22,4 +22,5 @@ export const palette = {
   shadowColor: fullBlack,
 }
 
+
 export default getMuiTheme({ palette })
