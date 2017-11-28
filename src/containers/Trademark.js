@@ -16,7 +16,6 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui/Table';
-import './Trademark.css'
 
 const styles = {
   tab: {
