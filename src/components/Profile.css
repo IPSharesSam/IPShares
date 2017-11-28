@@ -9,7 +9,7 @@
 }
 
 .profile-toggle {
-  align: left;
+  text-align: left;
   display: block;
   margin: auto;
   color: grey;
@@ -20,7 +20,7 @@
 }
 
 .inside-item{
-  align: right;
+  text-align: right;
 }
 
 .profile-paper {
