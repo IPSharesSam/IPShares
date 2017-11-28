@@ -1,0 +1,31 @@
+.profile-element {
+  width: 50;
+  text-align: left;
+  font-size: 2em;
+  
+  padding-left: 8em;
+  padding-right: 8em;
+  color: grey;
+}
+
+.profile-toggle {
+  align: left;
+  display: block;
+  margin: auto;
+  color: grey;
+}
+
+.profile-list-item{
+  color: grey;
+}
+
+.inside-item{
+  align: right;
+}
+
+.profile-paper {
+    color: grey;
+    margin: 25% auto;
+    padding: 40px;
+
+}
