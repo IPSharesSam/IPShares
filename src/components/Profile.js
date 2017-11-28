@@ -30,7 +30,6 @@ const styles = {
   },
 };
 
-
 class Profile extends PureComponent {
 
     checkStatus(bool) {
@@ -43,7 +42,7 @@ class Profile extends PureComponent {
 
 
           <div className="profile-element">
-            <Paper className = "profile-paper">
+            <Paper className = "profile-paperhttps://github.com/IPSharesSam/IPShares/pull/39/conflict?name=src%252Fcomponents%252FTimeline.js&ancestor_oid=e2c6da1e9720e6f2fddc3bb9a02853a87bb6a246&base_oid=46bf16a5b5d0173bd04fe85a4e7eb81d1a640cd7&head_oid=1203e934e487aa7fab25c08aa072ea0cb7acfe5a">
 
               <p>  Username: <text className="inside-item">{ currentUser.firstName } { currentUser.lastName }</text></p>
               <p>  Adress: <text className="inside-item">{ currentUser.streetName } { currentUser.streetNumber }, { currentUser.postalCode }, { currentUser.country }</text></p>

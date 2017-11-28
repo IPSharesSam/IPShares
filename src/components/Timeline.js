@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import { logo} from '../images'
 import './Timeline.css'
 
-
-
 class Timeline extends PureComponent {
 
     render() {

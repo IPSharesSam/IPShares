@@ -16,7 +16,6 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui/Table';
-import './Trademark.css'
 
 const styles = {
   tab: {
@@ -41,16 +40,23 @@ class Trademark extends PureComponent {
     super(props);
     this.state = {
       slideIndex: 0,
+      selected: []
     };
   }
 
-  static PropTypes = {
-    slideIndex: 0
-  }
-  
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
+    });
+  };
+
+  isSelected = (index) => {
+    return this.state.selected.indexOf(index) !== -1;
+  };
+
+  handleRowSelection = (selectedRows) => {
+    this.setState({
+      selected: selectedRows,
     });
   };
 
@@ -65,11 +71,17 @@ class Trademark extends PureComponent {
 
     this.props.searchTrademarks(search)
   }
-  renderSearches(search, index) {
 
-    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...search }
+  saveTrademarks() {
+    console.log(this.state)
+  }
+
+  renderSearches(searchItem, index) {
+    
+    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...searchItem}
+
     return (
-      <TableRow key={index}>
+      <TableRow key={index} value={ searchItem } selected={this.isSelected(index)}>
         <TableRowColumn>{owner_name}</TableRowColumn>
         <TableRowColumn>{trademark_name}</TableRowColumn>
         <TableRowColumn>{trademark_number}</TableRowColumn>
@@ -109,10 +121,16 @@ class Trademark extends PureComponent {
                 label="Search"
                 primary={true}
               />
+              <RaisedButton
+                style={styles.search}
+                onClick={this.saveTrademarks()}
+                label="Save selected trademarks"
+                secondary={true}
+              />
             </form>
 
 
-            <Table multiSelectable={true}>
+            <Table multiSelectable={true} onRowSelection={this.handleRowSelection}>
               <TableHeader>
                 <TableRow>
                   <TableHeaderColumn>Owner name</TableHeaderColumn>
@@ -125,7 +143,7 @@ class Trademark extends PureComponent {
               </TableHeader>
 
               <TableBody>
-                {searches.map(this.renderSearches)}
+                {searches.map((search, index) => this.renderSearches(search, index))}
               </TableBody>
 
             </Table>
@@ -137,7 +155,7 @@ class Trademark extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ authenticated, searches }) => ({ authenticated, searches })
+const mapStateToProps = ({ searches }) => ({ searches })
 const mapDispatchToProps = { push, searchTrademarks }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)
