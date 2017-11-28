@@ -2,7 +2,7 @@
   width: 50;
   text-align: left;
   font-size: 2em;
-  
+
   padding-left: 8em;
   padding-right: 8em;
   color: grey;
@@ -25,7 +25,9 @@
 
 .profile-paper {
     color: grey;
-    margin: 25% auto;
+    margin: 10% auto;
     padding: 40px;
+
+    width: 700px;
 
 }
