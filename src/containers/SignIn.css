@@ -2,30 +2,30 @@
 .gridlist-signin {
     background: url(/images/ship-bg.png) no-repeat center center;
     background-size: 100%;
-    padding: 10em 5em 4em 5em;
+    padding-bottom: 10em;
+    padding-left:5em;
 }
 
 .gridlist-creators {
-    padding: 2em 5em 2em 5em;
+    padding: 5em;
 }
 
 .gridlist-advisors {
-    padding: 2em 5em 4em 5em;
+    padding: 5em;
 }
 
 .gridtile-signin {
-    padding:0 5em 5em 5em!important;
+    padding: 2.5em;
     text-align: center;
+    font-size: 1.25em;
 }
 
 .gridtile-signin.landing-text {
-    padding-top:5em;
+    padding-top:10em;
 }
-
 .logo-big { 
     width: 66%!important;
     display:block;
-    padding-bottom:5em;
 }
 
 .icons {
@@ -46,3 +46,6 @@
     width:100%;
   }
   
+.spacer {
+    height:4em;
+}

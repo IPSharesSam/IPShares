@@ -85,6 +85,7 @@ export class SignIn extends PureComponent {
           label="Cancel" />
         </Paper>
         </Drawer>
+        <div className="spacer"></div>
         <Title content="For creators..." />
         <GridList className="gridlist-creators" cols={12} cellHeight="auto">
           <GridTile className="gridtile-signin" cols={4}>
@@ -133,6 +134,7 @@ export class SignIn extends PureComponent {
           </GridTile>
         </GridList>
         <div><img className="ip-share" src={ ipshare } alt=""/></div>
+        <div className="spacer"></div>
         <Title content="For advisors" />
         <GridList cols={12} cellHeight="auto">
           <GridTile className="gridtile-signin" cols={4}>
