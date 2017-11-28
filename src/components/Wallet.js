@@ -5,7 +5,7 @@ const styles = {
     wallet: {
         background: 'url("/images/wallet.png") no-repeat',
         backgroundSize: '100%',
-        height: '2100px'
+        height: '3000px'
     }
 }
 
