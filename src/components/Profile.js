@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import {List, ListItem} from 'material-ui/List';
 
-
-
 class Profile extends PureComponent {
     
     checkStatus(bool) {

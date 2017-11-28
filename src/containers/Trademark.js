@@ -40,14 +40,10 @@ class Trademark extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      slideIndex: 0,
+      slideIndex: 0
     };
   }
 
-  static PropTypes = {
-    slideIndex: 0
-  }
-  
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
@@ -65,11 +61,13 @@ class Trademark extends PureComponent {
 
     this.props.searchTrademarks(search)
   }
-  renderSearches(search, index) {
 
-    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...search }
+  renderSearches(searchItem, index) {
+    
+    const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...searchItem}
+
     return (
-      <TableRow key={index}>
+      <TableRow key={index} value={ searchItem }>
         <TableRowColumn>{owner_name}</TableRowColumn>
         <TableRowColumn>{trademark_name}</TableRowColumn>
         <TableRowColumn>{trademark_number}</TableRowColumn>
@@ -109,6 +107,11 @@ class Trademark extends PureComponent {
                 label="Search"
                 primary={true}
               />
+              <RaisedButton
+                style={styles.search}
+                label="Save selected trademarks"
+                secondary={true}
+              />
             </form>
 
 
@@ -137,7 +140,7 @@ class Trademark extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ authenticated, searches }) => ({ authenticated, searches })
+const mapStateToProps = ({ searches }) => ({ searches })
 const mapDispatchToProps = { push, searchTrademarks }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trademark)
