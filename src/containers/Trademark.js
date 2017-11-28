@@ -39,13 +39,24 @@ class Trademark extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      slideIndex: 0
+      slideIndex: 0,
+      selected: []
     };
   }
 
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
+    });
+  };
+
+  isSelected = (index) => {
+    return this.state.selected.indexOf(index) !== -1;
+  };
+
+  handleRowSelection = (selectedRows) => {
+    this.setState({
+      selected: selectedRows,
     });
   };
 
@@ -61,12 +72,16 @@ class Trademark extends PureComponent {
     this.props.searchTrademarks(search)
   }
 
+  saveTrademarks() {
+    console.log(this.state)
+  }
+
   renderSearches(searchItem, index) {
     
     const { owner_name, trademark_number, trademark_name, application_date, registration_date, status } = { ...searchItem}
 
     return (
-      <TableRow key={index} value={ searchItem }>
+      <TableRow key={index} value={ searchItem } selected={this.isSelected(index)}>
         <TableRowColumn>{owner_name}</TableRowColumn>
         <TableRowColumn>{trademark_name}</TableRowColumn>
         <TableRowColumn>{trademark_number}</TableRowColumn>
@@ -108,13 +123,14 @@ class Trademark extends PureComponent {
               />
               <RaisedButton
                 style={styles.search}
+                onClick={this.saveTrademarks()}
                 label="Save selected trademarks"
                 secondary={true}
               />
             </form>
 
 
-            <Table multiSelectable={true}>
+            <Table multiSelectable={true} onRowSelection={this.handleRowSelection}>
               <TableHeader>
                 <TableRow>
                   <TableHeaderColumn>Owner name</TableHeaderColumn>
@@ -127,7 +143,7 @@ class Trademark extends PureComponent {
               </TableHeader>
 
               <TableBody>
-                {searches.map(this.renderSearches)}
+                {searches.map((search, index) => this.renderSearches(search, index))}
               </TableBody>
 
             </Table>

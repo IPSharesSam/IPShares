@@ -1,17 +1,6 @@
 import React, { PureComponent } from 'react'
-import { logo,trademarkSmall } from '../images'
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import Paper from 'material-ui/Paper';
+import { logo } from '../images'
 import './Timeline.css'
-
-
 
 class Timeline extends PureComponent {
 
