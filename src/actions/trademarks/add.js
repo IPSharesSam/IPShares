@@ -7,15 +7,12 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-const request = require('superagent')
+
 const api = new API()
 
-const createUrl = (path) => {
-  return `${process.env.HOST || `http://localhost:${process.env.PORT || 3030}`}${path}`
-}
+export const ADD_TRADEMARKS = 'ADD_TRADEMARKS'
 
-export const createTrademarks = (trademarks) => {
-  const token = api.getToken()
+export default (trademarks) => {
   return (dispatch) => {
 
     if (!api.isAuthenticated()) {
@@ -26,14 +23,13 @@ export const createTrademarks = (trademarks) => {
 
     dispatch({ type: APP_LOADING })
 
-    request
-      .post(createUrl('/trademarks'))
-      .set('Authorization', `Bearer ${token}`)
-      .send(trademarks)
-      .then(() => {
+    api
+      .post('/trademarks', trademarks)
+      .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        dispatch(push('/'))
+        dispatch({ type: ADD_TRADEMARKS,
+                   payload: result.body })
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

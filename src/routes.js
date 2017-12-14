@@ -18,7 +18,6 @@ export default class Routes extends Component {
         <Route path="/sign-up" component={SignUp} />
         <Route path="/trademarks" component={Trademark} />
         <Route path="/advisors" component={Advisor} />
-        
       </div>
     )
   }

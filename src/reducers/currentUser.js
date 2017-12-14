@@ -2,7 +2,7 @@ import { USER_SIGNED_IN } from '../actions/user/sign-in'
 import { USER_SIGNED_OUT } from '../actions/user/sign-out'
 import { FETCHED_USER } from '../actions/user/fetch'
 
-const CURRENT_USER_KEY = 'supercomplexkey'
+const CURRENT_USER_KEY = 'verySecretUserKey'
 const currentUserFromLocalStorage = JSON.parse(
   window.localStorage.getItem(CURRENT_USER_KEY) || 'null'
 )

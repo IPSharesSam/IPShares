@@ -1,12 +1,12 @@
-import { FETCHED_TRADEMARKS } from '../actions/trademarks'
+import { SELECTED_TRADEMARKS } from '../actions/trademarks'
 import { ADD_TRADEMARKS } from '../actions/trademarks'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case FETCHED_TRADEMARKS:
+    case SELECTED_TRADEMARKS:
       return [...payload]
-    case ADD_TRADEMARKS:
-      return [...payload, ...state]
+      case ADD_TRADEMARKS:
+      return []
     default:
       return state
   }

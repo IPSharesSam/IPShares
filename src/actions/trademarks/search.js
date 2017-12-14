@@ -15,7 +15,6 @@ const api = new API()
 
 export default (search) => {
   const token = api.getToken()
-  console.log("SEARCH: ", search)
   return dispatch => {
 
     if (!api.isAuthenticated()) {

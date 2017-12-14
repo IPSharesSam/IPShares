@@ -2,7 +2,7 @@ import request from 'superagent'
 
 export default class ApiClient {
   defaultOptions = {
-    tokenStorageKey: 'homeApiJWT'
+    tokenStorageKey: 'ipsharesApiJWT'
   }
 
   constructor(host, options = {}) {
@@ -16,7 +16,7 @@ export default class ApiClient {
   // Authenticate and store the token
   //
   // Example:
-  //  api.authenticate('me@co.com', 'supersecret')
+  //  api.authenticate('me@co.com', 'verySecretKey')
   //    .then(res => console.log('authenticated!'))
   //    .catch(err => console.log(err))
   //
