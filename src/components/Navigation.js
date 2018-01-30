@@ -2,11 +2,33 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import compose from 'recompose/compose'
 import signOut from '../actions/user/signout'
+import { withStyles } from 'material-ui/styles'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import IconButton from 'material-ui/IconButton'
+import MenuIcon from 'material-ui-icons/Menu'
+
+const styles = {
+  root: {
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 export class Navigation extends PureComponent {
   static propTypes = {
-    signedIn: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
+    signedIn: PropTypes.bool.isRequired
   }
 
   signOut(event) {
@@ -15,27 +37,21 @@ export class Navigation extends PureComponent {
   }
 
   render() {
-    const { signedIn } = this.props
+    const { signedIn, classes } = this.props
     return (
-      <nav className="navbar" aria-label="main navigation">
-        <div className="container is-fluid">
-          <div className="navbar-brand">
-            <Link className="navbar-item" to="/classes">
-              <h1>Welcome to Classes</h1>
-            </Link>
-          </div>
-          <div className="navbar-end">
-            <div style={{ paddingRight: 0 }} className="navbar-item">
-              <p className="control">
-                { signedIn ?
-                  <button className="button is-danger" onClick={this.signOut.bind(this)}>Sign out</button> :
-                  <Link className="button is-primary" to="/">Sign in</Link>
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography type="title" color="inherit" className={classes.flex}>
+              IP Shares
+            </Typography>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
     )
   }
 }
@@ -44,4 +60,7 @@ const mapStateToProps = ({ user }) => ({
   signedIn: (!!user.currentUser && !!user.currentUser._id)
 })
 
-export default connect(mapStateToProps, { signOut })(Navigation)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { signOut })
+)(Navigation)
