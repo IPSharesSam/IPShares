@@ -1,0 +1,20 @@
+.PublicProfile-wrap {
+  width: 80%;
+  margin: auto;
+}
+
+.ProfileDetails {
+  width: auto;
+  margin: auto;
+}
+
+.TextField {
+  height: 400px;
+  width: 400px;
+}
+
+.Header-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
