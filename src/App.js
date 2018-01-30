@@ -3,18 +3,32 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import Reboot from 'material-ui/Reboot'
 import Routes from './routes'
 import Navigation from './components/Navigation'
+import './App.css'
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FF1818'
+    }
+  },
+  typography: {
+    fontFamily: 'Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    title: {
+      fontFamily: '"Bolts SF", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    }
+  }
+})
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
         <Reboot />
         <Navigation />
           <main>
             <Routes />
           </main>
       </MuiThemeProvider>
-    );
+    )
   }
 }
 
