@@ -9,6 +9,7 @@ import signUp from '../actions/user/sign-up'
 import './SignUp.css'
 import Switch from 'material-ui/Switch'
 
+
 const styles = {
   block: {
     maxWidth: 250,
