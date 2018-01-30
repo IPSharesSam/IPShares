@@ -6,7 +6,14 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signUp from '../actions/user/sign-up'
-import './SignUp.css'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import validate from "validate.js"
+
+const dialogStyle = {
+  width: '600px',
+  margin: '50px auto',
+  padding: '2rem',
+}
 
 export class SignUp extends PureComponent {
   static propTypes = {
@@ -20,10 +27,10 @@ export class SignUp extends PureComponent {
     event.preventDefault()
     if (this.validateAll()) {
       const user = {
-        firstName: this.refs.firstName.getValue(),
-        lastName: this.refs.lastName.getValue(),
-        email: this.refs.email.getValue(),
-        password: this.refs.password.getValue()
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
       }
       this.props.signUp(user)
     }
@@ -42,139 +49,187 @@ export class SignUp extends PureComponent {
       this.validatePasswordConfirmation()
   }
 
-  validateFirstName() {
-    const { firstName } = this.refs
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    })
 
-    if (firstName.getValue().length > 1) {
-      this.setState({
-        nameError: null
-      })
-      return true
+    switch(name) {
+    case "email":
+        this.validateEmail()
+        break
+    case "firstName":
+        this.validateFirstName()
+        break
+    case "lastName":
+        this.validateLastName()
+        break
+    case "password":
+        this.validatePassword()
+        break
+    case "passwordConfirmation":
+        this.validatePasswordConfirmation()
+        break
+    default:
+        return false
     }
 
-    this.setState({
-      nameError: 'Please provide your name'
-    })
-    return false
   }
-  validateLastName() {
-    const { lastName } = this.refs
 
-    if (lastName.getValue().length > 1) {
-      this.setState({
-        nameError: null
-      })
-      return true
-    }
-
-    this.setState({
-      nameError: 'Please provide your name'
-    })
-    return false
-  }
   validateEmail() {
-    const { email } = this.refs
-
-    if (email.getValue().match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
+    const email = this.state.email
+    const validationMsg = validate.single(email, {presence: true, email: true})
+console.log(email);
+    if (!!validationMsg) {
       this.setState({
-        emailError: null
-      })
-      return true
-    }
-
-    if (email.value === '') {
-      this.setState({
-        emailError: 'Please provide your email address'
+        emailError: validationMsg
       })
       return false
     }
 
     this.setState({
-      emailError: 'Please provide a valid email address'
+      emailError: null
     })
-    return false
+    return true
+  }
+
+  validateFirstName() {
+    const firstName = this.state.firstName
+    const validationMsg = validate.single(firstName, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        firstNameError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      firstNameError: null
+    })
+    return true
+  }
+
+  validateLastName() {
+    const lastName = this.state.lastName
+    const validationMsg = validate.single(lastName, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        lastNameError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      lastNameError: null
+    })
+    return true
   }
 
   validatePassword() {
-    const { password } = this.refs
+    const password = this.state.password
+    const validationMsg = validate.single(password, {presence: true,
+      length: {minimum: 6,
+              message: "must be at least 6 characters"
+      }
+    })
 
-    if (password.getValue().length < 6) {
+    if (!!validationMsg) {
       this.setState({
-        passwordError: 'Password is too short'
+        passwordError: validationMsg
       })
       return false
     }
 
-    if (password.getValue().match(/[a-zA-Z]+/) && password.getValue().match(/[0-9]+/)) {
-      this.setState({
-        passwordError: null
-      })
-      return true
-    }
-
     this.setState({
-      passwordConfirmationError: 'Passwords do not match'
+      passwordError: null
     })
-    return false
+    return true
   }
+
   validatePasswordConfirmation() {
-    const { password, passwordConfirmation } = this.refs
+    const password = this.state.password
+    const passwordConfirmation = this.state.passwordConfirmation
+    const validationMsg = validate.single(passwordConfirmation, {presence: true,
+      length: {minimum: 6,
+              message: "must be at least 6 characters"
+      }
+    })
 
-    if (password.value === passwordConfirmation.value) {
+    if (!!validationMsg) {
       this.setState({
-        passwordConfirmationError: null
+        passwordConfirmationError: validationMsg
       })
-      return true
+      return false
+    }
+
+    if(passwordConfirmation !== password)
+    {
+      this.setState({
+        passwordConfirmationError: "password confirmation is diferent"
+      })
+      return false
     }
 
     this.setState({
-      passwordConfirmationError: 'Passwords do not match'
+      passwordConfirmationError: null
     })
-    return false
+    return true
   }
+
+
   render() {
     return (
-      <Paper className="signup-paper">
+      <Paper style={ dialogStyle }>
         <h1>Sign up</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
 
-          <TextField className="left-inline" ref="firstName" type="text" hintText="First Name"
-            onChange={this.validateFirstName.bind(this)}
-            errorText={this.state.nameError}
+          <FormControl className="formControl">
+            <TextField id="firstName" type="text" placeholder="First Name"
+              onChange={this.handleChange("firstName")}
             />
+            <FormHelperText id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+          </FormControl>
 
-          <TextField className="right-inline" ref="lastName" type="text" hintText="Last Name"
-            onChange={this.validateLastName.bind(this)}
-            errorText={this.state.nameError}
-             />
-
-          <TextField ref="email" type="email" hintText="Email address"
-            onChange={this.validateEmail.bind(this)}
-            errorText={this.state.emailError}
-            fullWidth={true}
+          <FormControl className="formControl">
+            <TextField id="lastName" type="text" placeholder="Last Name"
+              onChange={this.handleChange("lastName")}
             />
+            <FormHelperText id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+          </FormControl>
 
-          <TextField ref="password" type="password" hintText="Password"
-            onChange={this.validatePassword.bind(this)}
-            errorText={this.state.passwordError}
-            fullWidth={true}
+           <FormControl fullWidth className="formControl">
+             <TextField id="email" type="email" placeholder="Email address"
+               onChange={this.handleChange("email")}
              />
+             <FormHelperText id="email-error-text">{this.state.emailError}</FormHelperText>
+           </FormControl>
 
-          <TextField ref="passwordConfirmation" type="password" hintText="Repeat Password"
-            onKeyUp={this.validatePasswordConfirmation.bind(this)}
-            onChange={this.validatePasswordConfirmation.bind(this)}
-            errorText={this.state.passwordConfirmationError}
-            fullWidth={true}
+           <FormControl fullWidth className="formControl">
+             <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
+               onChange={this.handleChange("password")}
              />
+             <FormHelperText id="password-error-text">{this.state.passwordError}</FormHelperText>
+           </FormControl>
+
+           <FormControl fullWidth className="formControl">
+             <TextField id="passwordConfirmation" type="password" placeholder="Password Confirmation"
+               autoComplete="current-password"
+               onKeyUp={this.handleChange("passwordConfirmation")}
+               onChange={this.handleChange("passwordConfirmation")}
+             />
+             <FormHelperText id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
+           </FormControl>
+
         </form>
         <Button
-          onClick={this.submitForm.bind(this)}
-          label="Sign up"
-          primary={true} />
-        <Button
-          onClick={this.cancel.bind(this)}
-          label="Cancel" />
+          onClick={ this.submitForm.bind(this) }
+          raised color="primary">
+          Sign in
+        </Button>
+        <Button onClick={this.cancel.bind(this)}> Cancel </Button>
       </Paper>
     )
   }

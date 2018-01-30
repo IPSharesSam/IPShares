@@ -50,8 +50,16 @@ export class SignIn extends PureComponent {
       [name]: event.target.value,
     })
 
-    this.validateEmail()
-    this.validatePassword()
+    switch(name) {
+    case "email":
+        this.validateEmail()
+        break
+    case "password":
+        this.validatePassword()
+        break
+    default:
+        return false
+    }
   }
 
   validateEmail() {
@@ -113,7 +121,7 @@ export class SignIn extends PureComponent {
               onChange={this.handleChange("password")}
               fullWidth={true}
             />
-            <FormHelperText id="email-error-text">{this.state.passwordError}</FormHelperText>
+            <FormHelperText id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
         </form>
 
