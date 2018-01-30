@@ -9,12 +9,28 @@
 }
 
 .TextField {
-  height: 400px;
-  width: 400px;
+  min-height: 250px;
+  width: 50%;
+  float: left;
 }
 
 .Header-wrap {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
+}
+
+.AdvisorLabels {
+  float: right;
+}
+
+.AdvisorImage {
+  float: left;
+}
+
+.Calender {
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
