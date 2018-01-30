@@ -1,6 +1,6 @@
 import ApiClient from '../../api/client'
 import { push } from 'react-router-redux'
-import { loadError } from '../loading'
+import { loadError } from './loading'
 
 export const SIGN_UP = 'SIGN_UP'
 
