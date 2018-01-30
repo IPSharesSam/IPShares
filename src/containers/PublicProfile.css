@@ -9,6 +9,8 @@
 }
 
 .TextField {
+  margin-top: 20px;
+  padding: 10px;
   min-height: 250px;
   width: 50%;
   float: left;
@@ -30,6 +32,7 @@
 }
 
 .Calender {
+  padding-top: 20px;
   margin: auto;
   display: flex;
   justify-content: center;

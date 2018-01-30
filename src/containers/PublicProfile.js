@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import 'react-dates/initialize';
 import GridList from '../components/GridList'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
@@ -6,23 +7,26 @@ import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
 import StarBorder from 'material-ui-icons/StarBorder'
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import moment from 'moment'
+import { DayPicker } from 'react-dates'
+import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
 
 class PublicProfile extends PureComponent {
   constructor(props) {
-  super(props);
-    this.handleDayClick = this.handleDayClick.bind(this);
-    this.state = {
-      selectedDay: null,
-    };
-  }
-  handleDayClick(day, { selected }) {
-    this.setState({
-      selectedDay: selected ? undefined : day,
-    });
-  }
+      super(props);
+
+      this.handleDayClick = this.handleDayClick.bind(this);
+
+      this.state = {
+        date: moment(),
+      };
+    }
+
+    handleDayClick(day) {
+      this.setState({ date: day });
+    }
+
 
   render() {
     const past = {
@@ -68,6 +72,8 @@ class PublicProfile extends PureComponent {
                 placeholder="send a message"
                 multiline={true}
                 InputProps={{ disableUnderline: true  }}
+                focused={this.state.focused}
+                onFocusChange={({ focused }) => this.setState({ focused })}
               />
               <Button raised color="default" fullWidth="true">
                 submit
@@ -75,12 +81,11 @@ class PublicProfile extends PureComponent {
             </Paper>
             <div className="Calender">
               <DayPicker
-                selectedDays={this.state.selectedDay}
-                onDayClick={this.handleDayClick}
-                disabledDays={past}
+                numberOfMonths={1}
+                hideKeyboardShortcutsPanel={true}
+                date={this.state.date}
+                onDateChange={date => this.setState({ date })}
               />
-              <p>
-              </p>
             </div>
           </div>
         </div>
@@ -89,6 +94,8 @@ class PublicProfile extends PureComponent {
   }
 }
 
+
+// Contact-wrap shouldn't be visable for non login.
 
 
 export default PublicProfile

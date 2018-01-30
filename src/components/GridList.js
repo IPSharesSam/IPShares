@@ -48,7 +48,7 @@ const styles = theme => ({
     transform: 'translateZ(0)',
   },
   title: {
-    color: theme.palette.primary.light,
+    color: 'rgb(255, 255, 255)',
   },
   titleBar: {
     background:
