@@ -5,6 +5,8 @@ import Routes from './routes'
 import Navigation from './components/Navigation'
 import './App.css'
 
+const TitleFont = '"Bolts SF", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -14,7 +16,13 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: 'Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     title: {
-      fontFamily: '"Bolts SF", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      fontFamily: TitleFont
+    },
+    headline: {
+      fontFamily: TitleFont
+    },
+    display1: {
+      fontFamily: TitleFont
     }
   }
 })

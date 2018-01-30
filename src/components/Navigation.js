@@ -31,7 +31,7 @@ export class Navigation extends PureComponent {
     signedIn: PropTypes.bool.isRequired
   }
 
-  signOut(event) {
+  signOut = (event) => {
     event.preventDefault()
     this.props.signOut()
   }
@@ -48,7 +48,10 @@ export class Navigation extends PureComponent {
             <Typography type="title" color="inherit" className={classes.flex}>
               IP Shares
             </Typography>
-            <Button color="inherit">Login</Button>
+            { this.props.signedIn ?
+              <Button color="inherit" onClick={this.signOut} >Sign out</Button> :
+              <Button color="inherit" component={Link} to="/sign-in" >Sign in</Button>
+            }
           </Toolbar>
         </AppBar>
       </div>
