@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import Reboot from 'material-ui/Reboot'
-import Typography from 'material-ui/Typography'
 import Routes from './routes'
 import Navigation from './components/Navigation'
 import './App.css'
@@ -24,12 +23,10 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Reboot />
-        <Typography>
         <Navigation />
           <main>
             <Routes />
           </main>
-        </Typography>
       </MuiThemeProvider>
     )
   }
