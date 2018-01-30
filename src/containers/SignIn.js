@@ -6,6 +6,8 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signIn from '../actions/user/sign-in'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import validate from "validate.js"
 
 const dialogStyle = {
   width: '400px',
@@ -29,51 +31,66 @@ export class SignIn extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
+
+    if(!this.validateAll()) return null
     const user = {
-      email: this.refs.email.getValue(),
-      password: this.refs.password.getValue(),
+      email: this.state.email,
+      password: this.state.password,
     }
     this.props.signIn(user)
   }
 
-  validateEmail = name => event => {
-    const email = event.target.value
+  validateAll() {
+    return this.validateEmail(this) &&
+      this.validatePassword(this)
+  }
+
+  handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     })
 
-    console.log(email)
+    this.validateEmail()
+    this.validatePassword()
+  }
 
-    if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
-      this.setState({
-        emailError: null
-      })
-      return true
-    }
+  validateEmail() {
+    const email = this.state.email
 
-    if (email === '') {
+    const validationMsg = validate.single(email, {presence: true, email: true})
+
+    if (!!validationMsg) {
       this.setState({
-        emailError: 'Please provide your email address'
+        emailError: validationMsg
       })
       return false
     }
 
     this.setState({
-      emailError: 'Please provide a valid email address'
+      emailError: null
     })
-    return false
+    return true
 
   }
 
   validatePassword() {
-    const { password } = this.refs
+    const password = this.state.password
+    const validationMsg = validate.single(password, {presence: true,
+      length: {minimum: 6,
+              message: "must be at least 6 characters"
+      }
+    })
 
-    if (password.getValue().length === 0) {
+    if (!!validationMsg) {
       this.setState({
-        passwordError: 'Please insert your Password'
+        passwordError: validationMsg
       })
       return false
     }
+
+    this.setState({
+      passwordError: null
+    })
     return true
   }
 
@@ -83,23 +100,27 @@ export class SignIn extends PureComponent {
       <Paper style={ dialogStyle }>
 
         <form onSubmit={this.submitForm.bind(this)}>
-          <TextField id="email" type="email" placeholder="Email address"
-            onChange={this.validateEmail("email")}
-            errorText={this.state.emailError}
-            fullWidth={true}
-          />
+          <FormControl fullWidth className="formControl">
+            <TextField id="email" type="email" placeholder="Email address"
+              onChange={this.handleChange("email")}
+              fullWidth={true}
+            />
+            <FormHelperText id="email-error-text">{this.state.emailError}</FormHelperText>
+          </FormControl>
 
-          <TextField ref="password" type="password" placeholder="Password" autoComplete="current-password"
-            onChange={this.validatePassword.bind(this)}
-            errorText={this.state.passwordError}
-            fullWidth={true}
-          />
+          <FormControl fullWidth className="formControl">
+            <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
+              onChange={this.handleChange("password")}
+              fullWidth={true}
+            />
+            <FormHelperText id="email-error-text">{this.state.passwordError}</FormHelperText>
+          </FormControl>
         </form>
 
         <Button
           onClick={ this.submitForm.bind(this) }
           raised color="primary">
-          Sign in
+          {"Sign in"}
         </Button>
 
       </Paper>
