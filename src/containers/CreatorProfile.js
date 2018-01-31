@@ -36,7 +36,7 @@ const styles = {
   },
 }
 
-export class AdvisorProfile extends PureComponent {
+export class CreatorProfile extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
   }
@@ -83,7 +83,7 @@ export class AdvisorProfile extends PureComponent {
     return (
 
       <Paper className="signup-paper">
-        <h1>Advisor Profile</h1>
+        <h1>Creator Profile</h1>
 
         <form onSubmit={this.submitForm.bind(this)}>
 
@@ -149,4 +149,4 @@ export class AdvisorProfile extends PureComponent {
   }
 }
 
-export default connect(null, { push })(AdvisorProfile)
+export default connect(null, { push })(CreatorProfile)
