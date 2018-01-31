@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import Home from './containers/Home'
 import PublicProfile from './containers/PublicProfile'
 import AdvisorProfile from './containers/AdvisorProfile'
+import CreatorProfile from './containers/CreatorProfile'
 // import SignUp from './users/SignUp'
 import SignIn from './containers/SignIn'
 
@@ -15,6 +16,7 @@ export default class Routes extends Component {
         <Route path="/Profiles" component={PublicProfile} />
         {/* <Route path="/sign-up" component={SignUp} /> */}
         <Route path="/account/advisor" component={AdvisorProfile} />
+        <Route path="/account/creator" component={CreatorProfile} />
       </div>
     )
   }

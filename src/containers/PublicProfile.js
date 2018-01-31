@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import 'react-dates/initialize';
+import { SingleDatePicker, SingleDatePickerWrapper } from 'react-dates'
 import GridList from '../components/GridList'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
@@ -8,7 +9,6 @@ import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
 import StarBorder from 'material-ui-icons/StarBorder'
 import moment from 'moment'
-import { SingleDatePicker, SingleDatePickerWrapper } from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
 
