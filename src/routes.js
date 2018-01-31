@@ -4,6 +4,7 @@ import Home from './containers/Home'
 import PublicProfile from './containers/PublicProfile'
 import SignUp from './containers/SignUp'
 import SignIn from './containers/SignIn'
+import Search from './containers/Search'
 
 export default class Routes extends Component {
   render() {
@@ -13,6 +14,7 @@ export default class Routes extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route exact path="/Profiles" component={PublicProfile} />
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/search" component={Search} />
       </div>
     )
   }
