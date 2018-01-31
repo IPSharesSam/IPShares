@@ -4,7 +4,7 @@ import Home from './containers/Home'
 import PublicProfile from './containers/PublicProfile'
 import AdvisorProfile from './containers/AdvisorProfile'
 import CreatorProfile from './containers/CreatorProfile'
-// import SignUp from './users/SignUp'
+import SignUp from './containers/SignUp'
 import SignIn from './containers/SignIn'
 
 export default class Routes extends Component {
@@ -13,8 +13,8 @@ export default class Routes extends Component {
       <div>
         <Route exact path="/" component={Home} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
         <Route path="/Profiles" component={PublicProfile} />
-        {/* <Route path="/sign-up" component={SignUp} /> */}
         <Route path="/account/advisor" component={AdvisorProfile} />
         <Route path="/account/creator" component={CreatorProfile} />
       </div>

@@ -1,6 +1,6 @@
 import ApiClient from '../../api/client'
 import { push } from 'react-router-redux'
-import { loadError } from './loading'
+// import { loadError } from '../loading'
 
 export const SIGN_UP = 'SIGN_UP'
 
@@ -12,6 +12,6 @@ export default function signUp (user) {
     .then(
       dispatch(push('/'))
     )
-    .catch(err => dispatch(loadError(err)))
+    .catch(err => dispatch(console.log(err)))
   }
 }
