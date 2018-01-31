@@ -24,8 +24,8 @@ class PublicProfile extends PureComponent {
 
       this.state = {
         date,
-        focused: true,
-        rating: 4,
+        focused: false,
+        rating: 3,
       };
     }
 
@@ -95,10 +95,12 @@ class PublicProfile extends PureComponent {
             </div>
           </header>
 
+
           <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
             Bio
           </Typography>
           <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He received his BA in Economics and Business Administration from Bocconi University, Milan. From the same institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was Director of the Master in Healthcare Management (MIMS - Italian class). </p>
+
 
             <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
               Clients
@@ -110,8 +112,9 @@ class PublicProfile extends PureComponent {
             </Typography>
           <GridList/>
 
+
             <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
-              Contact
+              Get in contact
             </Typography>
           <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
             <Paper className="TextField">
@@ -133,8 +136,7 @@ class PublicProfile extends PureComponent {
                 date={this.state.date}
                 onDateChange={(date) => this.setState({ date })}
                 focused={this.state.focused}
-                onFocusChange={this.onFocusChange}
-                keepOpenOnDateSelect={false}
+                onFocusChange={({ focused }) => this.setState({ focused })}
               />
             </div>
           </form>
