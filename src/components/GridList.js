@@ -24,14 +24,6 @@ const tileData = [
     title: 'Patent lawyer',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
   },
-  {
-    title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
-  },
-  {
-    title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
-  },
 ]
 
 

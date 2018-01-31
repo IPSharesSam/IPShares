@@ -8,7 +8,7 @@ import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
 import StarBorder from 'material-ui-icons/StarBorder'
 import moment from 'moment'
-import { DayPicker } from 'react-dates'
+import { SingleDatePicker, SingleDatePickerWrapper } from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
 
@@ -16,22 +16,46 @@ class PublicProfile extends PureComponent {
   constructor(props) {
       super(props);
 
-      this.handleDayClick = this.handleDayClick.bind(this);
+      const { date, focused } = props
+
+      this.handleDayClick = this.handleChange.bind(this);
+      this.onFocusChange = this.onFocusChange.bind(this)
 
       this.state = {
-        date: moment(),
+        date,
+        focused: true,
       };
     }
 
-    handleDayClick(day) {
-      this.setState({ date: day });
+    submitForm(event) {
+      event.preventDefault()
+      if (this.validateAll()) {
+        const apointment = {
+          date: this.state.date,
+          msg: this.state.msg,
+        }
+        console.log(apointment);
+      }
+      return false
     }
 
+    validateAll() {
+      return true
+    }
+
+    handleChange = name => event => {
+      this.setState({
+        [name]: event.target.value,
+      })
+    }
+
+    onFocusChange(focused) {
+      this.setState({ focused });
+    }
 
   render() {
-    const past = {
-      before: new Date(),
-    }
+
+
     return (
       <div className="PublicProfile-wrap">
         <div className="Details">
@@ -44,16 +68,16 @@ class PublicProfile extends PureComponent {
             </div>
             <div className="AdvisorLabels">
               <h2>John van der Burg</h2>
-              <Badge style={{marginRight:"18px"}}className="Badge" badgeContent={4} color="primary">
+              <Badge className="Badge" badgeContent={4} color="primary">
                 <MailIcon />
               </Badge>
-              <StarBorder />
-              <StarBorder />
-              <StarBorder />
-              <StarBorder />
               <Badge style={{margin:"18px"}}className="Badge" badgeContent={8} color="primary">
                 <MailIcon />
               </Badge>
+              <StarBorder />
+              <StarBorder />
+              <StarBorder />
+              <StarBorder />
             </div>
           </header>
           <h1>BIO</h1>
@@ -65,29 +89,31 @@ class PublicProfile extends PureComponent {
           <GridList/>
 
           <h2>Contact</h2>
-          <div className="Contact-wrap">
+          <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
             <Paper className="TextField">
               <TextField
                 className="TextField"
                 placeholder="send a message"
                 multiline={true}
                 InputProps={{ disableUnderline: true  }}
-                focused={this.state.focused}
-                onFocusChange={({ focused }) => this.setState({ focused })}
+                onChange={this.handleChange("msg")}
               />
-              <Button raised color="default" fullWidth="true">
+            <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
                 submit
               </Button>
             </Paper>
             <div className="Calender">
-              <DayPicker
+              <SingleDatePicker
                 numberOfMonths={1}
                 hideKeyboardShortcutsPanel={true}
                 date={this.state.date}
-                onDateChange={date => this.setState({ date })}
+                onDateChange={(date) => this.setState({ date })}
+                focused={this.state.focused}
+                onFocusChange={this.onFocusChange}
+                keepOpenOnDateSelect={false}
               />
             </div>
-          </div>
+          </form>
         </div>
       </div>
     )

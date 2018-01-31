@@ -14,6 +14,8 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signUp from '../actions/user/sign-up'
 import Switch from 'material-ui/Switch'
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 import './AdvisorProfile.css'
 
 const styles = {
@@ -29,7 +31,7 @@ const styles = {
     padding: "5px"
   },
   heading: {
-    backgroundColor: "#f6f6f6",
+    backgroundColor: "#fbfbfb",
     border: "1px solid #b8b8b8",
     minWidth: "100%",
     margin: "15px 0px",
@@ -62,15 +64,6 @@ export class SignUp extends PureComponent {
 
   state = { }
 
-
-  updateCheck() {
-    this.setState((oldState) => {
-      return {
-        checked: !oldState.checked,
-      };
-    });
-  }
-
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -87,9 +80,8 @@ export class SignUp extends PureComponent {
         city: this.state.city,
         country: this.state.country,
         phoneNumber: this.state.phoneNumber,
-        publicAdvisor: this.state.checked,
+        publicAdvisor: this.state.publicAdvisor,
         bio: this.state.bio,
-        //photo
         tags: [],
         clients: [],
         partners: [],
@@ -155,7 +147,7 @@ export class SignUp extends PureComponent {
             control={
               <Switch
                 checked={this.state.checked}
-                onChange={this.updateCheck}
+                onChange={this.handleChange("publicAdvisor")}
                 className = "profile-toggle"
                 style={styles.toggle}
               />
