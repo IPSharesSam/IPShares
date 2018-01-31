@@ -9,7 +9,9 @@
 }
 
 .TextField {
-  min-height: 250px;
+  margin-top: 20px;
+  padding: 10px;
+  min-height: 340px;
   width: 50%;
   float: left;
 }
@@ -17,12 +19,12 @@
 .Header-wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   padding: 20px;
 }
 
 .AdvisorLabels {
   float: right;
+  margin-left: 30px;
 }
 
 .AdvisorImage {
@@ -30,7 +32,7 @@
 }
 
 .Calender {
-  margin: auto;
+  padding-top: 20px;
+  margin-left: 20px;
   display: flex;
-  justify-content: center;
 }

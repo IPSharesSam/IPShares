@@ -24,14 +24,6 @@ const tileData = [
     title: 'Patent lawyer',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
   },
-  {
-    title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
-  },
-  {
-    title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
-  },
 ]
 
 
@@ -48,7 +40,7 @@ const styles = theme => ({
     transform: 'translateZ(0)',
   },
   title: {
-    color: theme.palette.primary.light,
+    color: 'rgb(255, 255, 255)',
   },
   titleBar: {
     background:
@@ -72,11 +64,6 @@ function SingleLineGridList(props) {
                 root: classes.titleBar,
                 title: classes.title,
               }}
-              actionIcon={
-                <IconButton>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
             />
           </GridListTile>
         ))}

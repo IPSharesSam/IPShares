@@ -9,7 +9,7 @@ const api = new ApiClient()
 export default function signIn (user) {
   return dispatch => {
     api.post('sessions', user)
-    .then(res => { 
+    .then(res => {
         api.storeToken(res.body.token)
         return res
     })
