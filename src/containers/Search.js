@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList'
 import Subheader from 'material-ui/List/ListSubheader'
@@ -40,15 +41,13 @@ export class TitlebarGridList extends PureComponent {
           {hits.map(hit => (
             <GridListTile key={hit.objectID} titleBackground={'green'}>
               <img src={hit.picUrl} alt={hit.firstName} />
-              <GridListTileBar
-                title={hit.firstName + ' ' + hit.lastName}
-                subtitle={<span>city: {hit.city}</span>}
-                actionIcon={
-                  <IconButton className={classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                }
+              {/* this is the user id */}
+              <Link to={'/advisor/' + hit.objectID}>
+                <GridListTileBar
+                  title={hit.firstName + ' ' + hit.lastName}
+                  subtitle={<span>city: {hit.city}</span>}
               />
+              </Link>
             </GridListTile>
         ))}
       </GridList>
