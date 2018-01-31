@@ -7,7 +7,8 @@ import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
-import StarBorder from 'material-ui-icons/StarBorder'
+import Typography from 'material-ui/Typography'
+import StarRatingComponent from 'react-star-rating-component'
 import moment from 'moment'
 import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
@@ -24,6 +25,7 @@ class PublicProfile extends PureComponent {
       this.state = {
         date,
         focused: true,
+        rating: 4,
       };
     }
 
@@ -53,12 +55,17 @@ class PublicProfile extends PureComponent {
       this.setState({ focused });
     }
 
-  render() {
+    onStarClick(nextValue, prevValue, name) {
+      this.setState({rating: nextValue});
+    }
 
+  render() {
+    const { rating } = this.state
 
     return (
       <div className="PublicProfile-wrap">
         <div className="Details">
+
           <header className="Header-wrap">
             <div className="picture">
               <img className="AdvisorImage"
@@ -66,29 +73,46 @@ class PublicProfile extends PureComponent {
                 alt='Advisor'
               />
             </div>
+
             <div className="AdvisorLabels">
-              <h2>John van der Burg</h2>
+              <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                John v.d Berg
+              </Typography>
               <Badge className="Badge" badgeContent={4} color="primary">
                 <MailIcon />
               </Badge>
               <Badge style={{margin:"18px"}}className="Badge" badgeContent={8} color="primary">
                 <MailIcon />
               </Badge>
-              <StarBorder />
-              <StarBorder />
-              <StarBorder />
-              <StarBorder />
+
+              <StarRatingComponent
+                  name="rate1"
+                  starCount={5}
+                  value={rating}
+                  onStarClick={this.onStarClick.bind(this)}
+              />
+
             </div>
           </header>
-          <h1>BIO</h1>
+
+          <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+            Bio
+          </Typography>
           <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He received his BA in Economics and Business Administration from Bocconi University, Milan. From the same institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was Director of the Master in Healthcare Management (MIMS - Italian class). </p>
 
-          <h2>Public Clients</h2>
-          <GridList/>
-          <h2>Public Partners</h2>
+            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+              Clients
+            </Typography>
           <GridList/>
 
-          <h2>Contact</h2>
+            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+              Partners
+            </Typography>
+          <GridList/>
+
+            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+              Contact
+            </Typography>
           <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
             <Paper className="TextField">
               <TextField
@@ -121,7 +145,6 @@ class PublicProfile extends PureComponent {
 }
 
 
-// Contact-wrap shouldn't be visable for non login.
 
 
 export default PublicProfile

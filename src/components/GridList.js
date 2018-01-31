@@ -64,11 +64,6 @@ function SingleLineGridList(props) {
                 root: classes.titleBar,
                 title: classes.title,
               }}
-              actionIcon={
-                <IconButton>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
             />
           </GridListTile>
         ))}
