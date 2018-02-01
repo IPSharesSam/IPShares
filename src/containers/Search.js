@@ -14,7 +14,9 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List'
+import Toolbar from 'material-ui/Toolbar'
+import AppBar from 'material-ui/AppBar'
 import { InstantSearch, Hits, SearchBox, Pagination } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
 import './Search.css'
@@ -25,9 +27,6 @@ const styles = theme => ({
   },
   cardContent: {
     minHeight: 150,
-  },
-  card: {
-    margin: 5,
   },
   button: {
     marginRight: 10,
@@ -55,11 +54,16 @@ export class TitlebarGridList extends PureComponent {
   }
 
   render() {
+    if (process.env.NODE_ENV === 'production') {
+      this.host = 'https://damp-reaches-81205.herokuapp.com/'
+      console.warn(this.host, 'prod url')
+    }
     function CustomHits({ hits }) {
       return (
-        <GridList cellHeight={"auto"} cols={5}>
+        <GridList cellHeight={"auto"} cols={5} style={{ marginTop: 12 }} spacing={24}>
           {hits.map(hit => (
-            <Card className={classes.card} key={hit.objectID}>
+            <GridListTile>
+            <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>
               <Link to={'/advisor/' + hit.objectID}>
                 <CardMedia
                   className={classes.media}
@@ -68,25 +72,26 @@ export class TitlebarGridList extends PureComponent {
                 />
               </Link>
               <CardContent className={classes.cardContent}>
-                  <Typography type="title" component="h2">
-                    <Link to={'/advisor/' + hit.objectID}>{hit.firstName + ' ' + hit.lastName}</Link>
-                  </Typography>
-                  {hit.tags.map(tag => {
-                    return <Chip className={classes.chip} label={tag} />
-                  })}
-                </CardContent>
-                <CardActions>
-                  <Button className={classes.button} raised size="small" color="default">
-                    <Link to={'/advisor/' + hit.objectID}>Profile</Link>
-                  </Button>
-                  <StarRatingComponent style={{ float:"right" }}
-                    name="rate2"
-                    editing={false}
-                    starCount={5}
-                    value={3}
-                  />
-                </CardActions>
+                <Typography type="title" component="h2">
+                  <Link to={'/advisor/' + hit.objectID}>{hit.firstName + ' ' + hit.lastName}</Link>
+                </Typography>
+                {hit.tags.map(tag => {
+                  return <Chip className={classes.chip} label={tag} />
+                })}
+            </CardContent>
+            <CardActions>
+              <Button className={classes.button} raised size="small" color="default">
+                <Link to={'/advisor/' + hit.objectID}>Profile</Link>
+              </Button>
+              <StarRatingComponent style={{ float:"right" }}
+                name="rate2"
+                editing={false}
+                starCount={5}
+                value={3}
+              />
+            </CardActions>
             </Card >
+          </GridListTile>
         ))}
       </GridList>
       );
@@ -108,17 +113,12 @@ export class TitlebarGridList extends PureComponent {
           indexName="advisors"
         >
           <Grid container spacing={24}>
-            <Grid item xs={12} md={2}>
-            <List component="nav">
-              <ListItem button>
-                <SearchBox className={classes.container}  autoFocus showLoadingIndicator />
-              </ListItem>
-              <ListItem button component="a" href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItem>
-            </List>
-            </Grid>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12}>
+              <AppBar position="static" color="default" style={{ margin: 5 }}>
+                <Toolbar>
+                  <SearchBox className={classes.container}  autoFocus showLoadingIndicator />
+                </Toolbar>
+              </AppBar>
               <Search />
               <Pagination />
             </Grid>
