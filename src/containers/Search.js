@@ -64,7 +64,7 @@ export class TitlebarGridList extends PureComponent {
           {hits.map(hit => (
             <GridListTile>
             <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>
-              <Link to={'/advisor/' + hit.objectID}>
+              <Link to={'/advisor/' + hit.advisorProfileId}>
                 <CardMedia
                   className={classes.media}
                   image={hit.picUrl}
@@ -73,7 +73,7 @@ export class TitlebarGridList extends PureComponent {
               </Link>
               <CardContent className={classes.cardContent}>
                 <Typography type="title" component="h2">
-                  <Link to={'/advisor/' + hit.objectID}>{hit.firstName + ' ' + hit.lastName}</Link>
+                  <Link to={'/advisor/' + hit.advisorProfileId}>{hit.firstName + ' ' + hit.lastName}</Link>
                 </Typography>
                 {hit.tags.map(tag => {
                   return <Chip className={classes.chip} label={tag} />
