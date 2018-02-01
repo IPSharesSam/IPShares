@@ -36,7 +36,6 @@ class PublicProfile extends PureComponent {
           date: this.state.date,
           msg: this.state.msg,
         }
-        console.log(apointment);
       }
       return false
     }

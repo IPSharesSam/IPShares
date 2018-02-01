@@ -79,7 +79,6 @@ export class SignUp extends PureComponent {
   validateEmail() {
     const email = this.state.email
     const validationMsg = validate.single(email, {presence: true, email: true})
-console.log(email);
     if (!!validationMsg) {
       this.setState({
         emailError: validationMsg

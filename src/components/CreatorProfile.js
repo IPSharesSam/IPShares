@@ -65,7 +65,6 @@ export class CreatorProfile extends PureComponent {
         clients: [],
         partners: [],
       }
-      console.log(profile);
       this.props.push('/')
     }
     return false
