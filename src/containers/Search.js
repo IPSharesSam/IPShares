@@ -55,7 +55,7 @@ export class TitlebarGridList extends PureComponent {
 
   render() {
     if (process.env.NODE_ENV === 'production') {
-      this.host = 'https://damp-reaches-81205.herokuapp.com:32706'
+      this.host = 'https://damp-reaches-81205.herokuapp.com'
       console.warn(this.host, 'prod url')
     }
     function CustomHits({ hits }) {
