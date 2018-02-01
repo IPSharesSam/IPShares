@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList'
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+import Chip from 'material-ui/Chip'
+import StarRatingComponent from 'react-star-rating-component'
 import Subheader from 'material-ui/List/ListSubheader'
 import IconButton from 'material-ui/IconButton'
 import InfoIcon from 'material-ui-icons/Info'
@@ -17,6 +21,21 @@ import './Search.css'
 const styles = theme => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
+  },
+  cardContent: {
+    minHeight: 150,
+  },
+  card: {
+    margin: 5,
+  },
+  button: {
+    marginRight: 10,
+  },
+  chip: {
+    margin: theme.spacing.unit / 2,
+  },
+  media: {
+    height: 200,
   },
 })
 
@@ -33,27 +52,45 @@ export class TitlebarGridList extends PureComponent {
     event.preventDefault()
     this.props.search(this.state.name)
   }
-  
+
   render() {
     function CustomHits({ hits }) {
       return (
-        <GridList cellHeight={180} cols={5}>
+        <GridList cellHeight={"auto"} cols={5}>
           {hits.map(hit => (
-            <GridListTile key={hit.objectID} titleBackground={'green'}>
-              <img src={hit.picUrl} alt={hit.firstName} />
-              {/* this is the user id */}
+            <Card className={classes.card} key={hit.objectID}>
               <Link to={'/advisor/' + hit.objectID}>
-                <GridListTileBar
-                  title={hit.firstName + ' ' + hit.lastName}
-                  subtitle={<span>city: {hit.city}</span>}
-              />
+                <CardMedia
+                  className={classes.media}
+                  image={hit.picUrl}
+                  title={hit.firstName}
+                />
               </Link>
-            </GridListTile>
+              <CardContent className={classes.cardContent}>
+                  <Typography type="title" component="h2">
+                    <Link to={'/advisor/' + hit.objectID}>{hit.firstName + ' ' + hit.lastName}</Link>
+                  </Typography>
+                  {hit.tags.map(tag => {
+                    return <Chip className={classes.chip} label={tag} />
+                  })}
+                </CardContent>
+                <CardActions>
+                  <Button className={classes.button} raised size="small" color="default">
+                    <Link to={'/advisor/' + hit.objectID}>Profile</Link>
+                  </Button>
+                  <StarRatingComponent style={{ float:"right" }}
+                    name="rate2"
+                    editing={false}
+                    starCount={5}
+                    value={3}
+                  />
+                </CardActions>
+            </Card >
         ))}
       </GridList>
       );
     }
-    
+
     const ConnectedHits = connectHits(CustomHits);
 
     function Search() {

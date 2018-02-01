@@ -9,8 +9,6 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
-import MenuIcon from 'material-ui-icons/Menu'
 
 const styles = {
   root: {
@@ -18,10 +16,14 @@ const styles = {
   },
   flex: {
     flex: 1,
+    display: "inline-flex",
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+  },
+  button: {
+    marginLeft: 8,
   },
 };
 
@@ -42,15 +44,24 @@ export class Navigation extends PureComponent {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography type="title" color="inherit" className={classes.flex}>
-              IP Shares
-            </Typography>
+            <div className={classes.flex}>
+              <Typography type="title" color="inherit">
+                IP Shares
+              </Typography>
+              <Button className={classes.button} color="inherit" component={Link} to="/"> Home </Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/search"> Search </Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/profiles"> Profiles </Button>
+              { this.props.signedIn ?
+              <Button className={classes.button} color="inherit" component={Link} to="/account/advisor"> Account </Button> :
+                <div></div>
+              }
+            </div>
             { this.props.signedIn ?
-              <Button color="inherit" onClick={this.signOut} >Sign out</Button> :
-              <Button color="inherit" component={Link} to="/sign-in" >Sign in</Button>
+              <Button raised color="inherit" onClick={this.signOut} >Sign out</Button> :
+                <div>
+                  <Button className={classes.button} raised color="inherit" component={Link} to="/sign-in" >Sign in</Button>
+                  <Button className={classes.button} raised color="inherit" component={Link} to="/sign-up" >Sign up</Button>
+                </div>
             }
           </Toolbar>
         </AppBar>
