@@ -56,19 +56,19 @@ export class SignUp extends PureComponent {
 
     switch(name) {
     case "email":
-        this.validateEmail()
+        this.validateEmail(event.target.value)
         break
     case "firstName":
-        this.validateFirstName()
+        this.validateFirstName(event.target.value)
         break
     case "lastName":
-        this.validateLastName()
+        this.validateLastName(event.target.value)
         break
     case "password":
-        this.validatePassword()
+        this.validatePassword(event.target.value)
         break
     case "passwordConfirmation":
-        this.validatePasswordConfirmation()
+        this.validatePasswordConfirmation(event.target.value)
         break
     default:
         return false
@@ -76,8 +76,8 @@ export class SignUp extends PureComponent {
 
   }
 
-  validateEmail() {
-    const email = this.state.email
+  validateEmail(email) {
+    // const email = this.state.email
     const validationMsg = validate.single(email, {presence: true, email: true})
     if (!!validationMsg) {
       this.setState({
@@ -92,8 +92,8 @@ export class SignUp extends PureComponent {
     return true
   }
 
-  validateFirstName() {
-    const firstName = this.state.firstName
+  validateFirstName(firstName) {
+    // const firstName = this.state.firstName
     const validationMsg = validate.single(firstName, {presence: true})
 
     if (!!validationMsg) {
@@ -109,8 +109,8 @@ export class SignUp extends PureComponent {
     return true
   }
 
-  validateLastName() {
-    const lastName = this.state.lastName
+  validateLastName(lastName) {
+    // const lastName = this.state.lastName
     const validationMsg = validate.single(lastName, {presence: true})
 
     if (!!validationMsg) {
@@ -126,8 +126,8 @@ export class SignUp extends PureComponent {
     return true
   }
 
-  validatePassword() {
-    const password = this.state.password
+  validatePassword(password) {
+    // const password = this.state.password
     const validationMsg = validate.single(password, {presence: true,
       length: {minimum: 6,
               message: "must be at least 6 characters"
@@ -147,26 +147,27 @@ export class SignUp extends PureComponent {
     return true
   }
 
-  validatePasswordConfirmation() {
+  validatePasswordConfirmation(passwordConfirmation) {
     const password = this.state.password
-    const passwordConfirmation = this.state.passwordConfirmation
-    const validationMsg = validate.single(passwordConfirmation, {presence: true,
-      length: {minimum: 6,
-              message: "must be at least 6 characters"
-      }
-    })
+    // const passwordConfirmation = this.state.passwordConfirmation
 
-    if (!!validationMsg) {
-      this.setState({
-        passwordConfirmationError: validationMsg
-      })
-      return false
-    }
+    // const validationMsg = validate.single(
+    //   passwordConfirmation,
+    //   { presence: true, 
+    //     length: { minimum: 6, message: "must be at least 6 characters" }
+    //   }
+    // )
 
-    if(passwordConfirmation !== password)
-    {
+    // if (!!validationMsg) {
+    //   this.setState({
+    //     passwordConfirmationError: validationMsg
+    //   })
+    //   return false
+    // }
+
+    if ((passwordConfirmation !== password) && password.length > 5) {
       this.setState({
-        passwordConfirmationError: "password confirmation is diferent"
+        passwordConfirmationError: "password confirmation is different"
       })
       return false
     }
@@ -189,28 +190,28 @@ export class SignUp extends PureComponent {
             <TextField id="firstName" type="text" placeholder="First Name"
               onChange={this.handleChange("firstName")}
             />
-            <FormHelperText id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
           </FormControl>
 
           <FormControl className="formControl">
             <TextField id="lastName" type="text" placeholder="Last Name"
               onChange={this.handleChange("lastName")}
             />
-            <FormHelperText id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
           </FormControl>
 
            <FormControl fullWidth className="formControl">
              <TextField id="email" type="email" placeholder="Email address"
                onChange={this.handleChange("email")}
              />
-             <FormHelperText id="email-error-text">{this.state.emailError}</FormHelperText>
+             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
            </FormControl>
 
            <FormControl fullWidth className="formControl">
              <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
                onChange={this.handleChange("password")}
              />
-             <FormHelperText id="password-error-text">{this.state.passwordError}</FormHelperText>
+             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
            </FormControl>
 
            <FormControl fullWidth className="formControl">
@@ -219,7 +220,7 @@ export class SignUp extends PureComponent {
                onKeyUp={this.handleChange("passwordConfirmation")}
                onChange={this.handleChange("passwordConfirmation")}
              />
-             <FormHelperText id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
+             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
            </FormControl>
 
         </form>

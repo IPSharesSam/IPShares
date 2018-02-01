@@ -33,6 +33,7 @@ export class SignIn extends PureComponent {
     event.preventDefault()
 
     if(!this.validateAll()) return null
+
     const user = {
       email: this.state.email,
       password: this.state.password,
@@ -41,8 +42,7 @@ export class SignIn extends PureComponent {
   }
 
   validateAll() {
-    return this.validateEmail(this.state.email) &&
-      this.validatePassword(this.state.password)
+    return this.validateEmail(this.state.email) && this.validatePassword(this.state.password)
   }
 
   handleChange = name => event => {
@@ -134,7 +134,6 @@ export class SignIn extends PureComponent {
           raised color="primary">
           {"Sign in"}
         </Button>
-
       </Paper>
     )
   }
