@@ -10,11 +10,11 @@ export const FETCHED_ADVISOR = 'FETCHED_ADVISOR'
 
 const api = new API()
 
-export default (userId) => {
+export default (advisorId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.post(`/advisor/${userId}`)
+    api.post(`/advisor/${advisorId}`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
