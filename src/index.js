@@ -6,7 +6,9 @@ import store, { history } from './store'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
-require('dotenv').config();
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
 
 ReactDOM.render(
   <Provider store={store}>

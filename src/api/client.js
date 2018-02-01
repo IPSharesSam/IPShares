@@ -6,7 +6,13 @@ export default class ApiClient {
   }
 
   constructor(host, options = {}) {
-    this.host = host || 'http://localhost:3030'
+    if (process.env.NODE_ENV === 'production') {
+      this.host = 'https://damp-reaches-81205.herokuapp.com/'
+      console.log(this.host, 'prod url')
+    }
+    if (process.env.NODE_ENV === 'development') {
+      this.host = 'http://localhost:3030'
+    }
     this.options = { ...this.defaultOptions, ...options }
   }
 
@@ -66,6 +72,13 @@ export default class ApiClient {
   }
 
   createUrl(path) {
+    if (process.env.NODE_ENV === 'production') {
+      console.log('prod create url!')
+      return ['https://damp-reaches-81205.herokuapp.com/', path].join('/')
+    }
+    if (process.env.NODE_ENV === 'development') {
+      return ['http://localhost:3030', path].join('/')
+    }
     return ['http://localhost:3030', path].join('/')
   }
 
