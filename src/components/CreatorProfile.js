@@ -66,7 +66,7 @@ export class CreatorProfile extends PureComponent {
         partners: [],
       }
       console.log(profile);
-      //this.props.signUp(user)
+      this.props.push('/')
     }
     return false
   }
@@ -82,8 +82,8 @@ export class CreatorProfile extends PureComponent {
   render() {
     return (
 
-      <Paper className="signup-paper">
-        <h1>Creator Profile</h1>
+      <div className="wrap">
+        <Typography type="title" component="h2">Creator profile</Typography>
 
         <form onSubmit={this.submitForm.bind(this)}>
 
@@ -143,7 +143,7 @@ export class CreatorProfile extends PureComponent {
           color="primary">
           Cancel
         </Button>
-      </Paper>
+      </div>
 
     )
   }

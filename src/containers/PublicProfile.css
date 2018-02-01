@@ -1,18 +1,19 @@
 .PublicProfile-wrap {
-  width: 80%;
-  margin: auto;
+  width: 95%;
+  margin: 20px auto;
 }
 
 .ProfileDetails {
   width: auto;
   margin: auto;
+  padding: 80px;
 }
 
 .TextField {
   margin-top: 20px;
   padding: 10px;
   min-height: 340px;
-  width: 50%;
+  width: 55%;
   float: left;
 }
 
@@ -32,7 +33,7 @@
 }
 
 .Calender {
+  width: 40%;
   padding-top: 20px;
-  margin-left: 20px;
-  display: flex;
+  float: right;
 }

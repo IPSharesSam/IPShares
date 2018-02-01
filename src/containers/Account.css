@@ -1,0 +1,6 @@
+.tabWrap {
+  display: flex;
+  width: 50%;
+  margin: 25px auto;
+  padding: 10px;
+}
