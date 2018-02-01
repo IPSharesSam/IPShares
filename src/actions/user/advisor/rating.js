@@ -16,7 +16,7 @@ export default (userId) => {
       .then((result) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
-          type: FETCHED_ADVISOR,
+          type: FETCH_RATING,
           payload: result.body
         })
       })
