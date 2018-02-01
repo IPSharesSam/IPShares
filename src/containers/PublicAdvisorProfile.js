@@ -47,7 +47,6 @@ class PublicAdvisorProfile extends PureComponent {
     if (!!advisorId) { fetchAdvisor(advisorId) }
   }
 
-
   submitForm(event) {
     event.preventDefault()
     if (this.validateAll()) {

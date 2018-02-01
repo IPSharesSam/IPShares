@@ -54,10 +54,6 @@ export class TitlebarGridList extends PureComponent {
   }
 
   render() {
-    if (process.env.NODE_ENV === 'production') {
-      this.host = 'https://damp-reaches-81205.herokuapp.com/'
-      console.warn(this.host, 'prod url')
-    }
     function CustomHits({ hits }) {
       return (
         <GridList cellHeight={"auto"} cols={5} style={{ marginTop: 12 }} spacing={24}>
@@ -81,7 +77,7 @@ export class TitlebarGridList extends PureComponent {
             </CardContent>
             <CardActions>
               <Button className={classes.button} raised size="small" color="default">
-                <Link to={'/advisor/' + hit.objectID}>Profile</Link>
+                <Link to={'/advisor/' + hit.advisorProfileId}>Profile</Link>
               </Button>
               <StarRatingComponent style={{ float:"right" }}
                 name="rate2"

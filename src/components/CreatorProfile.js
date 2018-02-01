@@ -2,25 +2,20 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { FormControlLabel } from 'material-ui/Form';
+import { FormControlLabel, FormHelperText, FormControl } from 'material-ui/Form';
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from 'material-ui/ExpansionPanel';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
-import signUp from '../actions/user/sign-up'
+import Grid from 'material-ui/Grid'
 import Switch from 'material-ui/Switch'
-import './AdvisorProfile.css'
+import validate from "validate.js"
 
-const styles = {
-  form: {
-    minWidth: "50%",
-    margin: "15px 0px"
-  },
+const classes = {
   formBio: {
     backgroundColor: "#ffffff",
     border: "1px solid #e0e0e0",
@@ -43,11 +38,11 @@ export class CreatorProfile extends PureComponent {
 
   state = { }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    })
-  }
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value,
+  //   })
+  // }
 
   submitForm(event) {
     event.preventDefault()
@@ -65,8 +60,6 @@ export class CreatorProfile extends PureComponent {
         clients: [],
         partners: [],
       }
-      console.log(profile);
-      this.props.push('/')
     }
     return false
   }
@@ -75,8 +68,121 @@ export class CreatorProfile extends PureComponent {
     this.props.push('/')
   }
 
-  validateAll() {
+  validateStreetName() {
+    const streetName = this.state.streetName
+    const validationMsg = validate.single(streetName, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        streetNameError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      streetNameError: null
+    })
     return true
+  }
+
+  validateStreetNumber() {
+    const streetNumber = this.state.streetNumber
+    const validationMsg = validate.single(streetNumber, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        streetNumberError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      streetNumberError: null
+    })
+    return true
+  }
+
+  validatePostalCode() {
+    const postalCode = this.state.postalCode
+    const validationMsg = validate.single(postalCode, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        postalCodeError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      postalCodeError: null
+    })
+    return true
+  }
+
+  validateCity() {
+    const city = this.state.city
+    const validationMsg = validate.single(city, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        cityError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      cityError: null
+    })
+    return true
+  }
+
+  validateCountry() {
+    const country = this.state.country
+    const validationMsg = validate.single(country, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        countryError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      countryError: null
+    })
+    return true
+  }
+
+  validatePhoneNumber() {
+    const phoneNumber = this.state.phoneNumber
+    const validationMsg = validate.single(phoneNumber, {presence: true})
+
+    if (!!validationMsg) {
+      this.setState({
+        phoneNumberError: validationMsg
+      })
+      return false
+    }
+
+    this.setState({
+      phoneNumberError: null
+    })
+    return true
+  }
+
+  validateAll() {
+    return this.validateStreetName() &&
+      this.validateStreetNumber() &&
+      this.validateCity() &&
+      this.validatePostalCode() &&
+      this.validateCountry() &&
+      this.validatePhoneNumber()
+  }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    })
   }
 
   render() {
@@ -86,38 +192,75 @@ export class CreatorProfile extends PureComponent {
         <Typography type="title" component="h2">Creator profile</Typography>
 
         <form onSubmit={this.submitForm.bind(this)}>
+          <Grid container spacing={24}>
 
-          <TextField style={styles.form} className="left-inline" id="streetName" type="text" label="Street" onChange={this.handleChange("streetName")}/>
+            <Grid item xs={8} md={6}>
+              <FormControl fullWidth>
+                <TextField id="streetName" type="text" label="Street" onChange={this.handleChange("streetName")}/>
+                <FormHelperText id="streetName-error-text">{this.state.streetNameError}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4} md={2}>
+              <FormControl fullWidth>
+                <TextField id="streetNumber" type="text" label="Number" onChange={this.handleChange("streetNumber")}/>
+                <FormHelperText id="streetNumber-error-text">{this.state.streetNumberError}</FormHelperText>
+              </FormControl>
+            </Grid>
+          </Grid>
 
-          <TextField style={styles.form} className="right-inline" id="streetNumber" type="text" label="Number" onChange={this.handleChange("streetNumber")}/>
+          <Grid container spacing={24}>
 
-          <TextField style={styles.form} className="left-inline" id="postalCode" type="text" label="Postal Code" onChange={this.handleChange("postalCode")} />
+            <Grid item xs={6} md={2}>
+              <FormControl fullWidth>
+                <TextField id="city" type="text" label="City" onChange={this.handleChange("city")}/>
+                <FormHelperText id="city-error-text">{this.state.cityError}</FormHelperText>
+              </FormControl>
+            </Grid>
 
-          <TextField style={styles.form} className="right-inline" id="city" type="text" label="City" onChange={this.handleChange("city")}/>
+            <Grid item xs={6} md={3}>
+              <FormControl fullWidth  >
+                <TextField id="postalCode" type="text" label="Postal Code" onChange={this.handleChange("postalCode")} />
+                <FormHelperText id="postalCode-error-text">{this.state.postalCodeError}</FormHelperText>
+              </FormControl>
+            </Grid>
 
-          <TextField style={styles.form} id="country" type="text" label="Country" fullWidth={true} onChange={this.handleChange("country")}/>
+            <Grid item xs={12} md={3}>
+              <FormControl fullWidth>
+                <TextField id="country" type="text" label="Country" fullWidth={true} onChange={this.handleChange("country")}/>
+                <FormHelperText id="country-error-text">{this.state.countryError}</FormHelperText>
+              </FormControl>
+            </Grid>
 
-          <TextField style={styles.form} id="phoneNumber" type="text" label="Phone Number" onChange={this.handleChange("phoneNumber")} />
+          </Grid>
 
-          <TextField style={styles.form} id="publicEmail" type="text" label="Public email" onChange={this.handleChange("email")} />
-
-
-            <ExpansionPanel style={styles.heading}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Bio</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <TextField style={styles.formBio}
-                  className="TextField"
-                  placeholder="Write something about yourself"
-                  id="bio"
-                  multiline={true}
-                  InputProps={{ disableUnderline: true  }}
-                  onChange={this.handleChange("bio")}
-                  />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-
+          <Grid container spacing={24}>
+            <Grid item xs={6} md={3}>
+              <FormControl fullWidth>
+                <TextField style={classes.form} id="phoneNumber" type="text" label="Phone" onChange={this.handleChange("phoneNumber")} />
+                <FormHelperText id="phoneNumber-error-text">{this.state.phoneNumberError}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} md={5}>
+              <FormControl fullWidth>
+                <TextField style={classes.form} id="publicEmail" type="text" label="Email" onChange={this.handleChange("email")} />
+              </FormControl>
+            </Grid>
+          </Grid>
+                <ExpansionPanel style={classes.heading}>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Bio</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <TextField style={classes.formBio}
+                      className="TextField"
+                      placeholder="Write something about yourself"
+                      id="bio"
+                      multiline={true}
+                      InputProps={{ disableUnderline: true  }}
+                      onChange={this.handleChange("bio")}
+                      />
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
 
 
           <FormControlLabel style={{float:"right"}}
@@ -126,7 +269,7 @@ export class CreatorProfile extends PureComponent {
                 checked={this.state.checked}
                 onChange={this.handleChange("publicAdvisor")}
                 className = "profile-toggle"
-                style={styles.toggle}
+                style={classes.toggle}
               />
             }
             label="Public profile"
