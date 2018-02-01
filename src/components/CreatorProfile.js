@@ -27,7 +27,7 @@ const classes = {
     backgroundColor: "#fbfbfb",
     border: "1px solid #b8b8b8",
     minWidth: "100%",
-    margin: "15px 0px",
+    margin: "25px 0px 50px",
   },
 }
 

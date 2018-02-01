@@ -27,7 +27,7 @@ const classes = {
     backgroundColor: "#fbfbfb",
     border: "1px solid #b8b8b8",
     minWidth: "100%",
-    margin: "15px 0px",
+    margin: "25px 0px 50px",
   },
 }
 
@@ -246,21 +246,22 @@ export class AdvisorProfile extends PureComponent {
               </FormControl>
             </Grid>
           </Grid>
-                <ExpansionPanel style={classes.heading}>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography>Bio</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <TextField style={classes.formBio}
-                      className="TextField"
-                      placeholder="Write something about yourself"
-                      id="bio"
-                      multiline={true}
-                      InputProps={{ disableUnderline: true  }}
-                      onChange={this.handleChange("bio")}
-                      />
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
+
+          <ExpansionPanel style={classes.heading}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>Bio</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <TextField style={classes.formBio}
+                className="TextField"
+                placeholder="Write something about yourself"
+                id="bio"
+                multiline={true}
+                InputProps={{ disableUnderline: true  }}
+                onChange={this.handleChange("bio")}
+                />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
 
 
           <FormControlLabel style={{float:"right"}}
