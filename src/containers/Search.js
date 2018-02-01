@@ -10,7 +10,8 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import { InstantSearch, Hits, SearchBox } from 'react-instantsearch/dom'
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import { InstantSearch, Hits, SearchBox, Pagination } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
 import './Search.css'
 
@@ -39,14 +40,14 @@ export class TitlebarGridList extends PureComponent {
       return (
         <GridList cellHeight={180} cols={5}>
           {hits.map(hit => (
-            <GridListTile key={hit.objectID} titleBackground={'green'}>
+            <GridListTile key={hit.objectID}>
               <img src={hit.picUrl} alt={hit.firstName} />
               {/* this is the user id */}
               <Link to={'/advisor/' + hit.objectID}>
                 <GridListTileBar
                   title={hit.firstName + ' ' + hit.lastName}
                   subtitle={<span>city: {hit.city}</span>}
-              />
+                />
               </Link>
             </GridListTile>
         ))}
@@ -71,10 +72,18 @@ export class TitlebarGridList extends PureComponent {
         >
           <Grid container spacing={24}>
             <Grid item xs={12} md={2}>
-              <SearchBox className={classes.container}  autoFocus showLoadingIndicator />
+            <List component="nav">
+              <ListItem button>
+                <SearchBox className={classes.container}  autoFocus showLoadingIndicator />
+              </ListItem>
+              <ListItem button component="a" href="#simple-list">
+                <ListItemText primary="Spam" />
+              </ListItem>
+            </List>
             </Grid>
             <Grid item xs={12} md={10}>
               <Search />
+              <Pagination />
             </Grid>
           </Grid>
         </InstantSearch>
