@@ -41,8 +41,8 @@ export class SignIn extends PureComponent {
   }
 
   validateAll() {
-    return this.validateEmail(this) &&
-      this.validatePassword(this)
+    return this.validateEmail(this.state.email) &&
+      this.validatePassword(this.state.password)
   }
 
   handleChange = name => event => {
@@ -62,10 +62,7 @@ export class SignIn extends PureComponent {
   }
 
   validateEmail(email) {
-    //const email = this.state.email
-
     const validationMsg = validate.single(email, {presence: true, email: true})
-    
 
     if (!!validationMsg) {
       this.setState({
@@ -82,7 +79,6 @@ export class SignIn extends PureComponent {
   }
 
   validatePassword(password) {
-    //const password = this.state.password
     const validationMsg = validate.single(password, {presence: true,
       length: {minimum: 6,
               message: "must be at least 6 characters"
@@ -105,23 +101,31 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
+
       <Paper style={ dialogStyle }>
 
         <form onSubmit={this.submitForm.bind(this)}>
           <FormControl fullWidth className="formControl">
-            <TextField id="email" type="email" placeholder="Email address"
+            <TextField id="email"
+              type="email"
+              placeholder="Email address"
+              error={!!this.state.emailError}
               onChange={this.handleChange("email")}
               fullWidth={true}
             />
-            <FormHelperText id="email-error-text">{this.state.emailError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
           </FormControl>
 
           <FormControl fullWidth className="formControl">
-            <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
+            <TextField id="password"
+              type="password"
+              placeholder="Password"
+              error={!!this.state.passwordError}
+              autoComplete="current-password"
               onChange={this.handleChange("password")}
               fullWidth={true}
             />
-            <FormHelperText id="password-error-text">{this.state.passwordError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
         </form>
 
