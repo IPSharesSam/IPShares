@@ -6,7 +6,12 @@ export default class ApiClient {
   }
 
   constructor(host, options = {}) {
-    this.host = host || 'http://localhost:3030'
+    if (process.env.NODE_ENV === 'production') {
+      this.host = 'https://damp-reaches-81205.herokuapp.com'
+    }
+    if (process.env.NODE_ENV === 'development') {
+      this.host = 'http://localhost:3030'
+    }
     this.options = { ...this.defaultOptions, ...options }
   }
 
@@ -66,7 +71,13 @@ export default class ApiClient {
   }
 
   createUrl(path) {
-    return ['http://localhost:3030', path].join('/')
+    if (process.env.NODE_ENV === 'production') {
+      return ['https://damp-reaches-81205.herokuapp.com', path].join('/')
+    }
+    if (process.env.NODE_ENV === 'development') {
+      return ['http://localhost:3030', path].join('/')
+    }
+    return ['https://damp-reaches-81205.herokuapp.com', path].join('/')
   }
 
   removeToken() {

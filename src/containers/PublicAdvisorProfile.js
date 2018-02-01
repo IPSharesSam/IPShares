@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import 'react-dates/initialize';
-import { SingleDatePicker } from 'react-dates'
+import 'react-dates/initialize'
 import GridList from '../components/GridList'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
@@ -10,12 +9,13 @@ import MailIcon from 'material-ui-icons/Mail'
 import Typography from 'material-ui/Typography'
 import Calendar from '../components/Calendar'
 import StarRatingComponent from 'react-star-rating-component'
-import 'react-dates/lib/css/_datepicker.css';
+import 'react-dates/lib/css/_datepicker.css'
 import './PublicProfile.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import fetchAdvisor from '../actions/user/advisor/fetch'
 
-class PublicProfile extends PureComponent {
+class PublicAdvisorProfile extends PureComponent {
   constructor(props) {
       super(props);
 
@@ -29,6 +29,14 @@ class PublicProfile extends PureComponent {
       };
     }
 
+    componentWillMount() {
+      const { fetchAdvisor } = this.props
+      const { advisorId } = this.props.match.params
+
+      if (!!advisorId) { fetchAdvisor(advisorId) }
+    }
+
+
     submitForm(event) {
       event.preventDefault()
       if (this.validateAll()) {
@@ -36,7 +44,6 @@ class PublicProfile extends PureComponent {
           date: this.state.date,
           msg: this.state.msg,
         }
-        console.log(apointment);
       }
       return false
     }
@@ -58,6 +65,8 @@ class PublicProfile extends PureComponent {
 
   render() {
     const { rating } = this.state
+    const { user, picUrl, tags } = this.props.advisorProfile
+    if(!user) return null
 
     return (
       <div className="PublicProfile-wrap">
@@ -66,14 +75,14 @@ class PublicProfile extends PureComponent {
           <header className="Header-wrap">
             <div className="picture">
               <img className="AdvisorImage"
-                src="https://www.intermedia.net/assets/images/advisor-icon.png"
+                src={picUrl}
                 alt='Advisor'
               />
             </div>
 
             <div className="AdvisorLabels">
               <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                John v.d Berg
+                {`${user.firstName} ${user.lastName}`}
               </Typography>
               <Badge className="Badge" badgeContent={4} color="primary">
                 <MailIcon />
@@ -96,7 +105,12 @@ class PublicProfile extends PureComponent {
           <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
             Bio
           </Typography>
-          <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He received his BA in Economics and Business Administration from Bocconi University, Milan. From the same institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was Director of the Master in Healthcare Management (MIMS - Italian class). </p>
+          <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He
+          received his BA in Economics and Business Administration from Bocconi University, Milan. From the same
+          institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a
+          Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of
+          Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was
+          Director of the Master in Healthcare Management (MIMS - Italian class). </p>
 
 
             <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
@@ -137,13 +151,12 @@ class PublicProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }, { match }) => {
+const mapStateToProps = ({ currentUser, advisorProfile }, { match }) => {
   const signedIn = !!currentUser && !!currentUser._id
-  const advisorId = match.params.advisorId
   return {
-    advisorId,
     signedIn,
+    advisorProfile,
   }
 }
 
-export default connect(mapStateToProps, { push })(PublicProfile)
+export default connect(mapStateToProps, { push, fetchAdvisor })(PublicAdvisorProfile)

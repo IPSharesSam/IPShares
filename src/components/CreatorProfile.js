@@ -60,7 +60,6 @@ export class CreatorProfile extends PureComponent {
         clients: [],
         partners: [],
       }
-      console.log(profile);
     }
     return false
   }

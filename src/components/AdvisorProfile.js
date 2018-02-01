@@ -60,7 +60,6 @@ export class AdvisorProfile extends PureComponent {
         clients: [],
         partners: [],
       }
-      console.log(profile);
     }
     return false
   }
