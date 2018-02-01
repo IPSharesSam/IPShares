@@ -49,23 +49,23 @@ export class SignIn extends PureComponent {
     this.setState({
       [name]: event.target.value,
     })
-
     switch(name) {
-    case "email":
-        this.validateEmail()
-        break
-    case "password":
-        this.validatePassword()
-        break
-    default:
-        return false
+      case "email":
+          this.validateEmail(event.target.value)
+          break
+      case "password":
+          this.validatePassword(event.target.value)
+          break
+      default:
+          return false
     }
   }
 
-  validateEmail() {
-    const email = this.state.email
+  validateEmail(email) {
+    //const email = this.state.email
 
     const validationMsg = validate.single(email, {presence: true, email: true})
+    
 
     if (!!validationMsg) {
       this.setState({
@@ -81,8 +81,8 @@ export class SignIn extends PureComponent {
 
   }
 
-  validatePassword() {
-    const password = this.state.password
+  validatePassword(password) {
+    //const password = this.state.password
     const validationMsg = validate.single(password, {presence: true,
       length: {minimum: 6,
               message: "must be at least 6 characters"
