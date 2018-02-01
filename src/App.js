@@ -5,16 +5,30 @@ import Routes from './routes'
 import Navigation from './components/Navigation'
 import './App.css'
 
-const TitleFont = '"Bolts SF", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+const TitleFont = '"Space Mono", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
 
 const theme = createMuiTheme({
+  // palette: {
+  //   primary: {
+  //     main: '#FF1818'
+  //   }
+  // },
   palette: {
     primary: {
-      main: '#FF1818'
+      light: '#ffffff',
+      main: '#eeeeee',
+      dark: '#bcbcbc',
+      contrastText: '#000000'
+    },
+    secondary: {
+      light: '#ff6f60',
+      main: '#e53935',
+      dark: '#ab000d',
+      contrastText: '#ffffff',
     }
   },
   typography: {
-    fontFamily: 'Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     title: {
       fontFamily: TitleFont
     },
