@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import Home from './containers/Home'
-import PublicProfile from './containers/PublicProfile'
+import PublicAdvisorProfile from './containers/PublicAdvisorProfile'
 import Account from './containers/Account'
 import SignUp from './containers/SignUp'
 import SignIn from './containers/SignIn'
@@ -15,8 +15,8 @@ export default class Routes extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/search" component={Search} />
-        <Route path="/profiles" component={PublicProfile} />
         <Route path="/account/" component={Account} />
+        <Route path="/advisor/:advisorId" component={PublicAdvisorProfile} />
       </div>
     )
   }

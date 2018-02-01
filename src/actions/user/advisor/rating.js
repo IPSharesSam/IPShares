@@ -5,14 +5,14 @@ import {
   LOAD_ERROR
 } from '../loading'
 
-export const FETCHED_ADVISOR = 'FETCHED_ADVISOR'
+export const FETCH_RATING = 'FETCH_RATING'
 
 const api = new API()
 
-export default (advisorId) => {
+export default (userId) => {
   return dispatch => {
     dispatch({ type: LOADING })
-    api.get(`advisor/${advisorId}`)
+    api.get(`rating/${userId}`)
       .then((result) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
