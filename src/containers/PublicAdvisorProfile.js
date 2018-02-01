@@ -14,6 +14,7 @@ import './PublicProfile.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import fetchAdvisor from '../actions/user/advisor/fetch'
+import { newRating, updateRating } from '../actions/user/advisor/rating'
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -62,13 +63,18 @@ class PublicAdvisorProfile extends PureComponent {
   submitStarRatingForm(event) {
     event.preventDefault()
     const { user } = this.props.advisorProfile
+    const { actualRatingOfUser } = this.props
+
+      const isNewRating = !actualRatingOfUser
+
       const rating = {
         advisorId: user._id,
-        userId: user._id,
-        review: this.state.review,
+        clientId: this.props.currentUser._id,
+        comment: this.state.comment,
         rating: this.state.rating,
       }
-      console.log(rating);
+
+      isNewRating ? this.props.newRating(rating) : this.props.updateRating(rating, actualRatingOfUser._id)
       this.setState({ ratingDialogOpen: false })
   }
 
@@ -83,7 +89,7 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   calculateRatingAverage(ratings) {
-    return 0
+    return ratings.reduce((x, rating) => x + rating.rating, 0)/ratings.length
   }
 
   handleClose = () => {
@@ -99,10 +105,13 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, tags, ratings } = this.props.advisorProfile
+    const { user, picUrl, ratings } = this.props.advisorProfile
+    const { actualRatingOfUser } = this.props
     if(!user) return null
-
     const ratingAverage = this.calculateRatingAverage(ratings)
+    console.log(ratingAverage);
+    if(!!actualRatingOfUser && !this.state.rating) this.setState({rating: actualRatingOfUser.rating, comment: actualRatingOfUser.comment})
+
     return (
       <div className="PublicProfile-wrap">
         <Paper className="Details">
@@ -198,16 +207,17 @@ class PublicAdvisorProfile extends PureComponent {
               onStarClick={this.onStarClick.bind(this)}
             />
 
-
             <form onSubmit={this.submitStarRatingForm.bind(this)} className="Contact-wrap">
               <div className="TextField">
                 <TextField
                  className="TextField"
-                 placeholder="Write a review"
+                 placeholder="Write a comment"
                  multiline={true}
                  InputProps={{ disableUnderline: true  }}
-                 onChange={this.handleChange("review")}
+                 onChange={this.handleChange("comment")}
+                 defaultValue={ !actualRatingOfUser ? "" : actualRatingOfUser.comment}
                 />
+
               </div>
             </form>
             <DialogContentText>
@@ -215,9 +225,9 @@ class PublicAdvisorProfile extends PureComponent {
            </DialogContent>
            <DialogActions>
              <Button onClick={this.handleClose} color="primary">
-               Disagree
+               back
              </Button>
-             <Button onClick={this.submitStarRatingForm.bind(this)} color="primary" autoFocus>
+             <Button onClick={this.submitStarRatingForm.bind(this)} raised color="primary" autoFocus>
                submit
              </Button>
            </DialogActions>
@@ -228,12 +238,17 @@ class PublicAdvisorProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, advisorProfile }, { match }) => {
+  const mapStateToProps = ({ user, advisorProfile }, { match }) => {
+  const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
+  const ratings = advisorProfile.ratings
+  const actualRatingOfUser = !ratings ? [] : ratings.filter((r) => (r.clientId === currentUser._id))[0]
   return {
     signedIn,
     advisorProfile,
+    currentUser,
+    actualRatingOfUser: actualRatingOfUser
   }
 }
 
-export default connect(mapStateToProps, { push, fetchAdvisor }) (PublicAdvisorProfile  )
+export default connect(mapStateToProps, { push, fetchAdvisor, newRating, updateRating }) (PublicAdvisorProfile  )
