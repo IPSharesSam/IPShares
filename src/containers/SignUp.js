@@ -79,7 +79,7 @@ export class SignUp extends PureComponent {
   validateEmail(email) {
     // const email = this.state.email
     const validationMsg = validate.single(email, {presence: true, email: true})
-    if (!!validationMsg) {
+    if (!!validationMsg && email.length > 0) {
       this.setState({
         emailError: validationMsg
       })
@@ -96,7 +96,7 @@ export class SignUp extends PureComponent {
     // const firstName = this.state.firstName
     const validationMsg = validate.single(firstName, {presence: true})
 
-    if (!!validationMsg) {
+    if (!!validationMsg && firstName.length > 0) {
       this.setState({
         firstNameError: validationMsg
       })
@@ -113,7 +113,7 @@ export class SignUp extends PureComponent {
     // const lastName = this.state.lastName
     const validationMsg = validate.single(lastName, {presence: true})
 
-    if (!!validationMsg) {
+    if (!!validationMsg && lastName.length > 0) {
       this.setState({
         lastNameError: validationMsg
       })
@@ -134,7 +134,7 @@ export class SignUp extends PureComponent {
       }
     })
 
-    if (!!validationMsg) {
+    if (!!validationMsg && password.length > 0) {
       this.setState({
         passwordError: validationMsg
       })
@@ -158,7 +158,7 @@ export class SignUp extends PureComponent {
     //   }
     // )
 
-    // if (!!validationMsg) {
+    // if (!!validationMsg && ) {
     //   this.setState({
     //     passwordConfirmationError: validationMsg
     //   })
@@ -187,41 +187,52 @@ export class SignUp extends PureComponent {
         <form onSubmit={this.submitForm.bind(this)}>
 
           <FormControl className="formControl">
-            <TextField id="firstName" type="text" placeholder="First Name"
-              onChange={this.handleChange("firstName")}
-            />
+            <TextField id="firstName"
+              error={!!this.state.firstNameError}
+              type="text"
+              placeholder="First Name"
+              onChange={this.handleChange("firstName")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
           </FormControl>
 
           <FormControl className="formControl">
-            <TextField id="lastName" type="text" placeholder="Last Name"
-              onChange={this.handleChange("lastName")}
-            />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+            <TextField id="lastName"
+              error={!!this.state.lastNameError}
+              type="text"
+              placeholder="Last Name"
+              onChange={this.handleChange("lastName")} />
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="lastName-error-text">{this.state.lastNameError}</FormHelperText>
           </FormControl>
 
-           <FormControl fullWidth className="formControl">
-             <TextField id="email" type="email" placeholder="Email address"
-               onChange={this.handleChange("email")}
-             />
-             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
-           </FormControl>
+          <FormControl fullWidth className="formControl">
+            <TextField id="email"
+              error={!!this.state.emailError}
+              type="email"
+              placeholder="Email address"
+              onChange={this.handleChange("email")} />
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
+          </FormControl>
 
-           <FormControl fullWidth className="formControl">
-             <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
-               onChange={this.handleChange("password")}
-             />
-             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
-           </FormControl>
+          <FormControl fullWidth className="formControl">
+            <TextField id="password"
+              error={!!this.state.passwordError}
+              type="password"
+              placeholder="Password"
+              autoComplete="current-password"
+              onChange={this.handleChange("password")} />
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
+          </FormControl>
 
-           <FormControl fullWidth className="formControl">
-             <TextField id="passwordConfirmation" type="password" placeholder="Password Confirmation"
-               autoComplete="current-password"
-               onKeyUp={this.handleChange("passwordConfirmation")}
-               onChange={this.handleChange("passwordConfirmation")}
-             />
-             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
-           </FormControl>
+          <FormControl fullWidth className="formControl">
+            <TextField id="passwordConfirmation"
+              error={!!this.state.passwordConfirmationError}
+              type="password"
+              placeholder="Password Confirmation"
+              autoComplete="current-password"
+              onKeyUp={this.handleChange("passwordConfirmation")}
+              onChange={this.handleChange("passwordConfirmation")} />
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
+          </FormControl>
 
         </form>
         <Button
