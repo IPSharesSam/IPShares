@@ -9,10 +9,8 @@ import ExpansionPanel, {
 } from 'material-ui/ExpansionPanel';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
-import signUp from '../actions/user/sign-up'
 import Switch from 'material-ui/Switch'
 import './AdvisorProfile.css'
 
