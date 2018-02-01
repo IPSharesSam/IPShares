@@ -15,7 +15,7 @@ import './PublicProfile.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-class PublicAdvisorProfile extends PureComponent {
+class PublicProfile extends PureComponent {
   constructor(props) {
       super(props);
 
@@ -146,4 +146,4 @@ const mapStateToProps = ({ currentUser }, { match }) => {
   }
 }
 
-export default connect(mapStateToProps, { push })(PublicAdvisorProfile)
+export default connect(mapStateToProps, { push })(PublicProfile)
