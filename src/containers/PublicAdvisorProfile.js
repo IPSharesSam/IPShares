@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import 'react-dates/initialize';
-import { SingleDatePicker, SingleDatePickerWrapper } from 'react-dates'
+import { SingleDatePicker } from 'react-dates'
 import GridList from '../components/GridList'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
@@ -9,15 +9,16 @@ import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
 import Typography from 'material-ui/Typography'
 import StarRatingComponent from 'react-star-rating-component'
-import moment from 'moment'
 import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-class PublicProfile extends PureComponent {
+class PublicAdvisorProfile extends PureComponent {
   constructor(props) {
       super(props);
 
-      const { date, focused } = props
+      const { date } = props
 
       this.handleDayClick = this.handleChange.bind(this);
       this.onFocusChange = this.onFocusChange.bind(this)
@@ -146,7 +147,13 @@ class PublicProfile extends PureComponent {
   }
 }
 
+const mapStateToProps = ({ currentUser }, { match }) => {
+  const signedIn = !!currentUser && !!currentUser._id
+  const advisorId = match.params.advisorId
+  return {
+    advisorId,
+    signedIn,
+  }
+}
 
-
-
-export default PublicProfile
+export default connect(mapStateToProps, { push })(PublicAdvisorProfile)
