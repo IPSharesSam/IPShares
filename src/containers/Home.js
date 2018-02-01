@@ -6,7 +6,6 @@ import findImage from '../images/find.png'
 import infinityImage from '../images/infinity.png'
 import contactImage from '../images/contact.png'
 import logoImage from '../images/logo.svg'
-import Card, { div } from 'material-ui/Card'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -46,14 +45,14 @@ class Home extends PureComponent {
 
   render() {
     const { classes } = this.props
-    return (   
+    return (
       <div className={classes.root}>
         <Paper style={{ padding: 24, margin: 24 }}>
           <Grid container spacing={24} style={{ marginBottom: 24 }}>
             <Grid item xs={12}><Typography component="h1" type="display1" align="center">For advisors...</Typography></Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <div className={classes.promoCard}>
-                  <img className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
+                  <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
                   <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                     Manage your portfolio
                   </Typography>
@@ -64,11 +63,11 @@ class Home extends PureComponent {
                     The advisor account will be build and continiously improved according to the needs of the advisors.
                   </Typography>
                 </div>
-              
+
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <div className={classes.promoCard}>
-                  <img className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
+                  <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
                   <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                     Get found
                   </Typography>
@@ -79,11 +78,11 @@ class Home extends PureComponent {
                     Cooperation between the advisors will be encouraged. You'll be able to easily get in touch with complimentary expertise, stimulating business, soothing the creators.
                   </Typography>
                 </div>
-              
+
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <div className={classes.promoCard}>
-                  <img className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
+                  <img alt="infinity" className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
                   <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                     Be part of the future
                   </Typography>
@@ -94,14 +93,14 @@ class Home extends PureComponent {
                     This gives you as an advisor the chance to embrace and accelerate our upcoming technological evolution.
                   </Typography>
                 </div>
-              
+
             </Grid>
           </Grid>
         </Paper>
         <Paper style={{ padding: 24, margin: 24 }}>
           <Grid container spacing={24} style={{ marginBottom: 24 }}>
             <Grid item xs={12}>
-              <img className={classes.logo} src={logoImage} />
+              <img alt="logo" className={classes.logo} src={logoImage} />
               <Typography component="h1" type="display1" align="center">The IP Share</Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -131,9 +130,9 @@ class Home extends PureComponent {
                   creator will receive the agreed amount in IP Shares. The
                   buyer might pay with Euro's but instead of the seller
                   receiving Euro's, the Euro's will be used to buy the lowest offer in
-                  the IP Shares order book which are given to the seller. 
+                  the IP Shares order book which are given to the seller.
                 </Typography>
-              </div>              
+              </div>
             </Grid>
           </Grid>
         </Paper>
@@ -142,7 +141,7 @@ class Home extends PureComponent {
             <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
             <Grid item xs={12} sm={6} md={4}>
               <div className={classes.promoCard}>
-                <img className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
+                <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   Design, Patents &amp; Trademarks
                 </Typography>
@@ -156,7 +155,7 @@ class Home extends PureComponent {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <div className={classes.promoCard}>
-                <img className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
+                <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   Copyright
                 </Typography>
@@ -166,11 +165,11 @@ class Home extends PureComponent {
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
                   License your creations like songs, artwork, video's and 3D designs.
                 </Typography>
-              </div>   
+              </div>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <div className={classes.promoCard}>
-                <img className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
+                <img alt="infinity" className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   Connect with an expert
                 </Typography>
