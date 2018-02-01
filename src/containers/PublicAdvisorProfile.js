@@ -14,59 +14,102 @@ import './PublicProfile.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import fetchAdvisor from '../actions/user/advisor/fetch'
+import { newRating, updateRating } from '../actions/user/advisor/rating'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 class PublicAdvisorProfile extends PureComponent {
   constructor(props) {
-      super(props);
+    super(props);
 
-      const { date } = props
+    const { date } = props
 
-      this.handleDayClick = this.handleChange.bind(this);
+    this.handleDayClick = this.handleChange.bind(this);
 
-      this.state = {
-        date,
-        rating: 3,
-      };
+    this.state = {
+      date,
     }
+  }
 
-    componentWillMount() {
-      const { fetchAdvisor } = this.props
-      const { advisorId } = this.props.match.params
+  state = {
+      ratingDialogOpen: false,
+      rating: 0
+  }
 
-      if (!!advisorId) { fetchAdvisor(advisorId) }
-    }
+  componentWillMount() {
+    const { fetchAdvisor } = this.props
+    const { advisorId } = this.props.match.params
 
+    if (!!advisorId) { fetchAdvisor(advisorId) }
+  }
 
-    submitForm(event) {
-      event.preventDefault()
-      if (this.validateAll()) {
-        const apointment = {
-          date: this.state.date,
-          msg: this.state.msg,
-        }
+  submitForm(event) {
+    event.preventDefault()
+    if (this.validateAll()) {
+      const apointment = {
+        date: this.state.date,
+        msg: this.state.msg,
       }
-      return false
+      console.log(apointment);
     }
+    return false
+  }
 
-    validateAll() {
-      return true
-    }
+  submitStarRatingForm(event) {
+    event.preventDefault()
+    const { user } = this.props.advisorProfile
+    const { actualRatingOfUser } = this.props
 
-    handleChange = name => event => {
-      this.setState({
-        [name]: event.target.value,
-      })
-    }
+      const isNewRating = !actualRatingOfUser
 
+      const rating = {
+        advisorId: user._id,
+        clientId: this.props.currentUser._id,
+        comment: this.state.comment,
+        rating: this.state.rating,
+      }
 
-    onStarClick(nextValue, prevValue, name) {
-      this.setState({rating: nextValue});
-    }
+      isNewRating ? this.props.newRating(rating) : this.props.updateRating(rating, actualRatingOfUser._id)
+      this.setState({ ratingDialogOpen: false })
+  }
+
+  validateAll() {
+    return true
+  }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    })
+  }
+
+  calculateRatingAverage(ratings) {
+    return ratings.reduce((x, rating) => x + rating.rating, 0)/ratings.length
+  }
+
+  handleClose = () => {
+    this.setState({ ratingDialogOpen: false })
+  }
+
+  handleOpen = () => {
+    this.setState({ ratingDialogOpen: true })
+  }
+
+  onStarClick(nextValue, prevValue, name) {
+    this.setState({rating: nextValue});
+  }
 
   render() {
-    const { rating } = this.state
-    const { user, picUrl, tags } = this.props.advisorProfile
+    const { user, picUrl, ratings } = this.props.advisorProfile
+    const { actualRatingOfUser } = this.props
     if(!user) return null
+    const ratingAverage = this.calculateRatingAverage(ratings)
+    console.log(ratingAverage);
+    if(!!actualRatingOfUser && !this.state.rating) this.setState({rating: actualRatingOfUser.rating, comment: actualRatingOfUser.comment})
 
     return (
       <div className="PublicProfile-wrap">
@@ -79,7 +122,6 @@ class PublicAdvisorProfile extends PureComponent {
                 alt='Advisor'
               />
             </div>
-
             <div className="AdvisorLabels">
               <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                 {`${user.firstName} ${user.lastName}`}
@@ -91,12 +133,14 @@ class PublicAdvisorProfile extends PureComponent {
                 <MailIcon />
               </Badge>
 
-              <StarRatingComponent
+              <div onClick={this.handleOpen.bind(this)} >
+                <StarRatingComponent
                   name="rate1"
                   starCount={5}
-                  value={rating}
-                  onStarClick={this.onStarClick.bind(this)}
-              />
+                  value={ratingAverage}
+                  editing={false}
+                />
+              </div>
 
             </div>
           </header>
@@ -144,19 +188,66 @@ class PublicAdvisorProfile extends PureComponent {
               <Calendar/>
             </div>
           </form>
-
         </Paper>
+
+        <div>
+          <Dialog
+           fullScreen={false}
+           open={this.state.ratingDialogOpen}
+           onClose={this.handleClose}
+           aria-labelledby="responsive-dialog-title"
+         >
+           <DialogTitle id="responsive-dialog-title">{"Share your thoughts with other clients"}</DialogTitle>
+           <DialogContent>
+            <StarRatingComponent
+              name="rate1"
+              starCount={5}
+              value={this.state.rating}
+              onStarClick={this.onStarClick.bind(this)}
+            />
+
+            <form onSubmit={this.submitStarRatingForm.bind(this)} className="Contact-wrap">
+              <div className="TextField">
+                <TextField
+                 className="TextField"
+                 placeholder="Write a comment"
+                 multiline={true}
+                 InputProps={{ disableUnderline: true  }}
+                 onChange={this.handleChange("comment")}
+                 defaultValue={ !actualRatingOfUser ? "" : actualRatingOfUser.comment}
+                />
+
+              </div>
+            </form>
+            <DialogContentText>
+            </DialogContentText>
+           </DialogContent>
+           <DialogActions>
+             <Button onClick={this.handleClose} color="primary">
+               back
+             </Button>
+             <Button onClick={this.submitStarRatingForm.bind(this)} raised color="primary" autoFocus>
+               submit
+             </Button>
+           </DialogActions>
+         </Dialog>
+        </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser, advisorProfile }, { match }) => {
+  const mapStateToProps = ({ user, advisorProfile }, { match }) => {
+  const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
+  const ratings = advisorProfile.ratings
+  const actualRatingOfUser = !ratings ? [] : ratings.filter((r) => (r.clientId === currentUser._id))[0]
   return {
     signedIn,
     advisorProfile,
+    currentUser,
+    actualRatingOfUser: actualRatingOfUser
   }
 }
 
-export default connect(mapStateToProps, { push, fetchAdvisor })(PublicAdvisorProfile)
+export default connect(mapStateToProps, { push, fetchAdvisor, newRating, updateRating }) (PublicAdvisorProfile  )
