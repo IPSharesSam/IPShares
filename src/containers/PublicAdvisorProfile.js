@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
 import MailIcon from 'material-ui-icons/Mail'
 import Typography from 'material-ui/Typography'
+import Calendar from '../components/Calendar'
 import StarRatingComponent from 'react-star-rating-component'
 import 'react-dates/lib/css/_datepicker.css';
 import './PublicProfile.css'
@@ -21,11 +22,9 @@ class PublicAdvisorProfile extends PureComponent {
       const { date } = props
 
       this.handleDayClick = this.handleChange.bind(this);
-      this.onFocusChange = this.onFocusChange.bind(this)
 
       this.state = {
         date,
-        focused: false,
         rating: 3,
       };
     }
@@ -52,9 +51,6 @@ class PublicAdvisorProfile extends PureComponent {
       })
     }
 
-    onFocusChange(focused) {
-      this.setState({ focused });
-    }
 
     onStarClick(nextValue, prevValue, name) {
       this.setState({rating: nextValue});
@@ -65,7 +61,7 @@ class PublicAdvisorProfile extends PureComponent {
 
     return (
       <div className="PublicProfile-wrap">
-        <div className="Details">
+        <Paper className="Details">
 
           <header className="Header-wrap">
             <div className="picture">
@@ -97,28 +93,28 @@ class PublicAdvisorProfile extends PureComponent {
           </header>
 
 
-          <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+          <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
             Bio
           </Typography>
           <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He received his BA in Economics and Business Administration from Bocconi University, Milan. From the same institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was Director of the Master in Healthcare Management (MIMS - Italian class). </p>
 
 
-            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
               Clients
             </Typography>
-          <GridList/>
+            <GridList/>
 
-            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
               Partners
             </Typography>
-          <GridList/>
+            <GridList/>
 
-
-            <Typography type="headline" component="h2" style={{ margin: 12 }} align="center">
+            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
               Get in contact
             </Typography>
+
           <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
-            <Paper className="TextField">
+            <div className="TextField">
               <TextField
                 className="TextField"
                 placeholder="send a message"
@@ -129,19 +125,13 @@ class PublicAdvisorProfile extends PureComponent {
             <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
                 submit
               </Button>
-            </Paper>
+            </div>
             <div className="Calender">
-              <SingleDatePicker
-                numberOfMonths={1}
-                hideKeyboardShortcutsPanel={true}
-                date={this.state.date}
-                onDateChange={(date) => this.setState({ date })}
-                focused={this.state.focused}
-                onFocusChange={({ focused }) => this.setState({ focused })}
-              />
+              <Calendar/>
             </div>
           </form>
-        </div>
+
+        </Paper>
       </div>
     )
   }
