@@ -55,34 +55,11 @@ export class Account extends PureComponent {
           <div className={classes.root}>
             <AppBar position="static">
               <Tabs value={value} onChange={this.handleChange}>
-                <Tab label="Account" />
-                <Tab label="Advisor" />
+                <Tab label="Details" />
               </Tabs>
             </AppBar>
 
-            {value === 0 && <TabContainer className={classes.accountTab}>
-              <img alt="Contact" className={classes.media} src={contactImage} style={{ marginBottom: 12, float:"left" }} />
-              <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                Manage your portfolio
-              </Typography>
-              <Typography component="p" style={{ marginBottom: 22 }} align="center">
-                As the IP Shares platform is linked to the official IP databases, it's possible to import your public portfolio in an instant.
-              </Typography>
-              <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                How all users collectively create value
-              </Typography>
-              <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                This is made possible by the IP Share crypto token. All
-                transactions made on the platform are done with IP Shares.
-                If for instance someone buys a product in the shop, the
-                creator will receive the agreed amount in IP Shares. The
-                buyer might pay with Euro's but instead of the seller
-                receiving Euro's, the Euro's will be used to buy the lowest offer in
-                the IP Shares order book which are given to the seller.
-              </Typography>
-            </TabContainer>}
-
-            {value === 1 && <TabContainer>
+            {value === 0 && <TabContainer>
               <AdvisorProfile/>
             </TabContainer>}
 
