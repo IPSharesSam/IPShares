@@ -3,6 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import Reboot from 'material-ui/Reboot'
 import Routes from './routes'
 import Navigation from './components/Navigation'
+import bg from './images/bg.png'
 import './App.css'
 
 const TitleFont = '"Bolts", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
@@ -52,7 +53,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Reboot />
         <Navigation />
-          <main>
+          <main style={{ backgroundImage: `url(${bg})` }}>
             <Routes />
           </main>
       </MuiThemeProvider>
