@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
@@ -43,11 +44,12 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    return this.validateFirstName() &&
-      this.validateLastName() &&
-      this.validateEmail() &&
-      this.validatePassword() &&
-      this.validatePasswordConfirmation()
+    const { firstName, lastName, email, password, passwordConfirmation } = this.state
+    return this.validateFirstName(firstName) &&
+      this.validateLastName(lastName) &&
+      this.validateEmail(email) &&
+      this.validatePassword(password) &&
+      this.validatePasswordConfirmation(passwordConfirmation)
   }
 
   handleChange = name => event => {
@@ -149,22 +151,7 @@ export class SignUp extends PureComponent {
   }
 
   validatePasswordConfirmation(passwordConfirmation) {
-    const password = this.state.password
-    // const passwordConfirmation = this.state.passwordConfirmation
-
-    // const validationMsg = validate.single(
-    //   passwordConfirmation,
-    //   { presence: true, 
-    //     length: { minimum: 6, message: "must be at least 6 characters" }
-    //   }
-    // )
-
-    // if (!!validationMsg && ) {
-    //   this.setState({
-    //     passwordConfirmationError: validationMsg
-    //   })
-    //   return false
-    // }
+    const { password } = this.state
 
     if ((passwordConfirmation !== password) && password.length > 5) {
       this.setState({
@@ -229,12 +216,12 @@ export class SignUp extends PureComponent {
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
           </FormControl>
         </form>
-        <Button
-          onClick={ this.submitForm.bind(this) }
-          raised color="primary">
-          Sign in
+        <Button onClick={ this.submitForm.bind(this) } raised color="secondary">
+          Sign up
         </Button>
-        <Button onClick={this.cancel.bind(this)}> Cancel </Button>
+        <Button style={{ marginLeft: 8 }} component={Link} to="/" >
+          Cancel
+        </Button>
       </Paper>
     )
   }

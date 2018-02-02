@@ -140,7 +140,7 @@ class Home extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
-        <Grid container spacing={24} style={{ marginBottom: 24 }}>
+        <Grid container spacing={24}>
           <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
