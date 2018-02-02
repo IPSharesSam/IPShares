@@ -251,9 +251,6 @@ class PublicAdvisorProfile extends PureComponent {
   const mapStateToProps = ({ user, advisorProfile }, { match }) => {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
-  const ratings = advisorProfile.ratings
-  const currentUserId = !!currentUser ? currentUser._id : ""
-  //const actualRatingOfUser = !ratings ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
 
   return {
     signedIn,
