@@ -33,6 +33,7 @@ export class SignIn extends PureComponent {
     event.preventDefault()
 
     if(!this.validateAll()) return null
+
     const user = {
       email: this.state.email,
       password: this.state.password,
@@ -41,30 +42,26 @@ export class SignIn extends PureComponent {
   }
 
   validateAll() {
-    return this.validateEmail(this) &&
-      this.validatePassword(this)
+    return this.validateEmail(this.state.email) && this.validatePassword(this.state.password)
   }
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     })
-
     switch(name) {
-    case "email":
-        this.validateEmail()
-        break
-    case "password":
-        this.validatePassword()
-        break
-    default:
-        return false
+      case "email":
+          this.validateEmail(event.target.value)
+          break
+      case "password":
+          this.validatePassword(event.target.value)
+          break
+      default:
+          return false
     }
   }
 
-  validateEmail() {
-    const email = this.state.email
-
+  validateEmail(email) {
     const validationMsg = validate.single(email, {presence: true, email: true})
 
     if (!!validationMsg) {
@@ -81,8 +78,7 @@ export class SignIn extends PureComponent {
 
   }
 
-  validatePassword() {
-    const password = this.state.password
+  validatePassword(password) {
     const validationMsg = validate.single(password, {presence: true,
       length: {minimum: 6,
               message: "must be at least 6 characters"
@@ -105,23 +101,31 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
+
       <Paper style={ dialogStyle }>
 
         <form onSubmit={this.submitForm.bind(this)}>
           <FormControl fullWidth className="formControl">
-            <TextField id="email" type="email" placeholder="Email address"
+            <TextField id="email"
+              type="email"
+              placeholder="Email address"
+              error={!!this.state.emailError}
               onChange={this.handleChange("email")}
               fullWidth={true}
             />
-            <FormHelperText id="email-error-text">{this.state.emailError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
           </FormControl>
 
           <FormControl fullWidth className="formControl">
-            <TextField id="password" type="password" placeholder="Password" autoComplete="current-password"
+            <TextField id="password"
+              type="password"
+              placeholder="Password"
+              error={!!this.state.passwordError}
+              autoComplete="current-password"
               onChange={this.handleChange("password")}
               fullWidth={true}
             />
-            <FormHelperText id="password-error-text">{this.state.passwordError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
         </form>
 
@@ -130,7 +134,6 @@ export class SignIn extends PureComponent {
           raised color="primary">
           {"Sign in"}
         </Button>
-
       </Paper>
     )
   }

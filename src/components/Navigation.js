@@ -16,7 +16,7 @@ const styles = {
   },
   flex: {
     flex: 1,
-    display: "inline-flex",
+    display: 'flex'
   },
   menuButton: {
     marginLeft: -12,
@@ -45,21 +45,21 @@ export class Navigation extends PureComponent {
         <AppBar position="static">
           <Toolbar>
             <div className={classes.flex}>
-              <Typography type="title" color="inherit">
+              <Typography type="headline" color="secondary" style={{ display: 'inline-flex' }}>
                 IP Shares
               </Typography>
-              <Button className={classes.button} color="inherit" component={Link} to="/"> Home </Button>
-              <Button className={classes.button} color="inherit" component={Link} to="/search"> Search </Button>
-              <Button className={classes.button} color="inherit" component={Link} to="/profiles"> Profiles </Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/">Home</Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/search">Search</Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/profiles">Profiles</Button>
               { this.props.signedIn ?
-              <Button className={classes.button} color="inherit" component={Link} to="/account/advisor"> Account </Button> :
+              <Button className={classes.button} color="inherit" component={Link} to="/account/advisor">Account</Button> :
                 <div></div>
               }
             </div>
             { this.props.signedIn ?
               <Button raised color="inherit" onClick={this.signOut} >Sign out</Button> :
                 <div>
-                  <Button className={classes.button} raised color="inherit" component={Link} to="/sign-in" >Sign in</Button>
+                  <Button className={classes.button} raised color="secondary" component={Link} to="/sign-in" >Sign in</Button>
                   <Button className={classes.button} raised color="inherit" component={Link} to="/sign-up" >Sign up</Button>
                 </div>
             }
