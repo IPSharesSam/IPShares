@@ -48,7 +48,7 @@ export class Navigation extends PureComponent {
               <Typography type="display2" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
                 IP Shares
               </Typography>
-              <Button className={classes.button} color="inherit" component={Link} to="/search">Find advisors</Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/search">Find advisors &amp; creators</Button>
               { this.props.signedIn ?
               <Button className={classes.button} color="inherit" component={Link} to="/account/advisor">Account</Button> :
                 <div></div>
