@@ -6,6 +6,9 @@ import findImage from '../images/search.svg'
 import flightImage from '../images/flight.svg'
 import contactImage from '../images/contact.svg'
 import logoImage from '../images/logo.svg'
+import RImage from '../images/R.svg'
+import IImage from '../images/I.svg'
+import CImage from '../images/C.svg'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -48,20 +51,20 @@ class Home extends PureComponent {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <Grid container spacing={24} style={{ marginBottom: 12 }}>
-          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For advisors...</Typography></Grid>
+        <Grid container spacing={24}>
+          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
+                <img alt="R" className={classes.media} src={RImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Manage your portfolio
+                  Design, Patents &amp; Trademarks
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  As the IP Shares platform is linked to the official IP databases, it's possible to import your public portfolio in an instant.
+                  One-click import all of your registrered trademarks, patents and designs.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  The advisor account will be build and continiously improved according to the needs of the advisors.
+                  Sell your actual product or license your invention as you like, directly from yours IPS account.
                 </Typography>
               </div>
             </Paper>
@@ -69,15 +72,15 @@ class Home extends PureComponent {
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
+                <img alt="Copyright" className={classes.media} src={CImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Get found
+                  Copyright
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Your company will be indexed based on your physical location, expertise and appreciation.
+                  Timestamp all types of work, creating inevitable, decentral evidence of ownership.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Cooperation between the advisors will be encouraged. You'll be able to easily get in touch with complimentary expertise, stimulating business, soothing the creators.
+                  License your creations like songs, artwork, video's and 3D designs.
                 </Typography>
               </div>
             </Paper>
@@ -85,15 +88,15 @@ class Home extends PureComponent {
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <img alt="flight" className={classes.media} src={flightImage} style={{ marginBottom: 12 }} />
+                <img alt="I" className={classes.media} src={IImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Be part of the future
+                  Connect with an expert
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  The IP Shares platform is build as a future-proof system, made to empower creators with respect to the importance of proper advice.
+                  Because intellectual property may require explanation you'll be able to find and link with an advisor.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  This gives you as an advisor the chance to embrace and accelerate our upcoming technological evolution.
+                  Search a party in your neighbourhood or select one based on their expertise.
                 </Typography>
               </div>
             </Paper>
@@ -140,20 +143,20 @@ class Home extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
-        <Grid container spacing={24}>
-          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
+        <Grid container spacing={24} style={{ marginBottom: 12 }}>
+          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For advisors...</Typography></Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Design, Patents &amp; Trademarks
+                  Manage your portfolio
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  One-click import all of your registrered trademarks, patents and designs.
+                  As the IP Shares platform is linked to the official IP databases, it's possible to import your public portfolio in an instant.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Sell your actual product or license your invention as you like, directly from yours IPS account.
+                  The advisor account will be build and continiously improved according to the needs of the advisors.
                 </Typography>
               </div>
             </Paper>
@@ -163,13 +166,13 @@ class Home extends PureComponent {
               <div className={classes.promoCard}>
                 <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Copyright
+                  Get found
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Timestamp all types of work, creating inevitable, decentral evidence of ownership.
+                  Your company will be indexed based on your physical location, expertise and appreciation.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  License your creations like songs, artwork, video's and 3D designs.
+                  Cooperation between the advisors will be encouraged. You'll be able to easily get in touch with complimentary expertise, stimulating business, soothing the creators.
                 </Typography>
               </div>
             </Paper>
@@ -179,13 +182,13 @@ class Home extends PureComponent {
               <div className={classes.promoCard}>
                 <img alt="flight" className={classes.media} src={flightImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Connect with an expert
+                  Be part of the future
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Because intellectual property may require explanation you'll be able to find and link with an advisor.
+                  The IP Shares platform is build as a future-proof system, made to empower creators with respect to the importance of proper advice.
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Search a party in your neighbourhood or select one based on their expertise.
+                  This gives you as an advisor the chance to embrace and accelerate our upcoming technological evolution.
                 </Typography>
               </div>
             </Paper>
