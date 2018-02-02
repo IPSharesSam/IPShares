@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react'
 import 'react-dates/initialize'
 import GridList from '../components/GridList'
+import GridListClients from '../components/GridListClients'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
-import MailIcon from 'material-ui-icons/Mail'
+import PublicAdvisor from 'material-ui-icons/Contacts'
+import PublicClient from 'material-ui-icons/PersonPinCircle'
 import Typography from 'material-ui/Typography'
 import Calendar from '../components/Calendar'
+import Grid from 'material-ui/Grid'
 import StarRatingComponent from 'react-star-rating-component'
 import 'react-dates/lib/css/_datepicker.css'
 import './PublicProfile.css'
@@ -32,12 +35,10 @@ class PublicAdvisorProfile extends PureComponent {
 
     this.state = {
       date,
-    }
-  }
-
-  state = {
       ratingDialogOpen: false,
-      rating: 0
+      rating: 0,
+      comment: "",
+    }
   }
 
   componentWillMount() {
@@ -62,18 +63,23 @@ class PublicAdvisorProfile extends PureComponent {
   submitStarRatingForm(event) {
     event.preventDefault()
     const { user } = this.props.advisorProfile
-    const { actualRatingOfUser } = this.props
+    const { actualRatingOfUser, signedIn, currentUser } = this.props
+    const { rating, comment } = this.state
+
+
+    if(!signedIn) return false //TODO: SEND ERROR signedIn
+    if(rating === 0) return false //TODO: SEND ERROR Rating please
+    if(comment === "") return false //TODO: SEND ERROR Rating message
 
       const isNewRating = !actualRatingOfUser
-
-      const rating = {
+      const newRating = {
         advisorId: user._id,
-        clientId: this.props.currentUser._id,
-        comment: this.state.comment,
-        rating: this.state.rating,
+        clientId: currentUser._id,
+        comment: comment,
+        rating: rating,
       }
 
-      isNewRating ? this.props.newRating(rating) : this.props.updateRating(rating, actualRatingOfUser._id)
+      isNewRating ? this.props.newRating(newRating) : this.props.updateRating(newRating, actualRatingOfUser._id)
       this.setState({ ratingDialogOpen: false })
   }
 
@@ -105,89 +111,93 @@ class PublicAdvisorProfile extends PureComponent {
 
   render() {
     const { user, picUrl, ratings } = this.props.advisorProfile
-    const { actualRatingOfUser } = this.props
     if(!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
-    console.log(ratingAverage);
-    if(!!actualRatingOfUser && !this.state.rating) this.setState({rating: actualRatingOfUser.rating, comment: actualRatingOfUser.comment})
 
     return (
-      <div className="PublicProfile-wrap">
-        <Paper className="Details">
+      <div>
+        <Paper style={{ padding: 24, margin: 24 }}>
+            <Grid container spacing={24} style={{ marginBottom: 24}}>
+              <Grid item xs={ 12 } md={ 5 }>
+              <header className="Header-wrap">
+                <div className="picture">
+                  <img className="AdvisorImage"
+                    src={picUrl}
+                    alt='Advisor'
+                  />
+                </div>
+                <div className="AdvisorLabels">
+                  <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                    {`${user.firstName} ${user.lastName}`}
+                  </Typography>
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={4} color="primary">
+                    <PublicAdvisor />
+                  </Badge>Advisors
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={8} color="primary">
+                    <PublicClient />
+                  </Badge>Clients
 
-          <header className="Header-wrap">
-            <div className="picture">
-              <img className="AdvisorImage"
-                src={picUrl}
-                alt='Advisor'
-              />
-            </div>
-            <div className="AdvisorLabels">
-              <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                {`${user.firstName} ${user.lastName}`}
+                  <div onClick={this.handleOpen.bind(this)} >
+                    <StarRatingComponent
+                      name="rate1"
+                      starCount={5}
+                      value={ratingAverage}
+                      editing={false}
+                    />
+                  </div>
+
+                </div>
+              </header>
+            </Grid>
+
+            <Grid item xs ={12} md={7}>
+              <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+                Bio
               </Typography>
-              <Badge className="Badge" badgeContent={4} color="primary">
-                <MailIcon />
-              </Badge>
-              <Badge style={{margin:"18px"}}className="Badge" badgeContent={8} color="primary">
-                <MailIcon />
-              </Badge>
+              <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He
+              received his BA in Economics and Business Administration from Bocconi University, Milan. From the same
+              institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a
+              Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of
+              Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was
+              Director of the Master in Healthcare Management (MIMS - Italian class). </p>
+            </Grid>
+            <Grid item xs={ 12 }>
+                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+                  Clients
+                </Typography>
+                <GridList/>
 
-              <div onClick={this.handleOpen.bind(this)} >
-                <StarRatingComponent
-                  name="rate1"
-                  starCount={5}
-                  value={ratingAverage}
-                  editing={false}
-                />
-              </div>
+                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+                  Partners
+                </Typography>
+                <GridListClients/>
 
-            </div>
-          </header>
-
-
-          <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-            Bio
-          </Typography>
-          <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He
-          received his BA in Economics and Business Administration from Bocconi University, Milan. From the same
-          institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a
-          Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of
-          Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was
-          Director of the Master in Healthcare Management (MIMS - Italian class). </p>
-
-
-            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-              Clients
-            </Typography>
-            <GridList/>
-
-            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-              Partners
-            </Typography>
-            <GridList/>
-
-            <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-              Get in contact
-            </Typography>
-
-          <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
-            <div className="TextField">
-              <TextField
-                className="TextField"
-                placeholder="send a message"
-                multiline={true}
-                InputProps={{ disableUnderline: true  }}
-                onChange={this.handleChange("msg")}
-              />
-            <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
-                submit
-              </Button>
-            </div>
-            <div className="Calender">
-              <Calendar/>
-            </div>
-          </form>
+                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+                  Get in contact
+                </Typography>
+            </Grid>
+            <Grid item xs={12} md={ 6 }>
+              <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
+                <div className="MsgField">
+                  <TextField
+                    className="TextField"
+                    placeholder="send a message"
+                    multiline={true}
+                    InputProps={{ disableUnderline: true  }}
+                    onChange={this.handleChange("msg")}
+                  />
+                <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
+                    submit
+                  </Button>
+                </div>
+              </form>
+              </Grid>
+              <Grid item xs={ 12 } md={ 6 }>
+                <div className="Calendar">
+                  <Calendar className="Calendar"/>
+                </div>
+              </Grid>
+          </Grid>
         </Paper>
 
         <div>
@@ -214,7 +224,6 @@ class PublicAdvisorProfile extends PureComponent {
                  multiline={true}
                  InputProps={{ disableUnderline: true  }}
                  onChange={this.handleChange("comment")}
-                 defaultValue={ !actualRatingOfUser ? "" : actualRatingOfUser.comment}
                 />
 
               </div>
@@ -241,7 +250,9 @@ class PublicAdvisorProfile extends PureComponent {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
   const ratings = advisorProfile.ratings
-  const actualRatingOfUser = !ratings ? [] : ratings.filter((r) => (r.clientId === currentUser._id))[0]
+  const currentUserId = !!currentUser ? currentUser._id : ""
+  const actualRatingOfUser = !ratings ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
+
   return {
     signedIn,
     advisorProfile,

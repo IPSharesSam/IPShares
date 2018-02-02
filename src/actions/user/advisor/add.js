@@ -10,7 +10,7 @@ const api = new API()
 export const ADD_ADVISOR_PROFILE = 'ADD_ADVISOR_PROFILE'
 export const UPDATE_ADVISOR_PROFILE = 'UPDATE_ADVISOR_PROFILE'
 
-export default (advisorProfile) => {
+export const addAdvisorProfile = (advisorProfile) => {
   return dispatch => {
 
     if (!api.isAuthenticated()) {
@@ -42,7 +42,7 @@ export const updateAdvisor = (advisorProfile) => {
       return
     }
     dispatch({ type: LOADING })
-    api.post(`advisor/`, advisorProfile)
+    api.put(`advisor/:id`, advisorProfile)
       .then((result) => {
         console.log(result)
         dispatch({ type: DONE_LOADING })

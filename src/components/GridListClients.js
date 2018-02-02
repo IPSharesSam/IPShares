@@ -7,20 +7,24 @@ import './GridList.css'
 
 const tileData = [
   {
-    title: 'IP expert',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPIlD6vl9yuVtpiOq89j8YXqcxTqxFz3dFiBt2G7KSsaS20408',
+    title: 'Musician',
+    img: 'https://static01.nyt.com/images/2017/04/21/arts/21minorities-inyt/21minorities-inyt-jumbo.jpg',
   },
   {
-    title: 'Trademark Advisor',
-    img: 'http://scarletoakfs.com/wp-content/uploads/2016/03/101952269-financial-advisor_1910x1000.jpg',
+    title: 'Painter',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Paolo_Salvati_-_expressionist_painter.JPG',
   },
   {
-    title: 'whatUpGansta',
-    img: 'https://fthmb.tqn.com/qQCDGniyAFfWwdIbJow4lDacJJM=/1280x854/filters:no_upscale():fill(transparent,1)/138710659-56a819ce3df78cf7729c1cde.jpg',
+    title: 'Scientist',
+    img: 'https://www.timeshighereducation.com/sites/default/files/Pictures/web/x/x/v/female_scientist_at_work_160114.jpg',
   },
   {
-    title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
+    title: 'Scientist',
+    img: 'https://cdn-media-1.lifehack.org/wp-content/files/2015/07/15-Signs-Youre-A-Natural-Born-Writer-Even-If-You-Dont-Feel-You-Are.jpg',
+  },
+  {
+    title: 'Scientist',
+    img: 'https://www.timeshighereducation.com/sites/default/files/Pictures/web/x/x/v/female_scientist_at_work_160114.jpg',
   },
 ]
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { updateAdvisor } from '../actions/user/advisor/add'
+import { updateAdvisor, addAdvisorProfile } from '../actions/user/advisor/add'
 import { FormControlLabel, FormHelperText, FormControl } from 'material-ui/Form';
 import ExpansionPanel, {
   ExpansionPanelSummary,
@@ -178,6 +178,13 @@ export class AdvisorProfile extends PureComponent {
     return false
   }
 
+  addAdvisorProfile() {
+    if (this.validateAll()) {
+      this.props.updateAdvisor(this.state)
+    }
+    return false
+  }
+
   render() {
 
     return (
@@ -287,6 +294,9 @@ export class AdvisorProfile extends PureComponent {
 }
 
 
-const mapStateToProps = ({ updateAdvisor }) => ({ updateAdvisor })
+const mapStateToProps = ({ updateAdvisor, addAdvisorProfile }) => ({
+  updateAdvisor,
+  addAdvisorProfile ,
+})
 
-export default connect(mapStateToProps, { push, updateAdvisor })(AdvisorProfile)
+export default connect(mapStateToProps, { push, updateAdvisor, addAdvisorProfile })(AdvisorProfile)
