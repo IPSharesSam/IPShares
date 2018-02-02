@@ -18,7 +18,7 @@ const theme = createMuiTheme({
       light: '#ffffff',
       main: '#eeeeee',
       dark: '#bcbcbc',
-      contrastText: '#000000'
+      contrastText: '#212529'
     },
     secondary: {
       light: '#ff6f60',
@@ -30,13 +30,16 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     title: {
-      fontFamily: TitleFont
+      fontFamily: TitleFont,
+      fontWeight: 700
     },
     headline: {
-      fontFamily: TitleFont
+      fontFamily: TitleFont,
+      fontWeight: 700
     },
     display1: {
-      fontFamily: TitleFont
+      fontFamily: TitleFont,
+      fontWeight: 700
     }
   }
 })

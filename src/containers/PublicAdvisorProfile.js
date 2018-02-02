@@ -35,17 +35,20 @@ class PublicAdvisorProfile extends PureComponent {
 
     this.state = {
       date,
+      rating: 0,
     }
   }
 
   state = {
-      ratingDialogOpen: false,
-      rating: 0
+      ratingDialogOpen: false
   }
 
   componentWillMount() {
     const { fetchAdvisor } = this.props
     const { advisorId } = this.props.match.params
+
+    //const actualUserRating = !!actualRatingOfUser ? actualRatingOfUser.rating : this.state.rating
+    //this.setState({rating: actualUserRating, comment: actualUserRating.comment})
 
     if (!!advisorId) { fetchAdvisor(advisorId) }
   }
@@ -65,10 +68,11 @@ class PublicAdvisorProfile extends PureComponent {
   submitStarRatingForm(event) {
     event.preventDefault()
     const { user } = this.props.advisorProfile
-    const { actualRatingOfUser } = this.props
+    const { actualRatingOfUser, signedIn } = this.props
+
+    if(!signedIn) return false //TODO: SEND ERROR
 
       const isNewRating = !actualRatingOfUser
-
       const rating = {
         advisorId: user._id,
         clientId: this.props.currentUser._id,
@@ -108,11 +112,8 @@ class PublicAdvisorProfile extends PureComponent {
 
   render() {
     const { user, picUrl, ratings } = this.props.advisorProfile
-    const { actualRatingOfUser } = this.props
     if(!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
-    console.log(ratingAverage);
-    if(!!actualRatingOfUser && !this.state.rating) this.setState({rating: actualRatingOfUser.rating, comment: actualRatingOfUser.comment})
 
     return (
       <div>
@@ -224,7 +225,6 @@ class PublicAdvisorProfile extends PureComponent {
                  multiline={true}
                  InputProps={{ disableUnderline: true  }}
                  onChange={this.handleChange("comment")}
-                 defaultValue={ !actualRatingOfUser ? "" : actualRatingOfUser.comment}
                 />
 
               </div>
@@ -251,7 +251,9 @@ class PublicAdvisorProfile extends PureComponent {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
   const ratings = advisorProfile.ratings
-  const actualRatingOfUser = !ratings ? [] : ratings.filter((r) => (r.clientId === currentUser._id))[0]
+  const currentUserId = !!currentUser ? currentUser._id : ""
+  const actualRatingOfUser = !ratings && !signedIn ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
+
   return {
     signedIn,
     advisorProfile,
