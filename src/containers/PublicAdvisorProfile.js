@@ -5,7 +5,8 @@ import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
-import MailIcon from 'material-ui-icons/Mail'
+import PublicAdvisor from 'material-ui-icons/Contacts'
+import PublicClient from 'material-ui-icons/PersonPinCircle'
 import Typography from 'material-ui/Typography'
 import Calendar from '../components/Calendar'
 import Grid from 'material-ui/Grid'
@@ -116,7 +117,7 @@ class PublicAdvisorProfile extends PureComponent {
       <div>
         <Paper style={{ padding: 24, margin: 24 }}>
             <Grid container spacing={24} style={{ marginBottom: 24}}>
-              <Grid item xs={ 5 }>
+              <Grid item xs={ 12 } md={ 5 }>
               <header className="Header-wrap">
                 <div className="picture">
                   <img className="AdvisorImage"
@@ -128,12 +129,12 @@ class PublicAdvisorProfile extends PureComponent {
                   <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                     {`${user.firstName} ${user.lastName}`}
                   </Typography>
-                  <Badge className="Badge" badgeContent={4} color="primary">
-                    <MailIcon />
-                  </Badge>
-                  <Badge style={{margin:"18px"}}className="Badge" badgeContent={8} color="primary">
-                    <MailIcon />
-                  </Badge>
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={4} color="primary">
+                    <PublicAdvisor />
+                  </Badge>Advisors
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={8} color="primary">
+                    <PublicClient />
+                  </Badge>Clients
 
                   <div onClick={this.handleOpen.bind(this)} >
                     <StarRatingComponent
@@ -148,7 +149,7 @@ class PublicAdvisorProfile extends PureComponent {
               </header>
             </Grid>
 
-            <Grid item xs={7}>
+            <Grid item xs ={12} md={7}>
               <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
                 Bio
               </Typography>
@@ -174,7 +175,7 @@ class PublicAdvisorProfile extends PureComponent {
                   Get in contact
                 </Typography>
             </Grid>
-            <Grid item xs={ 6 }>
+            <Grid item xs={12} md={ 6 }>
               <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
                 <div className="MsgField">
                   <TextField
@@ -190,7 +191,7 @@ class PublicAdvisorProfile extends PureComponent {
                 </div>
               </form>
               </Grid>
-              <Grid item xs={ 6 }>
+              <Grid item xs={ 12 } md={ 6 }>
                 <div className="Calendar">
                   <Calendar className="Calendar"/>
                 </div>
