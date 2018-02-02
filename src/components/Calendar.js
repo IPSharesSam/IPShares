@@ -30,8 +30,8 @@ export class Calendar extends PureComponent {
         height={250}
         selectedDate={today}
         disabledDays={[0,6]}
-        minDate={minDate}
-        maxDate={maxDate}
+        minDate={new Date(minDate)}
+        maxDate={new Date(maxDate)}
         keyboardSupport={true}
         autoFocus={false}
         />
