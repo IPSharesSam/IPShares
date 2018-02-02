@@ -5,7 +5,7 @@ import {
   LOAD_ERROR
 } from '../loading'
 
-export const FETCH_RATING = 'FETCH_RATING'
+export const FETCH_RATINGS = 'FETCH_RATINGS'
 export const UPDATE_RATING = 'UPDATE_RATING'
 export const NEW_RATING = 'NEW_RATING'
 
@@ -18,7 +18,7 @@ export default () => {
       .then((result) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
-          type: FETCH_RATING,
+          type: FETCH_RATINGS,
           payload: result.body
         })
       })
