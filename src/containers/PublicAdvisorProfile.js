@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import 'react-dates/initialize'
 import GridList from '../components/GridList'
+import GridListClients from '../components/GridListClients'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
@@ -169,7 +170,7 @@ class PublicAdvisorProfile extends PureComponent {
                 <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
                   Partners
                 </Typography>
-                <GridList/>
+                <GridListClients/>
 
                 <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
                   Get in contact
