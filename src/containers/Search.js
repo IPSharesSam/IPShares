@@ -2,22 +2,17 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
-import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList'
+import GridList, { GridListTile } from 'material-ui/GridList'
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import Chip from 'material-ui/Chip'
 import StarRatingComponent from 'react-star-rating-component'
-import Subheader from 'material-ui/List/ListSubheader'
-import IconButton from 'material-ui/IconButton'
-import InfoIcon from 'material-ui-icons/Info'
-import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import List, { ListItem, ListItemText } from 'material-ui/List'
 import Toolbar from 'material-ui/Toolbar'
 import AppBar from 'material-ui/AppBar'
-import { InstantSearch, Hits, SearchBox, Pagination } from 'react-instantsearch/dom'
+import { InstantSearch, SearchBox, Pagination } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
 import './Search.css'
 
@@ -86,7 +81,7 @@ export class TitlebarGridList extends PureComponent {
                 name="rate2"
                 editing={false}
                 starCount={5}
-                value={3}
+                value={hit.averageNumber}
               />
             </CardActions>
             </Card >
