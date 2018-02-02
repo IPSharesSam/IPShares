@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg5414"
+   width="246.00342"
+   height="246.00342"
+   viewBox="0 0 246.00342 246.00342"
+   sodipodi:docname="search.svg"
+   inkscape:version="0.92.2pre0 650254f, 2017-08-06">
+  <metadata
+     id="metadata5420">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5418" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview5416"
+     showgrid="false"
+     inkscape:zoom="2.6074563"
+     inkscape:cx="129.9424"
+     inkscape:cy="110.66726"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5414" />
+  <circle
+     style="fill:none;fill-opacity:0.969697;stroke:#e53935;stroke-width:13.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+     id="path5979"
+     cx="123.00171"
+     cy="123.00171"
+     r="116.20521" />
+  <g
+     style="fill:#000000;fill-rule:evenodd"
+     id="g6053"
+     transform="matrix(7.0815809,0,0,7.0815809,39.650988,41.763705)">
+    <path
+       id="path6039"
+       d="m 15.525072,13.726733 h -0.79 l -0.28,-0.27 c 0.98,-1.14 1.57,-2.62 1.57,-4.2300003 0,-3.59 -2.91,-6.5 -6.4999994,-6.5 -3.59,0 -6.5,2.91 -6.5,6.5 0,3.5900003 2.91,6.5000003 6.5,6.5000003 1.6099994,0 3.0899994,-0.59 4.2299994,-1.57 l 0.27,0.28 v 0.79 l 5,4.99 1.49,-1.49 z m -5.9999994,0 c -2.49,0 -4.5,-2.01 -4.5,-4.5000003 0,-2.49 2.01,-4.5 4.5,-4.5 2.4899994,0 4.4999994,2.01 4.4999994,4.5 0,2.4900003 -2.01,4.5000003 -4.4999994,4.5000003 z"
+       inkscape:connector-curvature="0"
+       style="fill:#e53935;fill-opacity:1;fill-rule:evenodd" />
+    <path
+       id="path6041"
+       d="M 0,0 H 24 V 24 H 0 Z"
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd" />
+  </g>
+</svg>

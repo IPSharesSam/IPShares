@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signIn from '../actions/user/sign-in'
 import { FormControl, FormHelperText } from 'material-ui/Form'
+import Typography from 'material-ui/Typography'
 import validate from "validate.js"
 
 const dialogStyle = {
@@ -101,9 +102,8 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
-
       <Paper style={ dialogStyle }>
-
+        <Typography component="h1" type="headline" style={{ marginBottom: 8 }}>Sign in</Typography>
         <form onSubmit={this.submitForm.bind(this)}>
           <FormControl fullWidth className="formControl">
             <TextField id="email"
@@ -115,7 +115,6 @@ export class SignIn extends PureComponent {
             />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
           </FormControl>
-
           <FormControl fullWidth className="formControl">
             <TextField id="password"
               type="password"
@@ -128,7 +127,6 @@ export class SignIn extends PureComponent {
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
         </form>
-
         <Button
           onClick={ this.submitForm.bind(this) }
           raised color="primary">

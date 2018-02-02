@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="65.428978mm"
+   height="65.428978mm"
+   viewBox="0 0 65.428978 65.428978"
+   version="1.1"
+   id="svg6939"
+   inkscape:version="0.92.2pre0 650254f, 2017-08-06"
+   sodipodi:docname="flight.svg">
+  <defs
+     id="defs6933">
+    <path
+       id="a"
+       d="M0 0h24v24H0V0z" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="197.62919"
+     inkscape:cy="111.4756"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g7571"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6936">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-115.57415,-170.07605)">
+    <circle
+       style="fill:none;fill-opacity:0.94117647;stroke:none;stroke-width:0.81371003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:markers fill stroke"
+       id="path974"
+       cx="148.16667"
+       cy="202.50595"
+       r="33.802803" />
+    <circle
+       style="fill:none;fill-opacity:0.94117647;stroke:#e53935;stroke-width:3.5718751;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path980"
+       cx="148.28864"
+       cy="-202.79054"
+       r="30.928553"
+       transform="scale(1,-1)" />
+    <g
+       style="fill:#000000"
+       id="g7571"
+       transform="matrix(1.7597202,0,0,1.7597202,127.172,181.6739)">
+      <path
+         id="path7558"
+         d="m 2.520013,18.714998 h 19 v 2 h -19 z m 19.57,-9.3599999 c -0.21,-0.8 -1.04,-1.28 -1.84,-1.06 l -5.31,1.42 -6.9,-6.43 -1.93,0.51 4.14,7.1699999 -4.97,1.33 -1.97,-1.54 -1.45,0.39 1.82,3.16 0.77,1.33 1.6,-0.43 5.31,-1.42 4.35,-1.16 5.31,-1.42 c 0.81,-0.23 1.28,-1.05 1.07,-1.8499999 z"
+         clip-path="url(#b)"
+         inkscape:connector-curvature="0"
+         style="fill:#e53935;fill-opacity:1" />
+      <path
+         id="path7560"
+         d="M 0,0 H 24 V 24 H 0 Z"
+         clip-path="url(#b)"
+         inkscape:connector-curvature="0"
+         style="fill:none" />
+    </g>
+  </g>
+</svg>
