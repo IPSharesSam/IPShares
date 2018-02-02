@@ -76,8 +76,11 @@ export class TitlebarGridList extends PureComponent {
                 })}
             </CardContent>
             <CardActions>
-              <Button className={classes.button} raised size="small" color="default">
-                <Link to={'/advisor/' + hit.advisorProfileId}>Profile</Link>
+              <Button component={Link}
+                to={'/advisor/' + hit.advisorProfileId}
+                className={classes.button}
+                color="default">
+                Profile
               </Button>
               <StarRatingComponent style={{ float:"right" }}
                 name="rate2"

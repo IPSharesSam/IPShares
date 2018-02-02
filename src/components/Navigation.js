@@ -45,13 +45,10 @@ export class Navigation extends PureComponent {
         <AppBar position="static">
           <Toolbar>
             <div className={classes.flex}>
-              <Typography type="headline" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
+              <Typography type="display2" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
                 IP Shares
               </Typography>
-              <Button className={classes.button} color="inherit" component={Link} to="/">Home</Button>
               <Button className={classes.button} color="inherit" component={Link} to="/search">Find advisors</Button>
-              {/* take this out for now
-              <Button className={classes.button} color="inherit" component={Link} to="/profiles">Profiles</Button> */}
               { this.props.signedIn ?
               <Button className={classes.button} color="inherit" component={Link} to="/account/advisor">Account</Button> :
                 <div></div>
