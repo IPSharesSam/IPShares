@@ -7,12 +7,12 @@ import './GridList.css'
 
 const tileData = [
   {
-    title: 'whatUpGansta',
-    img: 'https://www.intermedia.net/assets/images/advisor-icon.png',
+    title: 'IP expert',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPIlD6vl9yuVtpiOq89j8YXqcxTqxFz3dFiBt2G7KSsaS20408',
   },
   {
     title: 'Trademark Advisor',
-    img: 'http://www.reliancenipponlife.com/images/advisor_banner.jpg',
+    img: 'http://scarletoakfs.com/wp-content/uploads/2016/03/101952269-financial-advisor_1910x1000.jpg',
   },
   {
     title: 'whatUpGansta',

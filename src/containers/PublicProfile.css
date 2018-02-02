@@ -17,6 +17,17 @@
   float: left;
 }
 
+.MsgField {
+  padding: 10px;
+  border: 1px solid #c8c8c8;
+  border-radius: 10px;
+}
+
+.Calendar {
+  border: 1px solid #c8c8c8;
+  border-radius: 2px;
+}
+
 .Header-wrap {
   display: flex;
   flex-wrap: wrap;

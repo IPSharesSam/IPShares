@@ -1,13 +1,11 @@
-@font-face {
-  font-family: 'Bolts SF';
-  src: url(./fonts/boltssf.ttf);
-}
-
-.dv-star-rating-star {
-  font-size: 40px;
-}
-
 html {
   font-size: 18px;
 }
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
+@font-face {
+  font-family: 'Bolts SF';
+  src: url(./fonts/boltssf.ttf);
+}
+.dv-star-rating-star {
+  font-size: 25px;
+}

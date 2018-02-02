@@ -15,18 +15,18 @@ export class Calendar extends PureComponent {
         theme={{
           selectionColor: 'rgb(255, 84, 84)',
           textColor: {
-            default: '#333',
-            active: '#FFF'
+            default: '#222',
+            active: '#222'
           },
-          weekdayColor: '#dfdfdf',
-          headerColor: '#ff0015',
+          weekdayColor: '#ededee',
+          headerColor: '#989898',
           floatingNav: {
-            background: '#989898',
+            background: '#dfdfdf',
             color: '#FFF',
             chevron: '#FFA726'
           }
        }}
-        width={500}
+        width={621}
         height={250}
         selectedDate={today}
         disabledDays={[0,6]}
