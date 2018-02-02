@@ -26,7 +26,7 @@ const styles = theme => ({
     color: 'rgba(255, 255, 255, 0.54)',
   },
   cardContent: {
-    minHeight: 150,
+    minHeight: 180,
   },
   button: {
     marginRight: 10,
@@ -56,7 +56,7 @@ export class TitlebarGridList extends PureComponent {
   render() {
     function CustomHits({ hits }) {
       return (
-        <GridList cellHeight={"auto"} cols={5} style={{ marginTop: 12 }} spacing={24}>
+        <GridList cellHeight={"auto"} cols={4} style={{ marginTop: 12 }} spacing={24}>
           {hits.map(hit => (
             <GridListTile>
             <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>

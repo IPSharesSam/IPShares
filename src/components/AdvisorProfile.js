@@ -180,7 +180,7 @@ export class AdvisorProfile extends PureComponent {
 
   addAdvisorProfile() {
     if (this.validateAll()) {
-      this.props.updateAdvisor(this.state)
+      this.props.addAdvisorProfile(this.state)
     }
     return false
   }
@@ -262,19 +262,6 @@ export class AdvisorProfile extends PureComponent {
                 />
             </ExpansionPanelDetails>
           </ExpansionPanel>
-
-
-          <FormControlLabel style={{float:"right"}}
-            control={
-              <Switch
-                checked={this.state.checked}
-                onChange={this.handleChange("publicAdvisor")}
-                className = "profile-toggle"
-                style={classes.toggle}
-              />
-            }
-            label="Public profile"
-          />
 
         </form>
         <Button
