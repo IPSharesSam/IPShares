@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { updateAdvisor } from '../actions/user/advisor/add'
 import { FormControlLabel, FormHelperText, FormControl } from 'material-ui/Form';
 import ExpansionPanel, {
   ExpansionPanelSummary,
@@ -27,7 +28,7 @@ const classes = {
     backgroundColor: "#fbfbfb",
     border: "1px solid #b8b8b8",
     minWidth: "100%",
-    margin: "15px 0px",
+    margin: "25px 0px 50px",
   },
 }
 
@@ -36,33 +37,18 @@ export class AdvisorProfile extends PureComponent {
     push: PropTypes.func.isRequired,
   }
 
-  state = { }
+  constructor(props) {
+    super()
 
-  // handleChange = name => event => {
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   })
-  // }
+    const { streetName, streetNumber, city } = props
 
-  submitForm(event) {
-    event.preventDefault()
-    if (this.validateAll()) {
-      const profile = {
-        streetName: this.state.streetName,
-        streetNumber: this.state.streetNumber,
-        postalCode: this.state.postalCode,
-        city: this.state.city,
-        country: this.state.country,
-        phoneNumber: this.state.phoneNumber,
-        publicAdvisor: this.state.publicAdvisor,
-        bio: this.state.bio,
-        tags: [],
-        clients: [],
-        partners: [],
-      }
+    this.state = {
+      streetName,
+      streetNumber,
+      city,
     }
-    return false
   }
+
 
   cancel() {
     this.props.push('/')
@@ -185,13 +171,20 @@ export class AdvisorProfile extends PureComponent {
     })
   }
 
-  render() {
-    return (
+  updateAdvisorProfile() {
+    if (this.validateAll()) {
+      this.props.updateAdvisor(this.state)
+    }
+    return false
+  }
 
+  render() {
+
+    return (
       <div className="wrap">
         <Typography type="title" component="h2">Advisor profile</Typography>
 
-        <form onSubmit={this.submitForm.bind(this)}>
+        <form>
           <Grid container spacing={24}>
 
             <Grid item xs={8} md={6}>
@@ -246,21 +239,22 @@ export class AdvisorProfile extends PureComponent {
               </FormControl>
             </Grid>
           </Grid>
-                <ExpansionPanel style={classes.heading}>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography>Bio</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <TextField style={classes.formBio}
-                      className="TextField"
-                      placeholder="Write something about yourself"
-                      id="bio"
-                      multiline={true}
-                      InputProps={{ disableUnderline: true  }}
-                      onChange={this.handleChange("bio")}
-                      />
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
+
+          <ExpansionPanel style={classes.heading}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>Bio</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <TextField style={classes.formBio}
+                className="TextField"
+                placeholder="Write something about yourself"
+                id="bio"
+                multiline={true}
+                InputProps={{ disableUnderline: true  }}
+                onChange={this.handleChange("bio")}
+                />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
 
 
           <FormControlLabel style={{float:"right"}}
@@ -277,7 +271,7 @@ export class AdvisorProfile extends PureComponent {
 
         </form>
         <Button
-          onClick={this.submitForm.bind(this)}
+          onClick={this.updateAdvisorProfile.bind(this)}
           raised color="primary" >
           Update
         </Button>
@@ -292,4 +286,7 @@ export class AdvisorProfile extends PureComponent {
   }
 }
 
-export default connect(null, { push })(AdvisorProfile)
+
+const mapStateToProps = ({ updateAdvisor }) => ({ updateAdvisor })
+
+export default connect(mapStateToProps, { push, updateAdvisor })(AdvisorProfile)

@@ -57,7 +57,7 @@ export class Account extends PureComponent {
               <Tabs value={value} onChange={this.handleChange}>
                 <Tab label="Account" />
                 <Tab label="Creator" />
-                <Tab label="Advisor" href="#basic-tabs" />
+                <Tab label="Advisor" href="#" />
               </Tabs>
             </AppBar>
 
