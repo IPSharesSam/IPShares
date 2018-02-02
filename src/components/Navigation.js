@@ -43,7 +43,7 @@ export class Navigation extends PureComponent {
     return (
       <div className={classes.root}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar style={{ minHeight: 90 }}>
             <div className={classes.flex}>
               <Typography type="display2" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
                 IP Shares
