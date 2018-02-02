@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { updateAdvisor, addAdvisorProfile } from '../actions/user/advisor/add'
+import { addAdvisorProfile, updateAdvisor } from '../actions/user/advisor/add'
+import { fetchOwnProfile } from '../actions/user/advisor/fetch'
 import { FormControlLabel, FormHelperText, FormControl } from 'material-ui/Form';
 import ExpansionPanel, {
   ExpansionPanelSummary,
@@ -49,6 +50,9 @@ export class AdvisorProfile extends PureComponent {
     }
   }
 
+  componentWillMount() {
+    this.props.fetchOwnProfile()
+  }
 
   cancel() {
     this.props.push('/')
@@ -171,32 +175,38 @@ export class AdvisorProfile extends PureComponent {
     })
   }
 
-  updateAdvisorProfile() {
-    if (this.validateAll()) {
-      this.props.updateAdvisor(this.state)
-    }
-    return false
-  }
+  // updateAdvisorProfile() {
+  //   if (this.validateAll()) {
+  //     this.props.updateAdvisor(this.state)
+  //   }
+  //   return false
+  // }
 
-  addAdvisorProfile() {
+  localAddAdvisorProfile() {
     if (this.validateAll()) {
       this.props.addAdvisorProfile(this.state)
     }
     return false
   }
 
-  render() {
+  localUpdateAdvisorProfile() {
+    const { _id } = this.props.advisorProfile
+    if (this.validateAll()) {
+      this.props.updateAdvisor({ ...this.state, AdvisorProfileId: _id })
+    }
+    return false
+  }
 
+  render() {
+    const { streetName } = this.props.advisorProfile
     return (
       <div className="wrap">
-        <Typography type="title" component="h2">Advisor profile</Typography>
-
+        <Typography type="title" component="h2">Advisor profile - {streetName}</Typography>
         <form>
           <Grid container spacing={24}>
-
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
-                <TextField id="streetName" type="text" label="Street" onChange={this.handleChange("streetName")}/>
+                <TextField id="streetName" type="text" label={ streetName ? streetName : "Streetname" } onChange={this.handleChange("streetName")}/>
                 <FormHelperText id="streetName-error-text">{this.state.streetNameError}</FormHelperText>
               </FormControl>
             </Grid>
@@ -264,11 +274,10 @@ export class AdvisorProfile extends PureComponent {
           </ExpansionPanel>
 
         </form>
-        <Button
-          onClick={this.updateAdvisorProfile.bind(this)}
-          raised color="primary" >
-          Update
-        </Button>
+        {!!this.props.advisorProfile ?
+          <Button onClick={this.localUpdateAdvisorProfile.bind(this)} raised color="primary" >Update</Button> :
+          <Button onClick={this.localAddAdvisorProfile.bind(this)} raised color="primary" >Update</Button>
+        }
         <Button
           onClick={this.cancel.bind(this)}
           color="primary">
@@ -281,9 +290,8 @@ export class AdvisorProfile extends PureComponent {
 }
 
 
-const mapStateToProps = ({ updateAdvisor, addAdvisorProfile }) => ({
-  updateAdvisor,
-  addAdvisorProfile ,
+const mapStateToProps = ({ advisorProfile }) => ({
+  advisorProfile
 })
 
-export default connect(mapStateToProps, { push, updateAdvisor, addAdvisorProfile })(AdvisorProfile)
+export default connect(mapStateToProps, { push, addAdvisorProfile, updateAdvisor, fetchOwnProfile })(AdvisorProfile)
