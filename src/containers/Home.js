@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
-import findImage from '../images/find.png'
-import infinityImage from '../images/infinity.png'
-import contactImage from '../images/contact.png'
+import findImage from '../images/search.svg'
+import flightImage from '../images/flight.svg'
+import contactImage from '../images/contact.svg'
 import logoImage from '../images/logo.svg'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
@@ -85,7 +85,7 @@ class Home extends PureComponent {
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <img alt="infinity" className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
+                <img alt="flight" className={classes.media} src={flightImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   Be part of the future
                 </Typography>
@@ -99,13 +99,13 @@ class Home extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
-        <Paper style={{ padding: 24 }}>
-          <Grid container spacing={24} style={{ marginBottom: 24 }}>
-            <Grid item xs={12}>
-              <img alt="logo" className={classes.logo} src={logoImage} />
-              <Typography component="h1" type="display1" align="center">The IP Share</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
+        <Grid container spacing={24} style={{ marginBottom: 24 }}>
+          <Grid item xs={12}>
+            <img alt="logo" className={classes.logo} src={logoImage} />
+            <Typography component="h1" type="display1" align="center">The IP Share</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   No fees for using the platform
@@ -119,8 +119,10 @@ class Home extends PureComponent {
                   charged for the actual costs of the storation.
                 </Typography>
               </div>
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   How all users collectively create value
@@ -135,13 +137,13 @@ class Home extends PureComponent {
                   the IP Shares order book which are given to the seller.
                 </Typography>
               </div>
-            </Grid>
+            </Paper>
           </Grid>
-        </Paper>
-        <Paper style={{ padding: 24 }}>
-          <Grid container spacing={24} style={{ marginBottom: 24 }}>
-            <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
-            <Grid item xs={12} sm={6} md={4}>
+        </Grid>
+        <Grid container spacing={24} style={{ marginBottom: 24 }}>
+          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
@@ -154,8 +156,10 @@ class Home extends PureComponent {
                   Sell your actual product or license your invention as you like, directly from yours IPS account.
                 </Typography>
               </div>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
@@ -168,10 +172,12 @@ class Home extends PureComponent {
                   License your creations like songs, artwork, video's and 3D designs.
                 </Typography>
               </div>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <img alt="infinity" className={classes.media} src={infinityImage} style={{ marginBottom: 12 }} />
+                <img alt="flight" className={classes.media} src={flightImage} style={{ marginBottom: 12 }} />
                 <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
                   Connect with an expert
                 </Typography>
@@ -182,9 +188,9 @@ class Home extends PureComponent {
                   Search a party in your neighbourhood or select one based on their expertise.
                 </Typography>
               </div>
-            </Grid>
+            </Paper>
           </Grid>
-        </Paper>
+        </Grid>
       </div>
     )
   }
