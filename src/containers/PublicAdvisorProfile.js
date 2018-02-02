@@ -35,20 +35,15 @@ class PublicAdvisorProfile extends PureComponent {
 
     this.state = {
       date,
+      ratingDialogOpen: false,
       rating: 0,
+      comment: "",
     }
-  }
-
-  state = {
-      ratingDialogOpen: false
   }
 
   componentWillMount() {
     const { fetchAdvisor } = this.props
     const { advisorId } = this.props.match.params
-
-    //const actualUserRating = !!actualRatingOfUser ? actualRatingOfUser.rating : this.state.rating
-    //this.setState({rating: actualUserRating, comment: actualUserRating.comment})
 
     if (!!advisorId) { fetchAdvisor(advisorId) }
   }
@@ -68,19 +63,23 @@ class PublicAdvisorProfile extends PureComponent {
   submitStarRatingForm(event) {
     event.preventDefault()
     const { user } = this.props.advisorProfile
-    const { actualRatingOfUser, signedIn } = this.props
+    const { actualRatingOfUser, signedIn, currentUser } = this.props
+    const { rating, comment } = this.state
 
-    if(!signedIn) return false //TODO: SEND ERROR
+
+    if(!signedIn) return false //TODO: SEND ERROR signedIn
+    if(rating === 0) return false //TODO: SEND ERROR Rating please
+    if(comment === "") return false //TODO: SEND ERROR Rating message
 
       const isNewRating = !actualRatingOfUser
-      const rating = {
+      const newRating = {
         advisorId: user._id,
-        clientId: this.props.currentUser._id,
-        comment: this.state.comment,
-        rating: this.state.rating,
+        clientId: currentUser._id,
+        comment: comment,
+        rating: rating,
       }
 
-      isNewRating ? this.props.newRating(rating) : this.props.updateRating(rating, actualRatingOfUser._id)
+      isNewRating ? this.props.newRating(newRating) : this.props.updateRating(newRating, actualRatingOfUser._id)
       this.setState({ ratingDialogOpen: false })
   }
 
@@ -252,7 +251,7 @@ class PublicAdvisorProfile extends PureComponent {
   const signedIn = !!currentUser && !!currentUser._id
   const ratings = advisorProfile.ratings
   const currentUserId = !!currentUser ? currentUser._id : ""
-  const actualRatingOfUser = !ratings && !signedIn ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
+  const actualRatingOfUser = !ratings ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
 
   return {
     signedIn,
