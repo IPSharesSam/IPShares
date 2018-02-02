@@ -45,7 +45,7 @@ export class Navigation extends PureComponent {
         <AppBar position="static">
           <Toolbar>
             <div className={classes.flex}>
-              <Typography type="headline" color="secondary" style={{ display: 'inline-flex' }}>
+              <Typography type="headline" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
                 IP Shares
               </Typography>
               <Button className={classes.button} color="inherit" component={Link} to="/">Home</Button>
