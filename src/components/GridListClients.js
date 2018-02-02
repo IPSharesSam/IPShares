@@ -24,7 +24,7 @@ const tileData = [
   },
   {
     title: 'Scientist',
-    img: 'https://www.timeshighereducation.com/sites/default/files/Pictures/web/x/x/v/female_scientist_at_work_160114.jpg',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
   },
 ]
 

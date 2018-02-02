@@ -62,8 +62,8 @@ class PublicAdvisorProfile extends PureComponent {
 
   submitStarRatingForm(event) {
     event.preventDefault()
-    const { user } = this.props.advisorProfile
-    const { actualRatingOfUser, signedIn, currentUser } = this.props
+    const { user, ratings } = this.props.advisorProfile
+    const { signedIn, currentUser } = this.props
     const { rating, comment } = this.state
 
 
@@ -71,7 +71,6 @@ class PublicAdvisorProfile extends PureComponent {
     if(rating === 0) return false //TODO: SEND ERROR Rating please
     if(comment === "") return false //TODO: SEND ERROR Rating message
 
-      const isNewRating = !actualRatingOfUser
       const newRating = {
         advisorId: user._id,
         clientId: currentUser._id,
@@ -79,7 +78,10 @@ class PublicAdvisorProfile extends PureComponent {
         rating: rating,
       }
 
-      isNewRating ? this.props.newRating(newRating) : this.props.updateRating(newRating, actualRatingOfUser._id)
+      const currentRating = ratings.filter((r) => (r.clientId === currentUser._id))[0]
+      const isNewRating = !currentRating
+      console.log(currentRating, isNewRating);
+      isNewRating ? this.props.newRating(newRating) : this.props.updateRating(newRating)
       this.setState({ ratingDialogOpen: false })
   }
 
@@ -251,13 +253,12 @@ class PublicAdvisorProfile extends PureComponent {
   const signedIn = !!currentUser && !!currentUser._id
   const ratings = advisorProfile.ratings
   const currentUserId = !!currentUser ? currentUser._id : ""
-  const actualRatingOfUser = !ratings ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
+  //const actualRatingOfUser = !ratings ? {} : ratings.filter((r) => (r.clientId === currentUserId))[0]
 
   return {
     signedIn,
     advisorProfile,
     currentUser,
-    actualRatingOfUser: actualRatingOfUser
   }
 }
 
