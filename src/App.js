@@ -29,20 +29,19 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: '"Franklin Gothic Medium", "Franklin", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    title: {
-      fontFamily: TitleFont,
-      fontWeight: 400
-    },
     headline: {
       fontFamily: TitleFont,
+      color: 'rgba(0, 0, 0, 0.87)',
       fontWeight: 400
     },
     display1: {
       fontFamily: TitleFont,
+      color: 'rgba(0, 0, 0, 0.87)',
       fontWeight: 400
     },
     display2: {
       fontFamily: TitleFont,
+      color: 'rgba(0, 0, 0, 0.87)',
       fontWeight: 400
     }
   }

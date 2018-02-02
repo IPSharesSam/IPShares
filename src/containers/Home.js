@@ -51,66 +51,16 @@ class Home extends PureComponent {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper style={{ padding: 24, height: '100%' }}>
-              <div className={classes.promoCard}>
-                <img alt="R" className={classes.media} src={RImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Design, Patents &amp; Trademarks
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  One-click import all of your registrered trademarks, patents and designs.
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Sell your actual product or license your invention as you like, directly from yours IPS account.
-                </Typography>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper style={{ padding: 24, height: '100%' }}>
-              <div className={classes.promoCard}>
-                <img alt="Copyright" className={classes.media} src={CImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Copyright
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Timestamp all types of work, creating inevitable, decentral evidence of ownership.
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  License your creations like songs, artwork, video's and 3D designs.
-                </Typography>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper style={{ padding: 24, height: '100%' }}>
-              <div className={classes.promoCard}>
-                <img alt="I" className={classes.media} src={IImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  Connect with an expert
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Because intellectual property may require explanation you'll be able to find and link with an advisor.
-                </Typography>
-                <Typography component="p" style={{ marginBottom: 12 }} align="center">
-                  Search a party in your neighbourhood or select one based on their expertise.
-                </Typography>
-              </div>
-            </Paper>
-          </Grid>
-        </Grid>
         <Grid container spacing={24} style={{ marginBottom: 24 }}>
           <Grid item xs={12}>
             <img alt="logo" className={classes.logo} src={logoImage} />
-            <Typography component="h1" type="display1" align="center">The IP Share</Typography>
+            <Typography component="h1" type="display2" align="center">The IP Share</Typography>
+            <Typography component="h2" type="display1" align="center">Decentralizing intellectual property</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
                   No fees for using the platform
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
@@ -127,7 +77,7 @@ class Home extends PureComponent {
           <Grid item xs={12} sm={6}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
                   How all users collectively create value
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
@@ -143,13 +93,64 @@ class Home extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
+        <Grid container spacing={24}>
+          <Grid item xs={12}><Typography component="h1" type="display1" align="center">For creators...</Typography></Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
+              <div className={classes.promoCard}>
+                <img alt="R" className={classes.media} src={RImage} style={{ marginBottom: 12 }} />
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
+                  Design, Patents &amp; Trademarks
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  One-click import all of your registrered trademarks, patents and designs.
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  Sell your actual product or license your invention as you like, directly from yours IPS account.
+                </Typography>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
+              <div className={classes.promoCard}>
+                <img alt="Copyright" className={classes.media} src={CImage} style={{ marginBottom: 12 }} />
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
+                  Copyright
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  Timestamp all types of work, creating inevitable, decentral evidence of ownership.
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  License your creations like songs, artwork, video's and 3D designs.
+                </Typography>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper style={{ padding: 24, height: '100%' }}>
+              <div className={classes.promoCard}>
+                <img alt="I" className={classes.media} src={IImage} style={{ marginBottom: 12 }} />
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
+                  Connect with an expert
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  Because intellectual property may require explanation you'll be able to find and link with an advisor.
+                </Typography>
+                <Typography component="p" style={{ marginBottom: 12 }} align="center">
+                  Search a party in your neighbourhood or select one based on their expertise.
+                </Typography>
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
         <Grid container spacing={24} style={{ marginBottom: 12 }}>
           <Grid item xs={12}><Typography component="h1" type="display1" align="center">For advisors...</Typography></Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="contact" className={classes.media} src={contactImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
                   Manage your portfolio
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
@@ -165,7 +166,7 @@ class Home extends PureComponent {
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="find us" className={classes.media} src={findImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
                   Get found
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">
@@ -181,7 +182,7 @@ class Home extends PureComponent {
             <Paper style={{ padding: 24, height: '100%' }}>
               <div className={classes.promoCard}>
                 <img alt="flight" className={classes.media} src={flightImage} style={{ marginBottom: 12 }} />
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                <Typography type="title" component="h2" style={{ marginBottom: 12 }} align="center">
                   Be part of the future
                 </Typography>
                 <Typography component="p" style={{ marginBottom: 12 }} align="center">

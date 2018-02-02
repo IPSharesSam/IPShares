@@ -42,13 +42,13 @@ export class Navigation extends PureComponent {
     const { signedIn, classes } = this.props
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="#ffffff">
           <Toolbar style={{ minHeight: 90 }}>
             <div className={classes.flex}>
               <Typography type="display2" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
                 IP Shares
               </Typography>
-              <Button className={classes.button} color="inherit" component={Link} to="/search">Find advisors &amp; creators</Button>
+              <Button className={classes.button} color="inherit" component={Link} to="/search">Advisors &amp; creators</Button>
               { this.props.signedIn ?
               <Button className={classes.button} color="inherit" component={Link} to="/account/advisor">Account</Button> :
                 <div></div>
