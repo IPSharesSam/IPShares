@@ -2,6 +2,11 @@
   font-family: 'Bolts SF';
   src: url(./fonts/boltssf.ttf);
 }
+
+.dv-star-rating-star {
+  font-size: 40px;
+}
+
 html {
   font-size: 18px;
 }
