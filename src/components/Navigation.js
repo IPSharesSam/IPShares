@@ -39,7 +39,7 @@ export class Navigation extends PureComponent {
   }
 
   render() {
-    const { signedIn, classes } = this.props
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <AppBar position="static" color="#ffffff">
