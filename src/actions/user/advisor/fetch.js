@@ -9,6 +9,27 @@ export const FETCHED_ADVISOR = 'FETCHED_ADVISOR'
 
 const api = new API()
 
+export function fetchOwnProfile () {
+  return dispatch => {
+    dispatch({ type: LOADING })
+    api.get(`account/advisor`)
+      .then((result) => {
+        dispatch({ type: DONE_LOADING })
+        dispatch({
+          type: FETCHED_ADVISOR,
+          payload: result.body
+        })
+      })
+      .catch((error) => {
+        dispatch({ type: DONE_LOADING })
+        dispatch({
+          type: LOAD_ERROR,
+          payload: error.message
+        })
+      })
+  }
+}
+
 export default (advisorId) => {
   return dispatch => {
     dispatch({ type: LOADING })

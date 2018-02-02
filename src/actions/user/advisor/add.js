@@ -7,22 +7,20 @@ import {
 } from '../loading'
 
 const api = new API()
-export const ADD_ADVISOR_PROFILE = 'ADD_ADVISOR_PROFILE'
+export const FETCHED_ADVISOR = 'FETCHED_ADVISOR'
 export const UPDATE_ADVISOR_PROFILE = 'UPDATE_ADVISOR_PROFILE'
 
 export const addAdvisorProfile = (advisorProfile) => {
   return dispatch => {
-
-    if (!api.isAuthenticated()) {
-      dispatch(push('/sign-in'))
-      return
-    }
+    // if (!api.isAuthenticated()) {
+    //   dispatch(push('/sign-in'))
+    //   return
+    // }
     dispatch({ type: LOADING })
-    api.post('/advisor', advisorProfile)
+    api.post('advisor', advisorProfile)
       .then((result) => {
         dispatch({ type: DONE_LOADING })
-        dispatch({ type: ADD_ADVISOR_PROFILE,
-                   payload: result.body })
+        dispatch({ type: FETCHED_ADVISOR, payload: result.body })
       })
       .catch((error) => {
         dispatch({ type: DONE_LOADING })
@@ -36,13 +34,13 @@ export const addAdvisorProfile = (advisorProfile) => {
 
 export const updateAdvisor = (advisorProfile) => {
   return dispatch => {
-
+    const { AdvisorProfileId } = advisorProfile
     if (!api.isAuthenticated()) {
       dispatch(push('/sign-in'))
       return
     }
     dispatch({ type: LOADING })
-    api.put(`advisor/:id`, advisorProfile)
+    api.put(`advisor/${AdvisorProfileId}`, advisorProfile)
       .then((result) => {
         console.log(result)
         dispatch({ type: DONE_LOADING })
