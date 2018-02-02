@@ -2,11 +2,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signUp from '../actions/user/sign-up'
 import { FormControl, FormHelperText } from 'material-ui/Form'
+import Typography from 'material-ui/Typography'
 import validate from "validate.js"
 
 const dialogStyle = {
@@ -42,11 +44,12 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    return this.validateFirstName() &&
-      this.validateLastName() &&
-      this.validateEmail() &&
-      this.validatePassword() &&
-      this.validatePasswordConfirmation()
+    const { firstName, lastName, email, password, passwordConfirmation } = this.state
+    return this.validateFirstName(firstName) &&
+      this.validateLastName(lastName) &&
+      this.validateEmail(email) &&
+      this.validatePassword(password) &&
+      this.validatePasswordConfirmation(passwordConfirmation)
   }
 
   handleChange = name => event => {
@@ -148,22 +151,7 @@ export class SignUp extends PureComponent {
   }
 
   validatePasswordConfirmation(passwordConfirmation) {
-    const password = this.state.password
-    // const passwordConfirmation = this.state.passwordConfirmation
-
-    // const validationMsg = validate.single(
-    //   passwordConfirmation,
-    //   { presence: true, 
-    //     length: { minimum: 6, message: "must be at least 6 characters" }
-    //   }
-    // )
-
-    // if (!!validationMsg && ) {
-    //   this.setState({
-    //     passwordConfirmationError: validationMsg
-    //   })
-    //   return false
-    // }
+    const { password } = this.state
 
     if ((passwordConfirmation !== password) && password.length > 5) {
       this.setState({
@@ -182,10 +170,8 @@ export class SignUp extends PureComponent {
   render() {
     return (
       <Paper style={ dialogStyle }>
-        <h1>Sign up</h1>
-
+        <Typography component="h1" type="headline" style={{ marginBottom: 8 }}>Sign up</Typography>
         <form onSubmit={this.submitForm.bind(this)}>
-
           <FormControl className="formControl">
             <TextField id="firstName"
               error={!!this.state.firstNameError}
@@ -194,7 +180,6 @@ export class SignUp extends PureComponent {
               onChange={this.handleChange("firstName")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
           </FormControl>
-
           <FormControl className="formControl">
             <TextField id="lastName"
               error={!!this.state.lastNameError}
@@ -203,7 +188,6 @@ export class SignUp extends PureComponent {
               onChange={this.handleChange("lastName")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="lastName-error-text">{this.state.lastNameError}</FormHelperText>
           </FormControl>
-
           <FormControl fullWidth className="formControl">
             <TextField id="email"
               error={!!this.state.emailError}
@@ -212,7 +196,6 @@ export class SignUp extends PureComponent {
               onChange={this.handleChange("email")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
           </FormControl>
-
           <FormControl fullWidth className="formControl">
             <TextField id="password"
               error={!!this.state.passwordError}
@@ -222,7 +205,6 @@ export class SignUp extends PureComponent {
               onChange={this.handleChange("password")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
-
           <FormControl fullWidth className="formControl">
             <TextField id="passwordConfirmation"
               error={!!this.state.passwordConfirmationError}
@@ -233,14 +215,13 @@ export class SignUp extends PureComponent {
               onChange={this.handleChange("passwordConfirmation")} />
             <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
           </FormControl>
-
         </form>
-        <Button
-          onClick={ this.submitForm.bind(this) }
-          raised color="primary">
-          Sign in
+        <Button onClick={ this.submitForm.bind(this) } raised color="secondary">
+          Sign up
         </Button>
-        <Button onClick={this.cancel.bind(this)}> Cancel </Button>
+        <Button style={{ marginLeft: 8 }} component={Link} to="/" >
+          Cancel
+        </Button>
       </Paper>
     )
   }
