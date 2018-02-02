@@ -1,11 +1,17 @@
 html {
   font-size: 18px;
 }
-@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
 @font-face {
-  font-family: 'Bolts SF';
-  src: url(./fonts/boltssf.ttf);
+  font-family: 'Bolts';
+  src: url(./fonts/bolts.otf);
+}
+@font-face {
+  font-family: 'Franklin';
+  src: url(./fonts/franklin.ttf);
 }
 .dv-star-rating-star {
   font-size: 25px;
+}
+.MuiToolbar-root-39 {
+  height: 90px;
 }
