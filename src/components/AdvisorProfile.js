@@ -200,7 +200,6 @@ export class AdvisorProfile extends PureComponent {
   }
 
   render() {
-    console.info(!!this.props.advisorProfile.keys)
     const { streetName } = this.props.advisorProfile
     return (
       <div className="wrap">
