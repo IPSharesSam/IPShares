@@ -242,9 +242,39 @@ class PublicCreatorProfile extends PureComponent {
                   />
                 <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
                     submit
-                  </Button>
+                </Button>
                 </div>
               </form>
+            </Grid>
+            <Grid item xs={12} md={ 6 }>
+              <div className="LegalRep">
+                <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+                  Legal representative
+                </Typography>
+                <Typography type="body2" component="p" align="center">
+                  Drs. Jeroen Rodenburg
+                </Typography>
+                <Typography align="center">
+                  <img
+                    src="https://www.departnershipverkiezing.nl/wp-content/uploads/2014/09/Jeroen-Roodenburg-150x150.jpg"
+                    alt="Jeroen"
+                  />
+                </Typography>
+                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                  <Chip
+                    label="Trademark attorney"
+                    className={styles.chip}
+                  />
+                </Typography>
+                <Typography type="body2" component="p" style={{ marginBottom: 12 }} align="center">
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={0} color="primary">
+                    <PublicAdvisor />
+                  </Badge>Advisors
+                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={0} color="primary">
+                    <PublicClient />
+                  </Badge>Clients
+                </Typography>
+              </div>
             </Grid>
           </Grid>
         </Paper>

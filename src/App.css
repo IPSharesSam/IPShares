@@ -12,3 +12,8 @@ html {
 .dv-star-rating-star {
   font-size: 25px;
 }
+
+.bg {
+  background-size: 100%;
+  padding: 10px;
+}

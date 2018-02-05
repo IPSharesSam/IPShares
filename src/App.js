@@ -60,7 +60,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Reboot />
         <Navigation />
-          <main style={{ backgroundImage: `url(${bg})` }}>
+          <main className="bg" style={{ backgroundImage: `url(${bg})` }}>
             <Routes />
           </main>
       </MuiThemeProvider>
