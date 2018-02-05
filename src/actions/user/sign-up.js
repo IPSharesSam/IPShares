@@ -9,7 +9,8 @@ const api = new ApiClient()
 
 export default function signUp(user) {
   return dispatch => {
-    const { email, firstName, lastName, password, companyName } = user
+    const { email, firstName, lastName, password, companyName, type } = user
+    if (type !== 'advisor' && type !== 'creator') return
     api
       .post('users', { email, firstName, lastName, password })
       .then(newUser => {
@@ -24,8 +25,7 @@ export default function signUp(user) {
               dispatch({ type: USER_SIGNED_IN, payload: res.body })
             })
             const profilebody = companyName ? { companyName } : {}
-            console.log(profilebody)
-            api.post('advisor', profilebody).then(res => console.info(res))
+            api.post(type, profilebody).then(res => console.info(res))
           })
         dispatch(push('/account'))
       })

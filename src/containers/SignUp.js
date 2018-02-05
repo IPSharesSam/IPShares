@@ -7,20 +7,20 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signUp from '../actions/user/sign-up'
 import { FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form'
-import validate from "validate.js"
+import validate from 'validate.js'
 import Stepper, { Step, StepLabel } from 'material-ui/Stepper'
 import Radio, { RadioGroup } from 'material-ui/Radio'
 
 const dialogStyle = {
   width: '600px',
   margin: '50px auto',
-  padding: '2rem',
+  padding: '2rem'
 }
 
 export class SignUp extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired
   }
 
   state = { activeStep: 0 }
@@ -28,7 +28,14 @@ export class SignUp extends PureComponent {
   submitForm(event) {
     event.preventDefault()
 
-    const { companyName, firstName, lastName, email, password, option } = this.state
+    const {
+      companyName,
+      firstName,
+      lastName,
+      email,
+      password,
+      option
+    } = this.state
 
     if (this.validateAll()) {
       const user = {
@@ -37,7 +44,7 @@ export class SignUp extends PureComponent {
         lastName: lastName,
         email: email,
         password: password,
-        type: option,
+        type: option
       }
       this.props.signUp(user)
     }
@@ -49,43 +56,53 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    const { firstName, lastName, email, password, passwordConfirmation } = this.state
-    return this.validateFirstName(firstName) &&
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirmation
+    } = this.state
+    return (
+      this.validateFirstName(firstName) &&
       this.validateLastName(lastName) &&
       this.validateEmail(email) &&
       this.validatePassword(password) &&
       this.validatePasswordConfirmation(passwordConfirmation)
+    )
   }
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     })
 
-    switch(name) {
-    case "email":
+    switch (name) {
+      case 'email':
         this.validateEmail(event.target.value)
         break
-    case "firstName":
+      case 'firstName':
         this.validateFirstName(event.target.value)
         break
-    case "lastName":
+      case 'lastName':
         this.validateLastName(event.target.value)
         break
-    case "password":
+      case 'password':
         this.validatePassword(event.target.value)
         break
-    case "passwordConfirmation":
+      case 'passwordConfirmation':
         this.validatePasswordConfirmation(event.target.value)
         break
-    default:
+      default:
         return false
     }
-
   }
 
   validateEmail(email) {
-    const validationMsg = validate.single(email, {presence: true, email: true})
+    const validationMsg = validate.single(email, {
+      presence: true,
+      email: true
+    })
     if (!!validationMsg && email.length > 0) {
       this.setState({
         emailError: validationMsg
@@ -100,9 +117,11 @@ export class SignUp extends PureComponent {
   }
 
   validateFirstName(firstName) {
-    const validationMsg = validate.single(firstName, {presence: true,
-      length: {minimum: 2,
-              message: "first names can't be too short."
+    const validationMsg = validate.single(firstName, {
+      presence: true,
+      length: {
+        minimum: 2,
+        message: "first names can't be too short."
       }
     })
 
@@ -120,9 +139,11 @@ export class SignUp extends PureComponent {
   }
 
   validateLastName(lastName) {
-    const validationMsg = validate.single(lastName, {presence: true,
-      length: {minimum: 2,
-              message: "first names can't be too short."
+    const validationMsg = validate.single(lastName, {
+      presence: true,
+      length: {
+        minimum: 2,
+        message: "first names can't be too short."
       }
     })
 
@@ -140,9 +161,11 @@ export class SignUp extends PureComponent {
   }
 
   validatePassword(password) {
-    const validationMsg = validate.single(password, {presence: true,
-      length: {minimum: 6,
-              message: "must be at least 6 characters"
+    const validationMsg = validate.single(password, {
+      presence: true,
+      length: {
+        minimum: 6,
+        message: 'must be at least 6 characters'
       }
     })
 
@@ -162,9 +185,9 @@ export class SignUp extends PureComponent {
   validatePasswordConfirmation(passwordConfirmation) {
     const { password } = this.state
 
-    if ((passwordConfirmation !== password) && password.length > 5) {
+    if (passwordConfirmation !== password && password.length > 5) {
       this.setState({
-        passwordConfirmationError: "password confirmation is different"
+        passwordConfirmationError: 'password confirmation is different'
       })
       return false
     }
@@ -176,7 +199,7 @@ export class SignUp extends PureComponent {
   }
 
   getSteps() {
-    return ['Creator/Advisor', 'SignUp'];
+    return ['Creator/Advisor', 'SignUp']
   }
 
   getStepContent(stepIndex) {
@@ -184,83 +207,129 @@ export class SignUp extends PureComponent {
 
     switch (stepIndex) {
       case 0:
-        return (<RadioGroup
+        return (
+          <RadioGroup
             aria-label="Creator/Advisor"
             name="Creator/Advisor"
             value={this.state.option}
-            onChange={this.handleChange("option")}
+            onChange={this.handleChange('option')}
           >
-            <FormControlLabel value="Creator" control={<Radio />} label="Creator" />
-            <FormControlLabel value="Advisor" control={<Radio />} label="Advisor" />
-          </RadioGroup>)
+            <FormControlLabel
+              value="creator"
+              control={<Radio />}
+              label="Creator"
+            />
+            <FormControlLabel
+              value="advisor"
+              control={<Radio />}
+              label="Advisor"
+            />
+          </RadioGroup>
+        )
       case 1:
-      if(!this.state.option) {
-        this.setState({
-          activeStep: activeStep - 1,
-        })
-      }
-        return (<form onSubmit={this.submitForm.bind(this)}>
-          <FormControl fullWidth className="formControl">
-            <TextField id="CompanyName"
-              error={!!this.state.CompanyNameError}
-              type="text"
-              placeholder="Company Name"
-              onChange={this.handleChange("CompanyName")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="lastName-error-text">{this.state.CompanyNameError}</FormHelperText>
-          </FormControl>
+        if (!this.state.option) {
+          this.setState({
+            activeStep: activeStep - 1
+          })
+        }
+        return (
+          <form onSubmit={this.submitForm.bind(this)}>
+            <FormControl fullWidth className="formControl">
+              <TextField
+                id="companyName"
+                error={!!this.state.companyNameError}
+                type="text"
+                placeholder="Company Name"
+                onChange={this.handleChange('companyName')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="lastName-error-text"
+              >
+                {this.state.companyNameError}
+              </FormHelperText>
+            </FormControl>
 
-          <FormControl className="formControl">
-            <TextField id="firstName"
-              error={!!this.state.firstNameError}
-              type="text"
-              placeholder="First Name"
-              onChange={this.handleChange("firstName")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
-          </FormControl>
+            <FormControl className="formControl">
+              <TextField
+                id="firstName"
+                error={!!this.state.firstNameError}
+                type="text"
+                placeholder="First Name"
+                onChange={this.handleChange('firstName')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="firstName-error-text"
+              >
+                {this.state.firstNameError}
+              </FormHelperText>
+            </FormControl>
 
-          <FormControl className="formControl">
-            <TextField id="lastName"
-              error={!!this.state.lastNameError}
-              type="text"
-              placeholder="Last Name"
-              onChange={this.handleChange("lastName")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="lastName-error-text">{this.state.lastNameError}</FormHelperText>
-          </FormControl>
-          <FormControl fullWidth className="formControl">
-            <TextField id="email"
-              error={!!this.state.emailError}
-              type="email"
-              placeholder="Email address"
-              onChange={this.handleChange("email")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="email-error-text">{this.state.emailError}</FormHelperText>
-          </FormControl>
-          <FormControl fullWidth className="formControl">
-            <TextField id="password"
-              error={!!this.state.passwordError}
-              type="password"
-              placeholder="Password"
-              autoComplete="current-password"
-              onChange={this.handleChange("password")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="password-error-text">{this.state.passwordError}</FormHelperText>
-          </FormControl>
-          <FormControl fullWidth className="formControl">
-            <TextField id="passwordConfirmation"
-              error={!!this.state.passwordConfirmationError}
-              type="password"
-              placeholder="Password Confirmation"
-              autoComplete="current-password"
-              onKeyUp={this.handleChange("passwordConfirmation")}
-              onChange={this.handleChange("passwordConfirmation")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
-              id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
-          </FormControl>
-
-        </form>
+            <FormControl className="formControl">
+              <TextField
+                id="lastName"
+                error={!!this.state.lastNameError}
+                type="text"
+                placeholder="Last Name"
+                onChange={this.handleChange('lastName')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="lastName-error-text"
+              >
+                {this.state.lastNameError}
+              </FormHelperText>
+            </FormControl>
+            <FormControl fullWidth className="formControl">
+              <TextField
+                id="email"
+                error={!!this.state.emailError}
+                type="email"
+                placeholder="Email address"
+                onChange={this.handleChange('email')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="email-error-text"
+              >
+                {this.state.emailError}
+              </FormHelperText>
+            </FormControl>
+            <FormControl fullWidth className="formControl">
+              <TextField
+                id="password"
+                error={!!this.state.passwordError}
+                type="password"
+                placeholder="Password"
+                autoComplete="current-password"
+                onChange={this.handleChange('password')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="password-error-text"
+              >
+                {this.state.passwordError}
+              </FormHelperText>
+            </FormControl>
+            <FormControl fullWidth className="formControl">
+              <TextField
+                id="passwordConfirmation"
+                error={!!this.state.passwordConfirmationError}
+                type="password"
+                placeholder="Password Confirmation"
+                autoComplete="current-password"
+                onKeyUp={this.handleChange('passwordConfirmation')}
+                onChange={this.handleChange('passwordConfirmation')}
+              />
+              <FormHelperText
+                style={{ marginBottom: 6, marginTop: 6 }}
+                id="passwordConfirmation-error-text"
+              >
+                {this.state.passwordConfirmationError}
+              </FormHelperText>
+            </FormControl>
+          </form>
         )
 
       default:
@@ -269,34 +338,31 @@ export class SignUp extends PureComponent {
   }
 
   handleNext = () => {
-    const { activeStep } = this.state;
+    const { activeStep } = this.state
     this.setState({
-      activeStep: activeStep + 1,
+      activeStep: activeStep + 1
     })
   }
 
   handleBack = () => {
     const { activeStep } = this.state
     this.setState({
-      activeStep: activeStep - 1,
+      activeStep: activeStep - 1
     })
   }
 
   handleReset = () => {
     this.setState({
-      activeStep: 0,
+      activeStep: 0
     })
   }
 
-
   render() {
-
     const steps = this.getSteps()
     const { activeStep } = this.state
 
     return (
-      <Paper style={ dialogStyle }>
-
+      <Paper style={dialogStyle}>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
             return (
@@ -307,27 +373,32 @@ export class SignUp extends PureComponent {
           })}
         </Stepper>
         <div>
-          {(
+          {
             <div>
               {this.getStepContent(activeStep)}
               <div>
                 <Button
-                  onClick={activeStep === 0 ?
-                  this.cancel.bind(this) : this.handleBack}
+                  onClick={
+                    activeStep === 0 ? this.cancel.bind(this) : this.handleBack
+                  }
                 >
                   {activeStep === 0 ? 'Cancel' : 'Back'}
                 </Button>
-                <Button raised color="secondary"
-                  onClick={ activeStep === steps.length - 1 ?
-                  this.submitForm.bind(this) : this.handleNext}
+                <Button
+                  raised
+                  color="secondary"
+                  onClick={
+                    activeStep === steps.length - 1
+                      ? this.submitForm.bind(this)
+                      : this.handleNext
+                  }
                 >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </div>
-          )}
+          }
         </div>
-
       </Paper>
     )
   }
