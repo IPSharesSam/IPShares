@@ -62,47 +62,66 @@ export class TitlebarGridList extends PureComponent {
         >
           {hits.map(hit => (
             <GridListTile>
-            <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>
-              <Link to={'/advisor/' + hit.advisorProfileId}>
-                <CardMedia
-                  className={classes.media}
-                  image={hit.picUrl}
-                  title={hit.firstName}
-                />
-              </Link>
-              <CardContent className={classes.cardContent}>
-                <Typography type="title" component="h2">
-                  <Link to={'/advisor/' + hit.advisorProfileId}>{hit.firstName + ' ' + hit.lastName}</Link>
-                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+              <Card
+                className={classes.card}
+                key={hit.objectID}
+                style={{ margin: 5 }}
+              >
+                <Link to={'/advisor/' + hit.advisorProfileId}>
+                  <CardMedia
+                    className={classes.media}
+                    image={hit.picUrl}
+                    title={hit.firstName}
+                  />
+                </Link>
+                <CardContent className={classes.cardContent}>
+                  <Typography type="title" component="h2">
+                    <Link to={'/advisor/' + hit.advisorProfileId}>
+                      {hit.firstName + ' ' + hit.lastName}
+                    </Link>
+                    <Badge
+                      style={{ float: 'right', margin: '10px' }}
+                      className="Badge"
+                      badgeContent={0}
+                      color="primary"
+                    >
                       <PublicAdvisor />
                     </Badge>
-                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+                    <Badge
+                      style={{ float: 'right', margin: '10px' }}
+                      className="Badge"
+                      badgeContent={0}
+                      color="primary"
+                    >
                       <PublicClient />
                     </Badge>
-                </Typography>
-                {hit.tags.map(tag => {
-                  return <Chip className={classes.chip} label={tag} />
-                })}
-            </CardContent>
-            <CardActions>
-              <Button component={Link}
-                to={'/advisor/' + hit.advisorProfileId}
-                className={classes.button}
-                color="default">
-                Profile
-              </Button>
-              <StarRatingComponent style={{ float:"right" }}
-                name="rate2"
-                editing={false}
-                starCount={5}
-                value={hit.averageNumber}
-              />
-            </CardActions>
-            </Card >
-          </GridListTile>
-        ))}
-      </GridList>
-      );
+                  </Typography>
+                  {hit.tags.map(tag => {
+                    return <Chip className={classes.chip} label={tag} />
+                  })}
+                </CardContent>
+                <CardActions>
+                  <Button
+                    component={Link}
+                    to={'/advisor/' + hit.advisorProfileId}
+                    className={classes.button}
+                    color="default"
+                  >
+                    Profile
+                  </Button>
+                  <StarRatingComponent
+                    style={{ float: 'right' }}
+                    name="rate2"
+                    editing={false}
+                    starCount={5}
+                    value={hit.averageNumber}
+                  />
+                </CardActions>
+              </Card>
+            </GridListTile>
+          ))}
+        </GridList>
+      )
     }
 
     const ConnectedHits = connectHits(CustomHits)
@@ -116,7 +135,7 @@ export class TitlebarGridList extends PureComponent {
         <InstantSearch
           appId={process.env.REACT_APP_APP_ID}
           apiKey={process.env.REACT_APP_SEARCH_KEY}
-          indexName="advisors"
+          indexName="profiles"
         >
           <Grid container spacing={24}>
             <Grid item xs={12}>

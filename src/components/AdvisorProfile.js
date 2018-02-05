@@ -200,6 +200,7 @@ export class AdvisorProfile extends PureComponent {
   }
 
   render() {
+    console.log(!!this.props.advisorProfile)
     const { streetName } = this.props.advisorProfile
     return (
       <div className="wrap">
@@ -326,7 +327,7 @@ export class AdvisorProfile extends PureComponent {
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </form>
-        {!!this.props.advisorProfile.keys ? (
+        {!!this.props.advisorProfile ? (
           <Button
             onClick={this.localUpdateAdvisorProfile.bind(this)}
             raised
