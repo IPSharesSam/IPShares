@@ -9,6 +9,7 @@
     "react": "^16.2.0",
     "react-dates": "^16.2.1",
     "react-dom": "^16.2.0",
+    "react-dropzone": "^4.2.7",
     "react-google-maps": "^9.4.5",
     "react-infinite-calendar": "^2.3.1",
     "react-instantsearch": "^4.4.2",
