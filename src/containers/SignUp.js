@@ -2,14 +2,14 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import signUp from '../actions/user/sign-up'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import Typography from 'material-ui/Typography'
+import { FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form'
 import validate from "validate.js"
+import Stepper, { Step, StepLabel } from 'material-ui/Stepper'
+import Radio, { RadioGroup } from 'material-ui/Radio'
 
 const dialogStyle = {
   width: '600px',
@@ -23,16 +23,21 @@ export class SignUp extends PureComponent {
     signUp: PropTypes.func.isRequired,
   }
 
-  state = { }
+  state = { activeStep: 0 }
 
   submitForm(event) {
     event.preventDefault()
+
+    const { companyName, firstName, lastName, email, password, option } = this.state
+
     if (this.validateAll()) {
       const user = {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        password: this.state.password
+        companyName: companyName,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        type: option,
       }
       this.props.signUp(user)
     }
@@ -80,7 +85,6 @@ export class SignUp extends PureComponent {
   }
 
   validateEmail(email) {
-    // const email = this.state.email
     const validationMsg = validate.single(email, {presence: true, email: true})
     if (!!validationMsg && email.length > 0) {
       this.setState({
@@ -96,10 +100,13 @@ export class SignUp extends PureComponent {
   }
 
   validateFirstName(firstName) {
-    // const firstName = this.state.firstName
-    const validationMsg = validate.single(firstName, {presence: true})
+    const validationMsg = validate.single(firstName, {presence: true,
+      length: {minimum: 2,
+              message: "first names can't be too short."
+      }
+    })
 
-    if (!!validationMsg && firstName.length > 0) {
+    if (!!validationMsg) {
       this.setState({
         firstNameError: validationMsg
       })
@@ -113,10 +120,13 @@ export class SignUp extends PureComponent {
   }
 
   validateLastName(lastName) {
-    // const lastName = this.state.lastName
-    const validationMsg = validate.single(lastName, {presence: true})
+    const validationMsg = validate.single(lastName, {presence: true,
+      length: {minimum: 2,
+              message: "first names can't be too short."
+      }
+    })
 
-    if (!!validationMsg && lastName.length > 0) {
+    if (!!validationMsg) {
       this.setState({
         lastNameError: validationMsg
       })
@@ -130,14 +140,13 @@ export class SignUp extends PureComponent {
   }
 
   validatePassword(password) {
-    // const password = this.state.password
     const validationMsg = validate.single(password, {presence: true,
       length: {minimum: 6,
               message: "must be at least 6 characters"
       }
     })
 
-    if (!!validationMsg && password.length > 0) {
+    if (!!validationMsg) {
       this.setState({
         passwordError: validationMsg
       })
@@ -166,27 +175,59 @@ export class SignUp extends PureComponent {
     return true
   }
 
+  getSteps() {
+    return ['Creator/Advisor', 'SignUp'];
+  }
 
-  render() {
-    return (
-      <Paper style={ dialogStyle }>
-        <Typography component="h1" type="headline" style={{ marginBottom: 8 }}>Sign up</Typography>
-        <form onSubmit={this.submitForm.bind(this)}>
+  getStepContent(stepIndex) {
+    const { activeStep } = this.state
+
+    switch (stepIndex) {
+      case 0:
+        return (<RadioGroup
+            aria-label="Creator/Advisor"
+            name="Creator/Advisor"
+            value={this.state.option}
+            onChange={this.handleChange("option")}
+          >
+            <FormControlLabel value="Creator" control={<Radio />} label="Creator" />
+            <FormControlLabel value="Advisor" control={<Radio />} label="Advisor" />
+          </RadioGroup>)
+      case 1:
+      if(!this.state.option) {
+        this.setState({
+          activeStep: activeStep - 1,
+        })
+      }
+        return (<form onSubmit={this.submitForm.bind(this)}>
+          <FormControl fullWidth className="formControl">
+            <TextField id="CompanyName"
+              error={!!this.state.CompanyNameError}
+              type="text"
+              placeholder="Company Name"
+              onChange={this.handleChange("CompanyName")} />
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="lastName-error-text">{this.state.CompanyNameError}</FormHelperText>
+          </FormControl>
+
           <FormControl className="formControl">
             <TextField id="firstName"
               error={!!this.state.firstNameError}
               type="text"
               placeholder="First Name"
               onChange={this.handleChange("firstName")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="firstName-error-text">{this.state.firstNameError}</FormHelperText>
           </FormControl>
+
           <FormControl className="formControl">
             <TextField id="lastName"
               error={!!this.state.lastNameError}
               type="text"
               placeholder="Last Name"
               onChange={this.handleChange("lastName")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="lastName-error-text">{this.state.lastNameError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="lastName-error-text">{this.state.lastNameError}</FormHelperText>
           </FormControl>
           <FormControl fullWidth className="formControl">
             <TextField id="email"
@@ -194,7 +235,8 @@ export class SignUp extends PureComponent {
               type="email"
               placeholder="Email address"
               onChange={this.handleChange("email")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="email-error-text">{this.state.emailError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="email-error-text">{this.state.emailError}</FormHelperText>
           </FormControl>
           <FormControl fullWidth className="formControl">
             <TextField id="password"
@@ -203,7 +245,8 @@ export class SignUp extends PureComponent {
               placeholder="Password"
               autoComplete="current-password"
               onChange={this.handleChange("password")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="password-error-text">{this.state.passwordError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="password-error-text">{this.state.passwordError}</FormHelperText>
           </FormControl>
           <FormControl fullWidth className="formControl">
             <TextField id="passwordConfirmation"
@@ -213,15 +256,78 @@ export class SignUp extends PureComponent {
               autoComplete="current-password"
               onKeyUp={this.handleChange("passwordConfirmation")}
               onChange={this.handleChange("passwordConfirmation")} />
-            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }} id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
+            <FormHelperText style={{ marginBottom: 6, marginTop: 6 }}
+              id="passwordConfirmation-error-text">{this.state.passwordConfirmationError}</FormHelperText>
           </FormControl>
+
         </form>
-        <Button onClick={ this.submitForm.bind(this) } raised color="secondary">
-          Sign up
-        </Button>
-        <Button style={{ marginLeft: 8 }} component={Link} to="/" >
-          Cancel
-        </Button>
+        )
+
+      default:
+        return 'Uknown stepIndex'
+    }
+  }
+
+  handleNext = () => {
+    const { activeStep } = this.state;
+    this.setState({
+      activeStep: activeStep + 1,
+    })
+  }
+
+  handleBack = () => {
+    const { activeStep } = this.state
+    this.setState({
+      activeStep: activeStep - 1,
+    })
+  }
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0,
+    })
+  }
+
+
+  render() {
+
+    const steps = this.getSteps()
+    const { activeStep } = this.state
+
+    return (
+      <Paper style={ dialogStyle }>
+
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map(label => {
+            return (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            )
+          })}
+        </Stepper>
+        <div>
+          {(
+            <div>
+              {this.getStepContent(activeStep)}
+              <div>
+                <Button
+                  onClick={activeStep === 0 ?
+                  this.cancel.bind(this) : this.handleBack}
+                >
+                  {activeStep === 0 ? 'Cancel' : 'Back'}
+                </Button>
+                <Button raised color="secondary"
+                  onClick={ activeStep === steps.length - 1 ?
+                  this.submitForm.bind(this) : this.handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+
       </Paper>
     )
   }

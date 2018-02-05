@@ -7,24 +7,28 @@ export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
 const api = new ApiClient()
 
-export default function signUp (user) {
+export default function signUp(user) {
   return dispatch => {
-    api.post('users', user)
-    .then(newUser => {
-      api.post('sessions', user)
-      .then(res => {
-          api.storeToken(res.body.token)
-          return res
+    const { email, firstName, lastName, password, companyName } = user
+    api
+      .post('users', { email, firstName, lastName, password })
+      .then(newUser => {
+        api
+          .post('sessions', user)
+          .then(res => {
+            api.storeToken(res.body.token)
+            return res
+          })
+          .then(res => {
+            api.get('users/me').then(res => {
+              dispatch({ type: USER_SIGNED_IN, payload: res.body })
+            })
+            const profilebody = companyName ? { companyName } : {}
+            console.log(profilebody)
+            api.post('advisor', profilebody).then(res => console.info(res))
+          })
+        dispatch(push('/account'))
       })
-      .then(res => {
-        api.get('users/me', res)
-        .then(res => {
-          dispatch({ type: USER_SIGNED_IN, payload: res.body })
-          dispatch(push('/'))
-        })
-      })
-      dispatch(push('/'))
-    })
-    .catch(err => dispatch(console.log(err)))
+      .catch(err => dispatch(console.error(err)))
   }
 }

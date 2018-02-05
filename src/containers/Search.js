@@ -21,20 +21,20 @@ import './Search.css'
 
 const styles = theme => ({
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+    color: 'rgba(255, 255, 255, 0.54)'
   },
   cardContent: {
-    minHeight: 180,
+    minHeight: 180
   },
   button: {
-    marginRight: 10,
+    marginRight: 10
   },
   chip: {
-    margin: theme.spacing.unit / 2,
+    margin: theme.spacing.unit / 2
   },
   media: {
-    height: 200,
-  },
+    height: 200
+  }
 })
 
 export class TitlebarGridList extends PureComponent {
@@ -46,7 +46,7 @@ export class TitlebarGridList extends PureComponent {
     })
   }
 
-  submitForm = (event) => {
+  submitForm = event => {
     event.preventDefault()
     this.props.search(this.state.name)
   }
@@ -54,7 +54,12 @@ export class TitlebarGridList extends PureComponent {
   render() {
     function CustomHits({ hits }) {
       return (
-        <GridList cellHeight={"auto"} cols={4} style={{ marginTop: 12 }} spacing={24}>
+        <GridList
+          cellHeight={'auto'}
+          cols={4}
+          style={{ marginTop: 12 }}
+          spacing={24}
+        >
           {hits.map(hit => (
             <GridListTile>
             <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>
@@ -100,12 +105,10 @@ export class TitlebarGridList extends PureComponent {
       );
     }
 
-    const ConnectedHits = connectHits(CustomHits);
+    const ConnectedHits = connectHits(CustomHits)
 
     function Search() {
-      return (
-        <ConnectedHits />
-      );
+      return <ConnectedHits />
     }
     const { classes } = this.props
     return (
@@ -119,7 +122,11 @@ export class TitlebarGridList extends PureComponent {
             <Grid item xs={12}>
               <AppBar position="static" color="default" style={{ margin: 5 }}>
                 <Toolbar>
-                  <SearchBox className={classes.container}  autoFocus showLoadingIndicator />
+                  <SearchBox
+                    className={classes.container}
+                    autoFocus
+                    showLoadingIndicator
+                  />
                 </Toolbar>
               </AppBar>
               <Search />
@@ -128,7 +135,8 @@ export class TitlebarGridList extends PureComponent {
           </Grid>
         </InstantSearch>
       </Paper>
-    )}
+    )
+  }
 }
 
 TitlebarGridList.propTypes = {
