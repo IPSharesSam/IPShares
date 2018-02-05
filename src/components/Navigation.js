@@ -12,7 +12,7 @@ import Button from 'material-ui/Button'
 
 const styles = {
   root: {
-    width: '100%',
+    width: '100%'
   },
   flex: {
     flex: 1,
@@ -20,12 +20,12 @@ const styles = {
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 20
   },
   button: {
-    marginLeft: 8,
-  },
-};
+    marginLeft: 8
+  }
+}
 
 export class Navigation extends PureComponent {
   static propTypes = {
@@ -33,34 +33,78 @@ export class Navigation extends PureComponent {
     signedIn: PropTypes.bool.isRequired
   }
 
-  signOut = (event) => {
+  signOut = event => {
     event.preventDefault()
     this.props.signOut()
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, user } = this.props
     return (
       <div className={classes.root}>
         <AppBar position="static" color="#ffffff">
           <Toolbar style={{ minHeight: 90 }}>
             <div className={classes.flex}>
-              <Typography type="display2" color="secondary" component={Link} to="/" style={{ display: 'inline-flex' }}>
+              <Typography
+                type="display2"
+                color="secondary"
+                component={Link}
+                to="/"
+                style={{ display: 'inline-flex' }}
+              >
                 IP Shares
               </Typography>
-              <Button className={classes.button} color="inherit" component={Link} to="/search">Advisors &amp; creators</Button>
-              { this.props.signedIn ?
-              <Button className={classes.button} color="inherit" component={Link} to="/account/advisor">Account</Button> :
-                <div></div>
-              }
+              <Button
+                className={classes.button}
+                color="inherit"
+                component={Link}
+                to="/search"
+              >
+                Advisors &amp; creators
+              </Button>
             </div>
-            { this.props.signedIn ?
-              <Button raised color="inherit" onClick={this.signOut} >Sign out</Button> :
-                <div>
-                  <Button className={classes.button} raised color="secondary" component={Link} to="/sign-in" >Sign in</Button>
-                  <Button className={classes.button} raised color="inherit" component={Link} to="/sign-up" >Sign up</Button>
-                </div>
-            }
+            {this.props.signedIn ? (
+              <div>
+                <Button
+                  className={classes.button}
+                  raised
+                  color="secondary"
+                  component={Link}
+                  to="/account"
+                >
+                  {user.currentUser.firstName + ' ' + user.currentUser.lastName}
+                </Button>
+                <Button
+                  className={classes.button}
+                  raised
+                  color="inherit"
+                  onClick={this.signOut}
+                >
+                  Sign out
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <Button
+                  className={classes.button}
+                  raised
+                  color="secondary"
+                  component={Link}
+                  to="/sign-in"
+                >
+                  Sign in
+                </Button>
+                <Button
+                  className={classes.button}
+                  raised
+                  color="inherit"
+                  component={Link}
+                  to="/sign-up"
+                >
+                  Sign up
+                </Button>
+              </div>
+            )}
           </Toolbar>
         </AppBar>
       </div>
@@ -69,7 +113,8 @@ export class Navigation extends PureComponent {
 }
 
 const mapStateToProps = ({ user }) => ({
-  signedIn: (!!user.currentUser && !!user.currentUser._id)
+  signedIn: !!user.currentUser && !!user.currentUser._id,
+  user
 })
 
 export default compose(
