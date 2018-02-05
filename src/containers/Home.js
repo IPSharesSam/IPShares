@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import findImage from '../images/search.svg'
 import flightImage from '../images/flight.svg'
@@ -58,7 +57,7 @@ class Home extends PureComponent {
               component="h1"
               type="display2"
               align="center"
-              style={{ color: '#FF1818', marginBottom: 24}}
+              style={{ color: '#FF1818', marginBottom: 24 }}
             >
               IP Shares
             </Typography>

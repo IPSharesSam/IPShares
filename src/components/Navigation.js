@@ -42,7 +42,7 @@ export class Navigation extends PureComponent {
     const { classes, user } = this.props
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="#ffffff">
+        <AppBar position="static" style={{ backgroundColor: '#ffffff' }}>
           <Toolbar style={{ minHeight: 90 }}>
             <div className={classes.flex}>
               <Typography

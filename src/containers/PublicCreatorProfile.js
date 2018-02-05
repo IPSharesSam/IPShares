@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import Badge from 'material-ui/Badge'
 import Avatar from 'material-ui/Avatar'
-import List, { ListItem, ListItemText } from 'material-ui/List'
+import { ListItem, ListItemText } from 'material-ui/List'
 import PublicAdvisor from 'material-ui-icons/Contacts'
 import PublicClient from 'material-ui-icons/PersonPinCircle'
 import Folder from 'material-ui-icons/Folder'
@@ -19,7 +19,7 @@ import './PublicCreatorProfile.css'
 
 const styles = theme => ({
   chip: {
-    margin: 'auto',
+    margin: 'auto'
   },
   avatar: {
     margin: 'auto',
@@ -29,34 +29,33 @@ const styles = theme => ({
     color: '#d51021'
   },
   headings: {
-    color: "#ff1227",
-  },
+    color: '#ff1227'
+  }
 })
 
 class PublicCreatorProfile extends PureComponent {
   constructor(props) {
-    super(props);
+    super(props)
 
     const { date } = props
 
-    this.handleDayClick = this.handleChange.bind(this);
+    this.handleDayClick = this.handleChange.bind(this)
 
     this.state = {
-      date,
+      date
     }
   }
 
-  componentWillMount() {
-  }
+  componentWillMount() {}
 
   submitForm(event) {
     event.preventDefault()
     if (this.validateAll()) {
       const apointment = {
         date: this.state.date,
-        msg: this.state.msg,
+        msg: this.state.msg
       }
-      console.log(apointment);
+      console.log(apointment)
     }
     return false
   }
@@ -67,50 +66,73 @@ class PublicCreatorProfile extends PureComponent {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     })
   }
 
   render() {
-
     return (
       <div>
         <Paper style={{ padding: 24, margin: 24 }}>
-            <Grid container spacing={24} style={{ marginBottom: 24}}>
-              <Grid item xs={ 12 } md={ 5 }>
+          <Grid container spacing={24} style={{ marginBottom: 24 }}>
+            <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img className="CreatorImg"
+                  <img
+                    className="CreatorImg"
                     src="https://eaglescry.net/wp-content/uploads/2016/11/woman-artist.jpg"
-                    alt='Creator'
+                    alt="Creator"
                   />
                 </div>
                 <div className="CreatorTitle">
-                  <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  <Chip
-                    label="Creator Title"
-                    className={styles.chip}
-                  />
+                  <Typography
+                    type="headline"
+                    component="h2"
+                    style={{ marginBottom: 12 }}
+                    align="center"
+                  >
+                    <Chip label="Creator Title" className={styles.chip} />
                   </Typography>
                 </div>
               </header>
             </Grid>
 
-            <Grid item xs ={12} md={7}>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={12} md={7}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Bio
               </Typography>
-              <p>Tracey Emin’s art is one of disclosure, using her life events as inspiration for works ranging from painting, drawing, video and installation, to photography, needlework and sculpture. Emin reveals her hopes, humiliations, failures and successes in candid and, at times, excoriating work that is frequently both tragic and humorous.</p>
+              <p>
+                Tracey Emin’s art is one of disclosure, using her life events as
+                inspiration for works ranging from painting, drawing, video and
+                installation, to photography, needlework and sculpture. Emin
+                reveals her hopes, humiliations, failures and successes in
+                candid and, at times, excoriating work that is frequently both
+                tragic and humorous.
+              </p>
             </Grid>
-            <Grid item xs={ 12 }>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={12}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Latest IP
               </Typography>
-              <Typography type="display1" align="center">
-              </Typography>
+              <Typography type="display1" align="center" />
             </Grid>
-            <Grid item xs={ 3 }>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={3}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Creations
               </Typography>
               <ListItem>
@@ -129,7 +151,10 @@ class PublicCreatorProfile extends PureComponent {
                 <Avatar>
                   <Folder />
                 </Avatar>
-                <ListItemText primary="Graphic design" secondary="Dec 7, 2017" />
+                <ListItemText
+                  primary="Graphic design"
+                  secondary="Dec 7, 2017"
+                />
               </ListItem>
               <ListItem>
                 <Avatar>
@@ -138,8 +163,13 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Dress design" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={ 3 }>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={3}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Trademarks
               </Typography>
               <ListItem>
@@ -167,8 +197,13 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Cool name" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={ 3 }>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={3}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Designs
               </Typography>
               <ListItem>
@@ -196,8 +231,13 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Teapot" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={ 3 }>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+            <Grid item xs={3}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Patents
               </Typography>
               <ListItem>
@@ -225,30 +265,48 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Mag safe" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={ 12 }>
-                <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
-                  Get in contact
-                </Typography>
+            <Grid item xs={12}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
+                Get in contact
+              </Typography>
             </Grid>
-            <Grid item xs={12} md={ 6 }>
-              <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
+            <Grid item xs={12} md={6}>
+              <form
+                onSubmit={this.submitForm.bind(this)}
+                className="Contact-wrap"
+              >
                 <div className="MsgField">
                   <TextField
                     className="TextField"
                     placeholder="send a message"
                     multiline={true}
-                    InputProps={{ disableUnderline: true  }}
-                    onChange={this.handleChange("msg")}
+                    InputProps={{ disableUnderline: true }}
+                    onChange={this.handleChange('msg')}
                   />
-                <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
+                  <Button
+                    onClick={this.submitForm.bind(this)}
+                    raised
+                    color="default"
+                    fullWidth={true}
+                  >
                     submit
-                </Button>
+                  </Button>
                 </div>
               </form>
             </Grid>
-            <Grid item xs={12} md={ 6 }>
+            <Grid item xs={12} md={6}>
               <div className="LegalRep">
-                <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+                <Typography
+                  type="headline"
+                  component="h2"
+                  style={{ color: '#ff1227', margin: 20 }}
+                  align="center"
+                >
                   Legal representative
                 </Typography>
                 <Typography type="body2" component="p" align="center">
@@ -260,17 +318,34 @@ class PublicCreatorProfile extends PureComponent {
                     alt="Jeroen"
                   />
                 </Typography>
-                <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
-                  <Chip
-                    label="Trademark attorney"
-                    className={styles.chip}
-                  />
+                <Typography
+                  type="headline"
+                  component="h2"
+                  style={{ marginBottom: 12 }}
+                  align="center"
+                >
+                  <Chip label="Trademark attorney" className={styles.chip} />
                 </Typography>
-                <Typography type="body2" component="p" style={{ marginBottom: 12 }} align="center">
-                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={0} color="primary">
+                <Typography
+                  type="body2"
+                  component="p"
+                  style={{ marginBottom: 12 }}
+                  align="center"
+                >
+                  <Badge
+                    style={{ margin: '18px' }}
+                    className="Badge"
+                    badgeContent={0}
+                    color="primary"
+                  >
                     <PublicAdvisor />
                   </Badge>Advisors
-                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={0} color="primary">
+                  <Badge
+                    style={{ margin: '18px' }}
+                    className="Badge"
+                    badgeContent={0}
+                    color="primary"
+                  >
                     <PublicClient />
                   </Badge>Clients
                 </Typography>
@@ -283,14 +358,14 @@ class PublicCreatorProfile extends PureComponent {
   }
 }
 
-  const mapStateToProps = ({ user }, { match }) => {
+const mapStateToProps = ({ user }, { match }) => {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
 
   return {
     signedIn,
-    currentUser,
+    currentUser
   }
 }
 
-export default connect(mapStateToProps, { push }) ( PublicCreatorProfile  )
+export default connect(mapStateToProps, { push })(PublicCreatorProfile)
