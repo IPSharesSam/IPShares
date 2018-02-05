@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import Home from './containers/Home'
 import PublicAdvisorProfile from './containers/PublicAdvisorProfile'
+import PublicCreatorProfile from './containers/PublicCreatorProfile'
 import Account from './containers/Account'
 import SignUp from './containers/SignUp'
 import SignIn from './containers/SignIn'
@@ -17,6 +18,7 @@ export default class Routes extends Component {
         <Route path="/search" component={Search} />
         <Route path="/account/" component={Account} />
         <Route path="/advisor/:advisorId" component={PublicAdvisorProfile} />
+        <Route path="/creator/" component={PublicCreatorProfile} />
       </div>
     )
   }
