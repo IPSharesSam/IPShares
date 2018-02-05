@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { addAdvisorProfile, updateAdvisor } from '../actions/user/advisor/add'
 import { fetchOwnProfile } from '../actions/user/advisor/fetch'
-import { FormControlLabel, FormHelperText, FormControl } from 'material-ui/Form'
+import { FormHelperText, FormControl } from 'material-ui/Form'
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails
@@ -14,8 +14,9 @@ import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
-import Switch from 'material-ui/Switch'
 import validate from 'validate.js'
+import Dropzone from 'react-dropzone'
+import request from 'superagent'
 
 const classes = {
   formBio: {
@@ -46,7 +47,8 @@ export class AdvisorProfile extends PureComponent {
     this.state = {
       streetName,
       streetNumber,
-      city
+      city,
+      picUrl: ''
     }
   }
 
@@ -199,6 +201,34 @@ export class AdvisorProfile extends PureComponent {
     return false
   }
 
+  handleImageUpload(file) {
+    console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
+      let upload = request.post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
+                          .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
+                          .field('file', file);
+
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
+
+        if (response.body.secure_url !== '') {
+          this.setState({
+            picUrl: response.body.secure_url
+          });
+        }
+      });
+    }
+
+  onImageDrop(files) {
+    this.setState({
+      uploadedFile: files[0]
+    })
+
+    this.handleImageUpload(files[0])
+  }
+
+
   render() {
     const { streetName } = this.props.advisorProfile
     return (
@@ -207,6 +237,17 @@ export class AdvisorProfile extends PureComponent {
           Advisor profile - {streetName}
         </Typography>
         <form>
+          <Dropzone
+            multiple={false}
+            accept="image/*"
+            onDrop={this.onImageDrop.bind(this)}>
+            <p>Drop an image or click to select a file to upload.</p>
+          </Dropzone>
+          {this.state.picUrl === '' ? null :
+          <div>
+            <p>{this.state.uploadedFile.name}</p>
+            <img src={this.state.picUrl} alt=""/>
+          </div>}
           <Grid container spacing={24}>
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
@@ -346,6 +387,7 @@ export class AdvisorProfile extends PureComponent {
         <Button onClick={this.cancel.bind(this)} color="primary">
           Cancel
         </Button>
+
       </div>
     )
   }
