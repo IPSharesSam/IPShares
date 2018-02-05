@@ -12,7 +12,12 @@ import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
 import Toolbar from 'material-ui/Toolbar'
 import AppBar from 'material-ui/AppBar'
-import { InstantSearch, SearchBox, Pagination } from 'react-instantsearch/dom'
+import {
+  RefinementList,
+  InstantSearch,
+  SearchBox,
+  Pagination
+} from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
 import Badge from 'material-ui/Badge'
 import PublicAdvisor from 'material-ui-icons/Contacts'
@@ -61,12 +66,8 @@ export class TitlebarGridList extends PureComponent {
           spacing={24}
         >
           {hits.map(hit => (
-            <GridListTile>
-              <Card
-                className={classes.card}
-                key={hit.objectID}
-                style={{ margin: 5 }}
-              >
+            <GridListTile key={hit.objectID}>
+              <Card className={classes.card} style={{ margin: 5 }}>
                 <Link to={'/advisor/' + hit.advisorProfileId}>
                   <CardMedia
                     className={classes.media}
@@ -77,7 +78,11 @@ export class TitlebarGridList extends PureComponent {
                 <CardContent className={classes.cardContent}>
                   <Typography type="title" component="h2">
                     <Link to={'/advisor/' + hit.advisorProfileId}>
-                      {hit.firstName + ' ' + hit.lastName}
+                      {hit.firstName +
+                        ' ' +
+                        hit.lastName +
+                        '   +++   ' +
+                        hit.type}
                     </Link>
                     <Badge
                       style={{ float: 'right', margin: '10px' }}
@@ -126,9 +131,6 @@ export class TitlebarGridList extends PureComponent {
 
     const ConnectedHits = connectHits(CustomHits)
 
-    function Search() {
-      return <ConnectedHits />
-    }
     const { classes } = this.props
     return (
       <Paper style={{ padding: 24, margin: 24 }}>
@@ -146,9 +148,15 @@ export class TitlebarGridList extends PureComponent {
                     autoFocus
                     showLoadingIndicator
                   />
+                  <RefinementList
+                    attributeName="type"
+                    limitMax={5}
+                    operator="or"
+                    showMore={false}
+                  />
                 </Toolbar>
               </AppBar>
-              <Search />
+              <ConnectedHits />
               <Pagination />
             </Grid>
           </Grid>
