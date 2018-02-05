@@ -78,11 +78,7 @@ export class TitlebarGridList extends PureComponent {
                 <CardContent className={classes.cardContent}>
                   <Typography type="title" component="h2">
                     <Link to={'/advisor/' + hit.advisorProfileId}>
-                      {hit.firstName +
-                        ' ' +
-                        hit.lastName +
-                        '   +++   ' +
-                        hit.type}
+                      {hit.firstName + ' ' + hit.lastName}
                     </Link>
                     <Badge
                       style={{ float: 'right', margin: '10px' }}
