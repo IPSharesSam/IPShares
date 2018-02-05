@@ -46,7 +46,7 @@ export class Navigation extends PureComponent {
           <Toolbar style={{ minHeight: 90 }}>
             <div className={classes.flex}>
               <Typography
-                type="display2"
+                type="display1"
                 color="secondary"
                 component={Link}
                 to="/"

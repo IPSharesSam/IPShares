@@ -58,7 +58,7 @@ class Home extends PureComponent {
               component="h1"
               type="display2"
               align="center"
-              style={{ color: '#FF1818', marginBottom: 24 }}
+              style={{ color: '#FF1818', marginBottom: 24}}
             >
               IP Shares
             </Typography>
