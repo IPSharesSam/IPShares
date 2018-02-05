@@ -14,6 +14,9 @@ import Toolbar from 'material-ui/Toolbar'
 import AppBar from 'material-ui/AppBar'
 import { InstantSearch, SearchBox, Pagination } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
+import Badge from 'material-ui/Badge'
+import PublicAdvisor from 'material-ui-icons/Contacts'
+import PublicClient from 'material-ui-icons/PersonPinCircle'
 import './Search.css'
 
 const styles = theme => ({
@@ -65,6 +68,12 @@ export class TitlebarGridList extends PureComponent {
               <CardContent className={classes.cardContent}>
                 <Typography type="title" component="h2">
                   <Link to={'/advisor/' + hit.advisorProfileId}>{hit.firstName + ' ' + hit.lastName}</Link>
+                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+                      <PublicAdvisor />
+                    </Badge>
+                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+                      <PublicClient />
+                    </Badge>
                 </Typography>
                 {hit.tags.map(tag => {
                   return <Chip className={classes.chip} label={tag} />
