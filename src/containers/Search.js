@@ -14,6 +14,9 @@ import Toolbar from 'material-ui/Toolbar'
 import AppBar from 'material-ui/AppBar'
 import { InstantSearch, SearchBox, Pagination } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
+import Badge from 'material-ui/Badge'
+import PublicAdvisor from 'material-ui-icons/Contacts'
+import PublicClient from 'material-ui-icons/PersonPinCircle'
 import './Search.css'
 
 const styles = theme => ({
@@ -58,47 +61,48 @@ export class TitlebarGridList extends PureComponent {
           spacing={24}
         >
           {hits.map(hit => (
-            <GridListTile key={hit.objectID}>
-              <Card className={classes.card} style={{ margin: 5 }}>
-                <Link to={'/advisor/' + hit.advisorProfileId}>
-                  <CardMedia
-                    className={classes.media}
-                    image={hit.picUrl}
-                    title={hit.firstName}
-                  />
-                </Link>
-                <CardContent className={classes.cardContent}>
-                  <Typography type="title" component="h2">
-                    <Link to={'/advisor/' + hit.advisorProfileId}>
-                      {hit.firstName + ' ' + hit.lastName}
-                    </Link>
-                  </Typography>
-                  {hit.tags.map(tag => {
-                    return <Chip className={classes.chip} label={tag} />
-                  })}
-                </CardContent>
-                <CardActions>
-                  <Button
-                    component={Link}
-                    to={'/advisor/' + hit.advisorProfileId}
-                    className={classes.button}
-                    color="default"
-                  >
-                    Profile
-                  </Button>
-                  <StarRatingComponent
-                    style={{ float: 'right' }}
-                    name="rate2"
-                    editing={false}
-                    starCount={5}
-                    value={hit.averageNumber}
-                  />
-                </CardActions>
-              </Card>
-            </GridListTile>
-          ))}
-        </GridList>
-      )
+            <GridListTile>
+            <Card className={classes.card} key={hit.objectID} style={{ margin: 5 }}>
+              <Link to={'/advisor/' + hit.advisorProfileId}>
+                <CardMedia
+                  className={classes.media}
+                  image={hit.picUrl}
+                  title={hit.firstName}
+                />
+              </Link>
+              <CardContent className={classes.cardContent}>
+                <Typography type="title" component="h2">
+                  <Link to={'/advisor/' + hit.advisorProfileId}>{hit.firstName + ' ' + hit.lastName}</Link>
+                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+                      <PublicAdvisor />
+                    </Badge>
+                    <Badge style={{float:"right", margin:"10px"}} className="Badge" badgeContent={0} color="primary">
+                      <PublicClient />
+                    </Badge>
+                </Typography>
+                {hit.tags.map(tag => {
+                  return <Chip className={classes.chip} label={tag} />
+                })}
+            </CardContent>
+            <CardActions>
+              <Button component={Link}
+                to={'/advisor/' + hit.advisorProfileId}
+                className={classes.button}
+                color="default">
+                Profile
+              </Button>
+              <StarRatingComponent style={{ float:"right" }}
+                name="rate2"
+                editing={false}
+                starCount={5}
+                value={hit.averageNumber}
+              />
+            </CardActions>
+            </Card >
+          </GridListTile>
+        ))}
+      </GridList>
+      );
     }
 
     const ConnectedHits = connectHits(CustomHits)

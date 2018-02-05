@@ -9,11 +9,18 @@ import './App.css'
 const TitleFont = '"Bolts", Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
 
 const theme = createMuiTheme({
-  // palette: {
-  //   primary: {
-  //     main: '#FF1818'
-  //   }
-  // },
+  overrides: {
+      MuiChip: {
+        root: {
+          background: 'linear-gradient(45deg, #ff1227 30%, #ff1227 90%)',
+          borderRadius: 12,
+          color: 'white',
+          height: 32,
+          padding: '0 10px',
+          boxShadow: '0 2px 3px 1px rgba(38, 38, 38, 0.2)',
+        },
+      },
+    },
   palette: {
     primary: {
       light: '#ffffff',
