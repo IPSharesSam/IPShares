@@ -129,7 +129,7 @@ class PublicAdvisorProfile extends PureComponent {
                   />
                 </div>
                 <div className="AdvisorLabels">
-                  <Typography type="headline" component="h2" style={{ marginBottom: 12 }} align="center">
+                  <Typography type="headline" component="h2" style={{ color: "#ff1227",  marginBottom: 12 }} align="center">
                     {`${user.firstName} ${user.lastName}`}
                   </Typography>
                   <Badge style={{margin:"18px"}} className="Badge" badgeContent={4} color="primary">
@@ -153,7 +153,7 @@ class PublicAdvisorProfile extends PureComponent {
             </Grid>
 
             <Grid item xs ={12} md={7}>
-              <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+              <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
                 Bio
               </Typography>
               <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He
@@ -164,17 +164,17 @@ class PublicAdvisorProfile extends PureComponent {
               Director of the Master in Healthcare Management (MIMS - Italian class). </p>
             </Grid>
             <Grid item xs={ 12 }>
-                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-                  Clients
+                <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
+                  Partners
                 </Typography>
                 <GridList/>
 
-                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
-                  Partners
+                <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
+                  Clients
                 </Typography>
                 <GridListClients/>
 
-                <Typography type="headline" component="h2" style={{ margin: 20 }} align="center">
+                <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
                   Get in contact
                 </Typography>
             </Grid>

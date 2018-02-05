@@ -13,17 +13,17 @@ export class Calendar extends PureComponent {
     return (
       <InfiniteCalendar
         theme={{
-          selectionColor: 'rgb(255, 84, 84)',
+          selectionColor: '#ff1227',
           textColor: {
             default: '#222',
-            active: '#222'
+            active: '#fff'
           },
           weekdayColor: '#ededee',
           headerColor: '#989898',
           floatingNav: {
             background: '#dfdfdf',
-            color: '#FFF',
-            chevron: '#FFA726'
+            color: '#ff1227',
+            chevron: '#ff2626'
           }
        }}
         width={621}
