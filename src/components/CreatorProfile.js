@@ -14,6 +14,10 @@ import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Switch from 'material-ui/Switch'
 import validate from 'validate.js'
+import Dropzone from 'react-dropzone'
+import request from 'superagent'
+import { fetchOwnProfile } from '../actions/user/creator/fetch'
+import { updateCreator } from '../actions/user/creator/update'
 
 const classes = {
   formBio: {
@@ -35,31 +39,44 @@ export class CreatorProfile extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired
   }
+  constructor(props) {
+    super()
+  }
+
+  componentWillMount() {
+    this.props.fetchOwnProfile()
+  }
 
   state = {}
 
-  // handleChange = name => event => {
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   })
-  // }
+  componentWillReceiveProps(nextProps){
+    const { picUrl,
+      streetName,
+      streetNumber,
+      postalCode,
+      city,
+      country,
+      phoneNumber,
+      bio
+    } = nextProps.creatorProfile
+
+    this.setState({
+      streetName,
+      streetNumber,
+      postalCode,
+      city,
+      country,
+      phoneNumber,
+      bio,
+      picUrl: !picUrl ? '' : picUrl
+    })
+  }
 
   submitForm(event) {
     event.preventDefault()
+    const { _id } = this.props.creatorProfile
     if (this.validateAll()) {
-      const profile = {
-        streetName: this.state.streetName,
-        streetNumber: this.state.streetNumber,
-        postalCode: this.state.postalCode,
-        city: this.state.city,
-        country: this.state.country,
-        phoneNumber: this.state.phoneNumber,
-        publicAdvisor: this.state.publicAdvisor,
-        bio: this.state.bio,
-        tags: [],
-        clients: [],
-        partners: []
-      }
+      this.props.updateCreator({ ...this.state, CreatorProfileId: _id })
     }
     return false
   }
@@ -187,14 +204,70 @@ export class CreatorProfile extends PureComponent {
     })
   }
 
+  handleImageUpload(file) {
+    let upload = request
+      .post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file)
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err)
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          picUrl: response.body.secure_url
+        })
+      }
+    })
+  }
+
+  onImageDrop(files) {
+    this.setState({
+      uploadedFile: files[0]
+    })
+
+    this.handleImageUpload(files[0])
+  }
+
   render() {
+
+    const {
+      picUrl,
+      streetName,
+      streetNumber,
+      postalCode,
+      city,
+      country,
+      phoneNumber,
+      bio,
+    } = this.state
+
+    const { user } = this.props.creatorProfile
+    if(!user) return null
+
+
     return (
       <div className="wrap">
         <Typography type="title" component="h2">
           Creator profile
         </Typography>
 
-        <form onSubmit={this.submitForm.bind(this)}>
+        <form>
+          <Dropzone
+            multiple={false}
+            accept="image/*"
+            onDrop={this.onImageDrop.bind(this)}
+          >
+              {picUrl === '' ? <p>Drop an image or click to select a file to upload.</p> : (
+                <div>
+                  <img src={picUrl} alt="" />
+                </div>
+              )}
+
+          </Dropzone>
+
           <Grid container spacing={24}>
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
@@ -202,6 +275,7 @@ export class CreatorProfile extends PureComponent {
                   id="streetName"
                   type="text"
                   label="Street"
+                  value={streetName}
                   onChange={this.handleChange('streetName')}
                 />
                 <FormHelperText id="streetName-error-text">
@@ -215,6 +289,7 @@ export class CreatorProfile extends PureComponent {
                   id="streetNumber"
                   type="text"
                   label="Number"
+                  value={streetNumber}
                   onChange={this.handleChange('streetNumber')}
                 />
                 <FormHelperText id="streetNumber-error-text">
@@ -231,6 +306,7 @@ export class CreatorProfile extends PureComponent {
                   id="city"
                   type="text"
                   label="City"
+                  value={city}
                   onChange={this.handleChange('city')}
                 />
                 <FormHelperText id="city-error-text">
@@ -245,6 +321,7 @@ export class CreatorProfile extends PureComponent {
                   id="postalCode"
                   type="text"
                   label="Postal Code"
+                  value={postalCode}
                   onChange={this.handleChange('postalCode')}
                 />
                 <FormHelperText id="postalCode-error-text">
@@ -260,6 +337,7 @@ export class CreatorProfile extends PureComponent {
                   type="text"
                   label="Country"
                   fullWidth={true}
+                  value={country}
                   onChange={this.handleChange('country')}
                 />
                 <FormHelperText id="country-error-text">
@@ -277,6 +355,7 @@ export class CreatorProfile extends PureComponent {
                   id="phoneNumber"
                   type="text"
                   label="Phone"
+                  value={phoneNumber}
                   onChange={this.handleChange('phoneNumber')}
                 />
                 <FormHelperText id="phoneNumber-error-text">
@@ -308,6 +387,7 @@ export class CreatorProfile extends PureComponent {
                 id="bio"
                 multiline={true}
                 InputProps={{ disableUnderline: true }}
+                value={bio}
                 onChange={this.handleChange('bio')}
               />
             </ExpansionPanelDetails>
@@ -337,4 +417,8 @@ export class CreatorProfile extends PureComponent {
   }
 }
 
-export default connect(null, { push })(CreatorProfile)
+const mapStateToProps = ({ creatorProfile }) => ({
+  creatorProfile
+})
+
+export default connect(mapStateToProps, { push, fetchOwnProfile, updateCreator })(CreatorProfile)
