@@ -159,7 +159,7 @@ class PublicAdvisorProfile extends PureComponent {
               >
                 Bio
               </Typography>
-              <Typography variant="body1" component="p">
+              <Typography variant="body1" component="p" align="center">
                 {bio}
               </Typography>
             </Grid>
