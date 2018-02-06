@@ -7,19 +7,18 @@ import { connect } from 'react-redux'
 import { clearError } from '../actions/user/loading'
 import request from 'superagent'
 
-class ErrorSnackBar extends React.Component {
+class Error extends React.Component {
   state = {
-    open: false,
+    open: false
   }
 
   componentWillReceiveProps(nextProps) {
     const { error } = nextProps
 
-    if(!error) {
-        this.setState({ open: true })
+    if (!error) {
+      this.setState({ open: true })
     }
   }
-
 
   handleClick = () => {
     this.setState({ open: true })
@@ -34,35 +33,40 @@ class ErrorSnackBar extends React.Component {
   }
 
   render() {
-    const { error } =  this.props
-    if(!error) return null
+    const { error } = this.props
+    if (!error) return null
     return (
       <div>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'left'
           }}
           open={!!error}
           autoHideDuration={6000}
           onClose={this.handleClose}
           SnackbarContentProps={{
-            'aria-describedby': 'message-id',
+            'aria-describedby': 'message-id'
           }}
           message={<span id="message-id">{error}</span>}
           action={[
-            <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+            <Button
+              key="undo"
+              color="secondary"
+              size="small"
+              onClick={this.handleClose}
+            >
               UNDO
             </Button>,
             <IconButton
               key="close"
               aria-label="Close"
               color="inherit"
-              className={"close"}
+              className={'close'}
               onClick={this.handleClose}
             >
               <CloseIcon />
-            </IconButton>,
+            </IconButton>
           ]}
         />
       </div>
@@ -74,4 +78,4 @@ const mapStateToProps = ({ error }) => ({
   error
 })
 
-export default connect(mapStateToProps, {clearError, request})(ErrorSnackBar)
+export default connect(mapStateToProps, { clearError, request })(Error)

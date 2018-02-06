@@ -1,4 +1,4 @@
-import { LOADING, DONE_LOADING } from '../actions/loading'
+import { LOADING, DONE_LOADING } from '../actions/user/loading'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -7,7 +7,6 @@ export default (state = [], { type, payload } = {}) => {
 
     case DONE_LOADING:
       return state.filter(url => url !== payload)
-
     default:
       return state
   }

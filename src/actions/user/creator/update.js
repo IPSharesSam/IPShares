@@ -13,7 +13,6 @@ export const updateCreator = creatorProfile => {
       dispatch(push('/sign-in'))
       return
     }
-    console.log(CreatorProfileId);
     dispatch({ type: LOADING })
     api
       .patch(`creator/${CreatorProfileId}`, creatorProfile)
