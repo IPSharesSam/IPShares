@@ -22,42 +22,33 @@ import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
+  DialogTitle
+} from 'material-ui/Dialog'
 
 class PublicAdvisorProfile extends PureComponent {
   constructor(props) {
-    super(props);
-
-    const { date } = props
-
-    this.handleDayClick = this.handleChange.bind(this);
+    super(props)
 
     this.state = {
-      date,
       ratingDialogOpen: false,
       rating: 0,
-      comment: "",
+      comment: ''
     }
   }
 
   componentWillMount() {
     const { fetchAdvisor } = this.props
     const { advisorId } = this.props.match.params
-
-    if (!!advisorId) { fetchAdvisor(advisorId) }
+    fetchAdvisor(advisorId)
   }
 
   submitForm(event) {
     event.preventDefault()
-    if (this.validateAll()) {
-      const apointment = {
-        date: this.state.date,
-        msg: this.state.msg,
-      }
-      console.log(apointment);
+    const appointment = {
+      date: this.state.date,
+      msg: this.state.msg
     }
-    return false
+    return appointment
   }
 
   submitStarRatingForm(event) {
@@ -66,37 +57,34 @@ class PublicAdvisorProfile extends PureComponent {
     const { signedIn, currentUser } = this.props
     const { rating, comment } = this.state
 
+    if (!signedIn) return false //TODO: SEND ERROR signedIn
+    if (rating === 0) return false //TODO: SEND ERROR Rating please
+    if (comment === '') return false //TODO: SEND ERROR Rating message
 
-    if(!signedIn) return false //TODO: SEND ERROR signedIn
-    if(rating === 0) return false //TODO: SEND ERROR Rating please
-    if(comment === "") return false //TODO: SEND ERROR Rating message
+    const newRating = {
+      advisorId: user._id,
+      clientId: currentUser._id,
+      comment: comment,
+      rating: rating
+    }
 
-      const newRating = {
-        advisorId: user._id,
-        clientId: currentUser._id,
-        comment: comment,
-        rating: rating,
-      }
-
-      const currentRating = ratings.filter((r) => (r.clientId === currentUser._id))[0]
-      const isNewRating = !currentRating
-      console.log(currentRating, isNewRating);
-      isNewRating ? this.props.newRating(newRating) : this.props.updateRating(newRating)
-      this.setState({ ratingDialogOpen: false })
-  }
-
-  validateAll() {
-    return true
+    const currentRating = ratings.filter(r => r.clientId === currentUser._id)[0]
+    const isNewRating = !currentRating
+    console.log(currentRating, isNewRating)
+    isNewRating
+      ? this.props.newRating(newRating)
+      : this.props.updateRating(newRating)
+    this.setState({ ratingDialogOpen: false })
   }
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     })
   }
 
   calculateRatingAverage(ratings) {
-    return ratings.reduce((x, rating) => x + rating.rating, 0)/ratings.length
+    return ratings.reduce((x, rating) => x + rating.rating, 0) / ratings.length
   }
 
   handleClose = () => {
@@ -108,38 +96,49 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
+    this.setState({ rating: nextValue })
   }
 
   render() {
     const { user, picUrl, ratings } = this.props.advisorProfile
-    if(!user) return null
+    if (!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
 
     return (
       <div>
         <Paper style={{ padding: 24, margin: 24 }}>
-            <Grid container spacing={24} style={{ marginBottom: 24}}>
-              <Grid item xs={ 12 } md={ 5 }>
+          <Grid container spacing={24} style={{ marginBottom: 24 }}>
+            <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img className="AdvisorImage"
-                    src={picUrl}
-                    alt='Advisor'
-                  />
+                  <img className="AdvisorImage" src={picUrl} alt="Advisor" />
                 </div>
                 <div className="AdvisorLabels">
-                  <Typography type="headline" component="h2" style={{ color: "#ff1227",  marginBottom: 12 }} align="center">
+                  <Typography
+                    type="headline"
+                    component="h2"
+                    style={{ color: '#ff1227', marginBottom: 12 }}
+                    align="center"
+                  >
                     {`${user.firstName} ${user.lastName}`}
                   </Typography>
-                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={4} color="primary">
+                  <Badge
+                    style={{ margin: '18px' }}
+                    className="Badge"
+                    badgeContent={4}
+                    color="primary"
+                  >
                     <PublicAdvisor />
                   </Badge>Advisors
-                  <Badge style={{margin:"18px"}} className="Badge" badgeContent={8} color="primary">
+                  <Badge
+                    style={{ margin: '18px' }}
+                    className="Badge"
+                    badgeContent={8}
+                    color="primary"
+                  >
                     <PublicClient />
                   </Badge>Clients
-
-                  <div onClick={this.handleOpen.bind(this)} >
+                  <div onClick={this.handleOpen.bind(this)}>
                     <StarRatingComponent
                       name="rate1"
                       starCount={5}
@@ -147,116 +146,157 @@ class PublicAdvisorProfile extends PureComponent {
                       editing={false}
                     />
                   </div>
-
                 </div>
               </header>
             </Grid>
 
-            <Grid item xs ={12} md={7}>
-              <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
+            <Grid item xs={12} md={7}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
                 Bio
               </Typography>
-              <p>Federico Lega, Ph.D, is a Professor of Healthcare Management and Policy at Bocconi University. He
-              received his BA in Economics and Business Administration from Bocconi University, Milan. From the same
-              institution, he received his Ph.D. degree in Business Administration in June 2000 after a period spent as a
-              Visiting Fellow at the Wagner School of Public Management, New York University. Since 2006 he has been the Head of
-              Executive Education for the Healthcare sector at SDA Bocconi School of Management (SDA). From 2002 to 2008, he was
-              Director of the Master in Healthcare Management (MIMS - Italian class). </p>
+              <p>
+                Federico Lega, Ph.D, is a Professor of Healthcare Management and
+                Policy at Bocconi University. He received his BA in Economics
+                and Business Administration from Bocconi University, Milan. From
+                the same institution, he received his Ph.D. degree in Business
+                Administration in June 2000 after a period spent as a Visiting
+                Fellow at the Wagner School of Public Management, New York
+                University. Since 2006 he has been the Head of Executive
+                Education for the Healthcare sector at SDA Bocconi School of
+                Management (SDA). From 2002 to 2008, he was Director of the
+                Master in Healthcare Management (MIMS - Italian class).{' '}
+              </p>
             </Grid>
-            <Grid item xs={ 12 }>
-                <Typography type="headline" component="h2" style={{ color: "#ff1227", margin: 20 }} align="center">
-                  Partners
-                </Typography>
-                <GridList/>
+            <Grid item xs={12}>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
+                Partners
+              </Typography>
+              <GridList />
 
-                <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
-                  Clients
-                </Typography>
-                <GridListClients/>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
+                Clients
+              </Typography>
+              <GridListClients />
 
-                <Typography type="headline" component="h2" style={{ color: "#ff1227",  margin: 20 }} align="center">
-                  Get in contact
-                </Typography>
+              <Typography
+                type="headline"
+                component="h2"
+                style={{ color: '#ff1227', margin: 20 }}
+                align="center"
+              >
+                Get in contact
+              </Typography>
             </Grid>
-            <Grid item xs={12} md={ 6 }>
-              <form onSubmit={this.submitForm.bind(this)} className="Contact-wrap">
+            <Grid item xs={12} md={6}>
+              <form className="Contact-wrap">
                 <div className="MsgField">
                   <TextField
                     className="TextField"
                     placeholder="send a message"
                     multiline={true}
-                    InputProps={{ disableUnderline: true  }}
-                    onChange={this.handleChange("msg")}
+                    InputProps={{ disableUnderline: true }}
+                    onChange={this.handleChange('msg').bind(this)}
                   />
-                <Button onClick={this.submitForm.bind(this)} raised color="default" fullWidth={true}>
+                  <Button
+                    onClick={this.submitForm.bind(this)}
+                    raised
+                    color="default"
+                    fullWidth={true}
+                  >
                     submit
                   </Button>
                 </div>
               </form>
-              </Grid>
-              <Grid item xs={ 12 } md={ 6 }>
-                <div className="Calendar">
-                  <Calendar className="Calendar"/>
-                </div>
-              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Calendar />
+            </Grid>
           </Grid>
         </Paper>
 
         <div>
           <Dialog
-           fullScreen={false}
-           open={this.state.ratingDialogOpen}
-           onClose={this.handleClose}
-           aria-labelledby="responsive-dialog-title"
-         >
-           <DialogTitle id="responsive-dialog-title">{"Share your thoughts with other clients"}</DialogTitle>
-           <DialogContent>
-            <StarRatingComponent
-              name="rate1"
-              starCount={5}
-              value={this.state.rating}
-              onStarClick={this.onStarClick.bind(this)}
-            />
+            fullScreen={false}
+            open={this.state.ratingDialogOpen}
+            onClose={this.handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {'Share your thoughts with other clients'}
+            </DialogTitle>
+            <DialogContent>
+              <StarRatingComponent
+                name="rate1"
+                starCount={5}
+                value={this.state.rating}
+                onStarClick={this.onStarClick.bind(this)}
+              />
 
-            <form onSubmit={this.submitStarRatingForm.bind(this)} className="Contact-wrap">
-              <div className="TextField">
-                <TextField
-                 className="TextField"
-                 placeholder="Write a comment"
-                 multiline={true}
-                 InputProps={{ disableUnderline: true  }}
-                 onChange={this.handleChange("comment")}
-                />
-
-              </div>
-            </form>
-            <DialogContentText>
-            </DialogContentText>
-           </DialogContent>
-           <DialogActions>
-             <Button onClick={this.handleClose} color="primary">
-               back
-             </Button>
-             <Button onClick={this.submitStarRatingForm.bind(this)} raised color="primary" autoFocus>
-               submit
-             </Button>
-           </DialogActions>
-         </Dialog>
+              <form
+                onSubmit={this.submitStarRatingForm.bind(this)}
+                className="Contact-wrap"
+              >
+                <div className="TextField">
+                  <TextField
+                    className="TextField"
+                    placeholder="Write a comment"
+                    multiline={true}
+                    InputProps={{ disableUnderline: true }}
+                    onChange={this.handleChange('comment')}
+                  />
+                </div>
+              </form>
+              <DialogContentText />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                back
+              </Button>
+              <Button
+                onClick={this.submitStarRatingForm.bind(this)}
+                raised
+                color="primary"
+                autoFocus
+              >
+                submit
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     )
   }
 }
 
-  const mapStateToProps = ({ user, advisorProfile }, { match }) => {
+const mapStateToProps = ({ user, advisorProfile }) => {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
 
   return {
     signedIn,
     advisorProfile,
-    currentUser,
+    currentUser
   }
 }
 
-export default connect(mapStateToProps, { push, fetchAdvisor, newRating, updateRating }) (PublicAdvisorProfile  )
+export default connect(mapStateToProps, {
+  push,
+  fetchAdvisor,
+  newRating,
+  updateRating
+})(PublicAdvisorProfile)

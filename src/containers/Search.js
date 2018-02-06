@@ -22,6 +22,7 @@ import { connectHits } from 'react-instantsearch/connectors'
 import Badge from 'material-ui/Badge'
 import PublicAdvisor from 'material-ui-icons/Contacts'
 import PublicClient from 'material-ui-icons/PersonPinCircle'
+import './Search.css'
 
 const styles = theme => ({
   icon: {
@@ -65,8 +66,8 @@ export class TitlebarGridList extends PureComponent {
           spacing={24}
         >
           {hits.map(hit => (
-            <GridListTile className="Cards" key={hit.objectID}>
-              <Card style={{ margin: 5 }}>
+            <GridListTile key={hit.objectID}>
+              <Card className={classes.card} style={{ margin: 5 }}>
                 <Link to={'/advisor/' + hit.advisorProfileId}>
                   <CardMedia
                     className={classes.media}
