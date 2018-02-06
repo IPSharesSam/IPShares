@@ -11,7 +11,6 @@ export function fetchOwnProfile() {
     api
       .get('account/creator')
       .then(result => {
-        console.log(result)
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: FETCHED_CREATOR,
