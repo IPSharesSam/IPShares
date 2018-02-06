@@ -208,8 +208,7 @@ export class AdvisorProfile extends PureComponent {
         console.error(err)
       }
 
-      if (response.body.secure_url !== '') {
-        console.log(response.body)
+      if (!!response.body.public_id) {
         this.setState({
           picUrl:
             'https://res.cloudinary.com/elexilon/image/upload/h_400,w_800,c_fill,g_face/' +
