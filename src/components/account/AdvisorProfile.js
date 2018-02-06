@@ -198,7 +198,6 @@ export class AdvisorProfile extends PureComponent {
   }
 
   handleImageUpload(file) {
-    // https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_crop,g_face,r_max/w_200/
     let upload = request
       .post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
       .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
@@ -213,10 +212,8 @@ export class AdvisorProfile extends PureComponent {
         console.log(response.body)
         this.setState({
           picUrl:
-            'https://res.cloudinary.com/elexilon/image/upload/h_200,w_400,c_crop,g_face/' +
-            response.body.public_id +
-            '.jpeg'
-          // picUrl: response.body.secure_url
+            'https://res.cloudinary.com/elexilon/image/upload/h_400,w_800,c_fill,g_face/' +
+            response.body.public_id
         })
       }
     })
