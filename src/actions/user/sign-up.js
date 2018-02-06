@@ -12,7 +12,7 @@ export default function signUp(user) {
     const { email, firstName, lastName, password, companyName, type } = user
     if (type !== 'advisor' && type !== 'creator') return
     api
-      .post('users', { email, firstName, lastName, password })
+      .post('users', { email, firstName, lastName, password, type })
       .then(newUser => {
         api
           .post('sessions', user)
@@ -32,7 +32,7 @@ export default function signUp(user) {
       })
       .catch(err => dispatch({
         type: LOAD_ERROR,
-        payload: err.response.text
+        payload: err
       }))
   }
 }

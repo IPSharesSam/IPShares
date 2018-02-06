@@ -15,6 +15,8 @@ import Chip from 'material-ui/Chip'
 import 'react-dates/lib/css/_datepicker.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import './PublicCreatorProfile.css'
+import fetchCreator from '../actions/user/creator/fetch'
 
 const styles = theme => ({
   chip: {
@@ -37,15 +39,18 @@ class PublicCreatorProfile extends PureComponent {
     super(props)
 
     const { date } = props
-
     this.handleDayClick = this.handleChange.bind(this)
-
     this.state = {
       date
     }
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    const { fetchCreator } = this.props
+    const { creatorId } = this.props.match.params
+    console.log(creatorId)
+    fetchCreator(creatorId)
+  }
 
   submitForm(event) {
     event.preventDefault()
@@ -70,6 +75,10 @@ class PublicCreatorProfile extends PureComponent {
   }
 
   render() {
+    const { user, picUrl } = this.props.creatorProfile
+
+    if (!user) return null
+
     return (
       <div>
         <Paper style={{ padding: 24, margin: 24 }}>
@@ -77,13 +86,18 @@ class PublicCreatorProfile extends PureComponent {
             <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img
-                    className="CreatorImg"
-                    src="https://eaglescry.net/wp-content/uploads/2016/11/woman-artist.jpg"
-                    alt="Creator"
-                  />
+                  <img className="CreatorImg" src={picUrl} alt="Creator" />
                 </div>
                 <div className="CreatorTitle">
+                  <Typography
+                    type="headline"
+                    component="h2"
+                    style={{ color: '#ff1227', marginBottom: 12 }}
+                    align="center"
+                  >
+                    {`${user.firstName} ${user.lastName}`}
+                  </Typography>
+
                   <Typography
                     type="headline"
                     component="h2"
@@ -357,14 +371,17 @@ class PublicCreatorProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ user }, { match }) => {
+const mapStateToProps = ({ user, creatorProfile }) => {
   const currentUser = user.currentUser
   const signedIn = !!currentUser && !!currentUser._id
 
   return {
     signedIn,
-    currentUser
+    currentUser,
+    creatorProfile
   }
 }
 
-export default connect(mapStateToProps, { push })(PublicCreatorProfile)
+export default connect(mapStateToProps, { push, fetchCreator })(
+  PublicCreatorProfile
+)
