@@ -2,16 +2,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
-import GridList, { GridListTile } from 'material-ui/GridList'
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import Chip from 'material-ui/Chip'
+// import Chip from 'material-ui/Chip'
 import StarRatingComponent from 'react-star-rating-component'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import Toolbar from 'material-ui/Toolbar'
-import AppBar from 'material-ui/AppBar'
 import {
   RefinementList,
   InstantSearch,
@@ -19,17 +16,19 @@ import {
   Pagination
 } from 'react-instantsearch/dom'
 import { connectHits } from 'react-instantsearch/connectors'
-import Badge from 'material-ui/Badge'
-import PublicAdvisor from 'material-ui-icons/Contacts'
-import PublicClient from 'material-ui-icons/PersonPinCircle'
+// import Badge from 'material-ui/Badge'
+// import PublicAdvisor from 'material-ui-icons/Contacts'
+import Star from 'material-ui-icons/Star'
+// import PublicClient from 'material-ui-icons/PersonPinCircle'
 import './Search.css'
 
 const styles = theme => ({
+  root: theme.mixins.gutters({
+    paddingTop: 16,
+    paddingBottom: 16
+  }),
   icon: {
     color: 'rgba(255, 255, 255, 0.54)'
-  },
-  cardContent: {
-    minHeight: 180
   },
   button: {
     marginRight: 10
@@ -58,29 +57,29 @@ export class TitlebarGridList extends PureComponent {
 
   render() {
     function CustomHits({ hits }) {
+      const profileLink = hit => {
+        const id =
+          hit.type === 'advisor' ? hit.advisorProfileId : hit.creatorProfileId
+        return '/' + hit.type + '/' + id
+      }
+      const fullName = hit => hit.firstName + ' ' + hit.lastName
+
       return (
-        <GridList
-          cellHeight={'auto'}
-          cols={4}
-          style={{ marginTop: 12 }}
-          spacing={24}
-        >
+        <Grid container spacing={24}>
           {hits.map(hit => (
-            <GridListTile key={hit.objectID}>
-              <Card className={classes.card} style={{ margin: 5 }}>
-                <Link to={'/advisor/' + hit.advisorProfileId}>
+            <Grid item xs={12} md={6} lg={4} key={hit.objectID}>
+              <Card className={classes.card}>
+                <Link to={profileLink(hit)}>
                   <CardMedia
                     className={classes.media}
                     image={hit.picUrl}
-                    title={hit.firstName}
+                    title={fullName(hit)}
                   />
                 </Link>
-                <CardContent className={classes.cardContent}>
+                <CardContent style={{ paddingBottom: 12 }}>
                   <Typography type="title" component="h2">
-                    <Link to={'/advisor/' + hit.advisorProfileId}>
-                      {hit.firstName + ' ' + hit.lastName}
-                    </Link>
-                    <Badge
+                    <Link to={profileLink(hit)}>{fullName(hit)}</Link>
+                    {/* <Badge
                       style={{ float: 'right', margin: '10px' }}
                       className="Badge"
                       badgeContent={0}
@@ -95,33 +94,44 @@ export class TitlebarGridList extends PureComponent {
                       color="primary"
                     >
                       <PublicClient />
-                    </Badge>
+                    </Badge> */}
                   </Typography>
-                  {hit.tags.map(tag => {
+                  <Typography
+                    type="subheading"
+                    component="h3"
+                    style={{ marginTop: 8 }}
+                  >
+                    <StarRatingComponent
+                      renderStarIcon={() => <Star />}
+                      name="rate2"
+                      editing={false}
+                      value={hit.averageNumber}
+                    />
+                  </Typography>
+                  {/* {hit.tags.map(tag => {
                     return <Chip className={classes.chip} label={tag} />
-                  })}
+                  })} */}
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                   <Button
                     component={Link}
-                    to={'/advisor/' + hit.advisorProfileId}
+                    to={profileLink(hit)}
                     className={classes.button}
                     color="default"
                   >
                     Profile
                   </Button>
                   <StarRatingComponent
-                    style={{ float: 'right' }}
                     name="rate2"
                     editing={false}
                     starCount={5}
                     value={hit.averageNumber}
                   />
-                </CardActions>
+                </CardActions> */}
               </Card>
-            </GridListTile>
+            </Grid>
           ))}
-        </GridList>
+        </Grid>
       )
     }
 
@@ -129,29 +139,29 @@ export class TitlebarGridList extends PureComponent {
 
     const { classes } = this.props
     return (
-      <Paper style={{ padding: 24, margin: 24 }}>
+      <Paper style={{ padding: 24 }}>
         <InstantSearch
           appId={process.env.REACT_APP_APP_ID}
           apiKey={process.env.REACT_APP_SEARCH_KEY}
           indexName="profiles"
         >
           <Grid container spacing={24}>
-            <Grid item xs={12}>
-              <AppBar position="static" color="default" style={{ margin: 5 }}>
-                <Toolbar>
-                  <SearchBox
-                    className={classes.container}
-                    autoFocus
-                    showLoadingIndicator
-                  />
-                  <RefinementList
-                    attributeName="type"
-                    limitMax={5}
-                    operator="or"
-                    showMore={false}
-                  />
-                </Toolbar>
-              </AppBar>
+            <Grid item xs={12} md={3}>
+              <Paper className={classes.root} elevation={1}>
+                <SearchBox
+                  className={classes.container}
+                  autoFocus
+                  showLoadingIndicator
+                />
+                <RefinementList
+                  attributeName="type"
+                  limitMax={5}
+                  operator="or"
+                  showMore={false}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={9}>
               <ConnectedHits />
               <Pagination />
             </Grid>
