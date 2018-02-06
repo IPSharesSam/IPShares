@@ -31,10 +31,10 @@ export class Account extends PureComponent {
   }
 
   render() {
-    if (!this.props.currentUser) {
+    if (!this.props.user) {
       return null
     }
-    const { type } = this.props.currentUser
+    const { type } = this.props.user
     const { value } = this.state
 
     if (!type) return null
@@ -61,9 +61,6 @@ export class Account extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  const currentUser = user.currentUser
-  return { currentUser }
-}
+const mapStateToProps = ({ user }) => ({ user })
 
 export default connect(mapStateToProps)(Account)

@@ -72,7 +72,7 @@ export class Navigation extends PureComponent {
                   component={Link}
                   to="/account"
                 >
-                  {user.currentUser.firstName + ' ' + user.currentUser.lastName}
+                  {user.firstName + ' ' + user.lastName}
                 </Button>
                 <Button
                   className={classes.button}
@@ -113,7 +113,7 @@ export class Navigation extends PureComponent {
 }
 
 const mapStateToProps = ({ user }) => ({
-  signedIn: !!user.currentUser && !!user.currentUser._id,
+  signedIn: !!user && !!user._id,
   user
 })
 
