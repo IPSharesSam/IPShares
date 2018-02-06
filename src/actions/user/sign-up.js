@@ -21,11 +21,12 @@ export default function signUp(user) {
             return res
           })
           .then(res => {
-            api.get('users/me').then(res => {
-              dispatch({ type: USER_SIGNED_IN, payload: res.body })
-            })
             const profilebody = companyName ? { companyName } : {}
-            api.post(type, profilebody).then(res => console.info(res))
+            api.post(type, profilebody).then(res => {
+              api.get('users/me').then(res => {
+                dispatch({ type: USER_SIGNED_IN, payload: res.body })
+              })
+            })
           })
         dispatch(push('/account'))
       })

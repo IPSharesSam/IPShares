@@ -179,13 +179,6 @@ export class AdvisorProfile extends PureComponent {
     })
   }
 
-  // updateAdvisorProfile() {
-  //   if (this.validateAll()) {
-  //     this.props.updateAdvisor(this.state)
-  //   }
-  //   return false
-  // }
-
   localAddAdvisorProfile() {
     if (this.validateAll()) {
       this.props.addAdvisorProfile(this.state)
@@ -203,22 +196,23 @@ export class AdvisorProfile extends PureComponent {
 
   handleImageUpload(file) {
     console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
-      let upload = request.post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
-                          .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
-                          .field('file', file);
+    let upload = request
+      .post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file)
 
-      upload.end((err, response) => {
-        if (err) {
-          console.error(err);
-        }
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err)
+      }
 
-        if (response.body.secure_url !== '') {
-          this.setState({
-            picUrl: response.body.secure_url
-          });
-        }
-      });
-    }
+      if (response.body.secure_url !== '') {
+        this.setState({
+          picUrl: response.body.secure_url
+        })
+      }
+    })
+  }
 
   onImageDrop(files) {
     this.setState({
@@ -228,26 +222,27 @@ export class AdvisorProfile extends PureComponent {
     this.handleImageUpload(files[0])
   }
 
-
   render() {
     const { streetName } = this.props.advisorProfile
     return (
       <div className="wrap">
         <Typography type="title" component="h2">
-          Advisor profile - {streetName}
+          Advisor profile
         </Typography>
         <form>
           <Dropzone
             multiple={false}
             accept="image/*"
-            onDrop={this.onImageDrop.bind(this)}>
+            onDrop={this.onImageDrop.bind(this)}
+          >
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
-          {this.state.picUrl === '' ? null :
-          <div>
-            <p>{this.state.uploadedFile.name}</p>
-            <img src={this.state.picUrl} alt=""/>
-          </div>}
+          {this.state.picUrl === '' ? null : (
+            <div>
+              <p>{this.state.uploadedFile.name}</p>
+              <img src={this.state.picUrl} alt="" />
+            </div>
+          )}
           <Grid container spacing={24}>
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
@@ -337,17 +332,6 @@ export class AdvisorProfile extends PureComponent {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            {/* <Grid item xs={6} md={5}>
-              <FormControl fullWidth>
-                <TextField
-                  style={classes.form}
-                  id="publicEmail"
-                  type="text"
-                  label="Email"
-                  onChange={this.handleChange('email')}
-                />
-              </FormControl>
-            </Grid> */}
           </Grid>
 
           <ExpansionPanel style={classes.heading}>
@@ -387,7 +371,6 @@ export class AdvisorProfile extends PureComponent {
         <Button onClick={this.cancel.bind(this)} color="primary">
           Cancel
         </Button>
-
       </div>
     )
   }
