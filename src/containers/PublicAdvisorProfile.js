@@ -53,8 +53,9 @@ class PublicAdvisorProfile extends PureComponent {
 
   submitStarRatingForm(event) {
     event.preventDefault()
-    const { user, ratings } = this.props.advisorProfile
-    const { signedIn, currentUser } = this.props
+    const advisorUser = this.props.advisorProfile.user
+    const { ratings } = this.props.advisorProfile
+    const { signedIn, user } = this.props
     const { rating, comment } = this.state
 
     if (!signedIn) return false //TODO: SEND ERROR signedIn
@@ -62,13 +63,13 @@ class PublicAdvisorProfile extends PureComponent {
     if (comment === '') return false //TODO: SEND ERROR Rating message
 
     const newRating = {
-      advisorId: user._id,
-      clientId: currentUser._id,
+      advisorId: advisorUser._id,
+      clientId: user._id,
       comment: comment,
       rating: rating
     }
 
-    const currentRating = ratings.filter(r => r.clientId === currentUser._id)[0]
+    const currentRating = ratings.filter(r => r.clientId === user._id)[0]
     const isNewRating = !currentRating
     console.log(currentRating, isNewRating)
     isNewRating
@@ -275,13 +276,12 @@ class PublicAdvisorProfile extends PureComponent {
 }
 
 const mapStateToProps = ({ user, advisorProfile }) => {
-  const currentUser = user.currentUser
-  const signedIn = !!currentUser && !!currentUser._id
+  const signedIn = !!user && !!user._id
 
   return {
     signedIn,
     advisorProfile,
-    currentUser
+    user
   }
 }
 

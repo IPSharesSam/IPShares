@@ -362,13 +362,12 @@ class PublicCreatorProfile extends PureComponent {
 }
 
 const mapStateToProps = ({ user, creatorProfile }) => {
-  const currentUser = user.currentUser
-  const signedIn = !!currentUser && !!currentUser._id
+  const signedIn = !!user && !!user._id
 
   return {
     signedIn,
-    currentUser,
-    creatorProfile
+    creatorProfile,
+    user
   }
 }
 
