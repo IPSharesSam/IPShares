@@ -22,7 +22,6 @@ import { connectHits } from 'react-instantsearch/connectors'
 import Badge from 'material-ui/Badge'
 import PublicAdvisor from 'material-ui-icons/Contacts'
 import PublicClient from 'material-ui-icons/PersonPinCircle'
-import './Search.css'
 
 const styles = theme => ({
   icon: {

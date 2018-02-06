@@ -6,20 +6,21 @@ export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
 const api = new ApiClient()
 
-export default function signIn (user) {
+export default function signIn(user) {
   return dispatch => {
-    api.post('sessions', user)
-    .then(res => {
+    api
+      .post('sessions', user)
+      .then(res => {
         api.storeToken(res.body.token)
         return res
-    })
-    .then(res => {
-      api.get('users/me', res)
-      .then(res => {
-        dispatch({ type: USER_SIGNED_IN, payload: res.body })
-        dispatch(push('/'))
       })
-    })
-    .catch(err => console.error(err))
+      .then(res => {
+        api.get('users/me', res).then(res => {
+          console.log(res)
+          dispatch({ type: USER_SIGNED_IN, payload: res.body })
+          dispatch(push('/'))
+        })
+      })
+      .catch(err => console.error(err))
   }
 }

@@ -1,26 +1,24 @@
 import API from '../../../api/client'
-import {
-  LOADING,
-  DONE_LOADING,
-  LOAD_ERROR
-} from '../loading'
+import { LOADING, DONE_LOADING, LOAD_ERROR } from '../loading'
 
 export const FETCHED_ADVISOR = 'FETCHED_ADVISOR'
 
 const api = new API()
 
-export function fetchOwnProfile () {
+export function fetchOwnProfile() {
   return dispatch => {
     dispatch({ type: LOADING })
-    api.get(`account/advisor`)
-      .then((result) => {
+    api
+      .get('account/advisor')
+      .then(result => {
+        console.log(result)
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: FETCHED_ADVISOR,
           payload: result.body
         })
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
@@ -30,18 +28,19 @@ export function fetchOwnProfile () {
   }
 }
 
-export default (advisorId) => {
+export default advisorId => {
   return dispatch => {
     dispatch({ type: LOADING })
-    api.get(`advisor/${advisorId}`)
-      .then((result) => {
+    api
+      .get(`advisor/${advisorId}`)
+      .then(result => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: FETCHED_ADVISOR,
           payload: result.body
         })
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,

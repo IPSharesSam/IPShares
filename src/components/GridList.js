@@ -1,29 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
-import './GridList.css'
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList'
 
 const tileData = [
   {
     title: 'IP expert',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPIlD6vl9yuVtpiOq89j8YXqcxTqxFz3dFiBt2G7KSsaS20408',
+    img:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPIlD6vl9yuVtpiOq89j8YXqcxTqxFz3dFiBt2G7KSsaS20408'
   },
   {
     title: 'Trademark Advisor',
-    img: 'http://scarletoakfs.com/wp-content/uploads/2016/03/101952269-financial-advisor_1910x1000.jpg',
+    img:
+      'http://scarletoakfs.com/wp-content/uploads/2016/03/101952269-financial-advisor_1910x1000.jpg'
   },
   {
     title: 'whatUpGansta',
-    img: 'https://fthmb.tqn.com/qQCDGniyAFfWwdIbJow4lDacJJM=/1280x854/filters:no_upscale():fill(transparent,1)/138710659-56a819ce3df78cf7729c1cde.jpg',
+    img:
+      'https://fthmb.tqn.com/qQCDGniyAFfWwdIbJow4lDacJJM=/1280x854/filters:no_upscale():fill(transparent,1)/138710659-56a819ce3df78cf7729c1cde.jpg'
   },
   {
     title: 'Patent lawyer',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v',
-  },
+    img:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfm1OoIhqaD4abBSBgXxgEBguxuv882iPzbJ2UhDvSUQtJpD5v'
+  }
 ]
-
 
 const styles = theme => ({
   root: {
@@ -31,24 +32,23 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   gridList: {
     flexWrap: 'nowrap',
-    transform: 'translateZ(0)',
+    transform: 'translateZ(0)'
   },
   title: {
-    color: 'rgb(255, 255, 255)',
+    color: 'rgb(255, 255, 255)'
   },
   titleBar: {
     background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)',
-  },
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)'
+  }
 })
 
-
 function SingleLineGridList(props) {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <div className="SingleLine-wrap">
@@ -60,18 +60,18 @@ function SingleLineGridList(props) {
               title={tile.title}
               classes={{
                 root: classes.titleBar,
-                title: classes.title,
+                title: classes.title
               }}
             />
           </GridListTile>
         ))}
       </GridList>
     </div>
-  );
+  )
 }
 
 SingleLineGridList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+  classes: PropTypes.object.isRequired
+}
 
-export default withStyles(styles)(SingleLineGridList);
+export default withStyles(styles)(SingleLineGridList)
