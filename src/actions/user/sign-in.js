@@ -1,6 +1,6 @@
 import ApiClient from '../../api/client'
 import { push } from 'react-router-redux'
-// import { loadError } from '../loading'
+import { LOAD_ERROR, DONE_LOADING } from './loading'
 
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
@@ -21,6 +21,12 @@ export default function signIn(user) {
           dispatch(push('/'))
         })
       })
-      .catch(err => console.error(err))
+      .catch(error => {
+        dispatch({ type: DONE_LOADING })
+        dispatch({
+          type: LOAD_ERROR,
+          payload: error.response.text
+        })
+      })
   }
 }

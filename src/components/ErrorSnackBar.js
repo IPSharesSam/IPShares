@@ -1,52 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Snackbar from 'material-ui/Snackbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
+import React from 'react'
+import Button from 'material-ui/Button'
+import Snackbar from 'material-ui/Snackbar'
+import IconButton from 'material-ui/IconButton'
+import CloseIcon from 'material-ui-icons/Close'
+import { connect } from 'react-redux'
+import { clearError } from '../actions/user/loading'
+import request from 'superagent'
 
-const styles = theme => ({
-  close: {
-    width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4,
-  },
-});
-
-class SimpleSnackbar extends React.Component {
+class ErrorSnackBar extends React.Component {
   state = {
     open: false,
-  };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { error } = nextProps
+
+    if(!error) {
+        this.setState({ open: true })
+    }
+  }
+
 
   handleClick = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+      return
     }
-
-    this.setState({ open: false });
-  };
+    this.props.clearError()
+    this.setState({ open: false })
+  }
 
   render() {
-    const { classes } = this.props;
+    const { error } =  this.props
+    if(!error) return null
     return (
       <div>
-        <Button onClick={this.handleClick}>Open simple snackbar</Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open={this.state.open}
+          open={!!error}
           autoHideDuration={6000}
           onClose={this.handleClose}
           SnackbarContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">Note archived</span>}
+          message={<span id="message-id">{error}</span>}
           action={[
             <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
               UNDO
@@ -55,7 +58,7 @@ class SimpleSnackbar extends React.Component {
               key="close"
               aria-label="Close"
               color="inherit"
-              className={classes.close}
+              className={"close"}
               onClick={this.handleClose}
             >
               <CloseIcon />
@@ -63,12 +66,12 @@ class SimpleSnackbar extends React.Component {
           ]}
         />
       </div>
-    );
+    )
   }
 }
 
-SimpleSnackbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapStateToProps = ({ error }) => ({
+  error
+})
 
-export default withStyles(styles)(SimpleSnackbar);
+export default connect(mapStateToProps, {clearError, request})(ErrorSnackBar)

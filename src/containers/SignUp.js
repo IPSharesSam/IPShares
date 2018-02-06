@@ -10,6 +10,7 @@ import { FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form'
 import validate from 'validate.js'
 import Stepper, { Step, StepLabel } from 'material-ui/Stepper'
 import Radio, { RadioGroup } from 'material-ui/Radio'
+import ErrorSnackBar from '../components/ErrorSnackBar'
 
 const dialogStyle = {
   width: '600px',
@@ -399,6 +400,7 @@ export class SignUp extends PureComponent {
             </div>
           }
         </div>
+        <ErrorSnackBar />
       </Paper>
     )
   }
