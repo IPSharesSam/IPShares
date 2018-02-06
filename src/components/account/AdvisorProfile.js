@@ -2,8 +2,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { addAdvisorProfile, updateAdvisor } from '../actions/user/advisor/add'
-import { fetchOwnProfile } from '../actions/user/advisor/fetch'
+import {
+  addAdvisorProfile,
+  updateAdvisor
+} from '../../actions/user/advisor/add'
+import { fetchOwnProfile } from '../../actions/user/advisor/fetch'
 import { FormHelperText, FormControl } from 'material-ui/Form'
 import ExpansionPanel, {
   ExpansionPanelSummary,
@@ -195,7 +198,7 @@ export class AdvisorProfile extends PureComponent {
   }
 
   handleImageUpload(file) {
-    console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
+    // https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_crop,g_face,r_max/w_200/
     let upload = request
       .post(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL)
       .field('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
@@ -207,8 +210,13 @@ export class AdvisorProfile extends PureComponent {
       }
 
       if (response.body.secure_url !== '') {
+        console.log(response.body)
         this.setState({
-          picUrl: response.body.secure_url
+          picUrl:
+            'https://res.cloudinary.com/elexilon/image/upload/h_200,w_400,c_crop,g_face/' +
+            response.body.public_id +
+            '.jpeg'
+          // picUrl: response.body.secure_url
         })
       }
     })

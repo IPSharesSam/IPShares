@@ -15,7 +15,6 @@ import Chip from 'material-ui/Chip'
 import 'react-dates/lib/css/_datepicker.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import './PublicCreatorProfile.css'
 
 const styles = theme => ({
   chip: {

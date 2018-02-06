@@ -5,8 +5,8 @@ import Paper from 'material-ui/Paper'
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Tabs, { Tab } from 'material-ui/Tabs'
-import AdvisorProfile from '../components/AdvisorProfile'
-// import CreatorProfile from '../components/CreatorProfile'
+import AdvisorProfile from '../components/account/AdvisorProfile'
+// import CreatorProfile from '../components/account/CreatorProfile'
 import Grid from 'material-ui/Grid'
 
 function TabContainer(props) {
