@@ -24,7 +24,7 @@ export function fetchOwnProfile () {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.message
+          payload: error
         })
       })
   }
@@ -45,7 +45,7 @@ export default (advisorId) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.message
+          payload: error
         })
       })
   }
