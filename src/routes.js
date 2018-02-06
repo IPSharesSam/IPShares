@@ -18,7 +18,7 @@ export default class Routes extends Component {
         <Route path="/search" component={Search} />
         <Route path="/account/" component={Account} />
         <Route path="/advisor/:advisorId" component={PublicAdvisorProfile} />
-        <Route path="/creator/" component={PublicCreatorProfile} />
+        <Route path="/creator/:creatorId" component={PublicCreatorProfile} />
       </div>
     )
   }
