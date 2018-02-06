@@ -21,7 +21,7 @@ export function fetchOwnProfile() {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error
+          payload: error.response.text
         })
       })
   }
@@ -43,7 +43,7 @@ export default creatorId => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error
+          payload: error.response.text
         })
       })
   }
