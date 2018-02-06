@@ -13,11 +13,10 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Switch from 'material-ui/Switch'
-import validate from 'validate.js'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
-import { fetchOwnProfile } from '../actions/user/creator/fetch'
-import { updateCreator } from '../actions/user/creator/update'
+import { fetchOwnProfile } from '../../actions/user/creator/fetch'
+import { updateCreator } from '../../actions/user/creator/update'
 
 const classes = {
   formBio: {
@@ -39,9 +38,6 @@ export class CreatorProfile extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired
   }
-  constructor(props) {
-    super()
-  }
 
   componentWillMount() {
     this.props.fetchOwnProfile()
@@ -49,8 +45,9 @@ export class CreatorProfile extends PureComponent {
 
   state = {}
 
-  componentWillReceiveProps(nextProps){
-    const { picUrl,
+  componentWillReceiveProps(nextProps) {
+    const {
+      picUrl,
       streetName,
       streetNumber,
       postalCode,
@@ -75,127 +72,12 @@ export class CreatorProfile extends PureComponent {
   submitForm(event) {
     event.preventDefault()
     const { _id } = this.props.creatorProfile
-    if (this.validateAll()) {
-      this.props.updateCreator({ ...this.state, CreatorProfileId: _id })
-    }
+    this.props.updateCreator({ ...this.state, CreatorProfileId: _id })
     return false
   }
 
   cancel() {
     this.props.push('/')
-  }
-
-  validateStreetName() {
-    const streetName = this.state.streetName
-    const validationMsg = validate.single(streetName, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        streetNameError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      streetNameError: null
-    })
-    return true
-  }
-
-  validateStreetNumber() {
-    const streetNumber = this.state.streetNumber
-    const validationMsg = validate.single(streetNumber, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        streetNumberError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      streetNumberError: null
-    })
-    return true
-  }
-
-  validatePostalCode() {
-    const postalCode = this.state.postalCode
-    const validationMsg = validate.single(postalCode, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        postalCodeError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      postalCodeError: null
-    })
-    return true
-  }
-
-  validateCity() {
-    const city = this.state.city
-    const validationMsg = validate.single(city, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        cityError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      cityError: null
-    })
-    return true
-  }
-
-  validateCountry() {
-    const country = this.state.country
-    const validationMsg = validate.single(country, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        countryError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      countryError: null
-    })
-    return true
-  }
-
-  validatePhoneNumber() {
-    const phoneNumber = this.state.phoneNumber
-    const validationMsg = validate.single(phoneNumber, { presence: true })
-
-    if (!!validationMsg) {
-      this.setState({
-        phoneNumberError: validationMsg
-      })
-      return false
-    }
-
-    this.setState({
-      phoneNumberError: null
-    })
-    return true
-  }
-
-  validateAll() {
-    return (
-      this.validateStreetName() &&
-      this.validateStreetNumber() &&
-      this.validateCity() &&
-      this.validatePostalCode() &&
-      this.validateCountry() &&
-      this.validatePhoneNumber()
-    )
   }
 
   handleChange = name => event => {
@@ -214,12 +96,11 @@ export class CreatorProfile extends PureComponent {
       if (err) {
         console.error(err)
       }
-
-      if (response.body.secure_url !== '') {
-        this.setState({
-          picUrl: response.body.secure_url
-        })
-      }
+      this.setState({
+        picUrl:
+          'https://res.cloudinary.com/elexilon/image/upload/h_400,w_800,c_fill,g_face/' +
+          response.body.public_id
+      })
     })
   }
 
@@ -232,7 +113,6 @@ export class CreatorProfile extends PureComponent {
   }
 
   render() {
-
     const {
       picUrl,
       streetName,
@@ -241,31 +121,30 @@ export class CreatorProfile extends PureComponent {
       city,
       country,
       phoneNumber,
-      bio,
+      bio
     } = this.state
 
     const { user } = this.props.creatorProfile
-    if(!user) return null
-
+    if (!user) return null
 
     return (
       <div className="wrap">
         <Typography type="title" component="h2">
           Creator profile
         </Typography>
-
         <form>
           <Dropzone
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}
           >
-              {picUrl === '' ? <p>Drop an image or click to select a file to upload.</p> : (
-                <div>
-                  <img src={picUrl} alt="" />
-                </div>
-              )}
-
+            {picUrl === '' ? (
+              <p>Drop an image or click to select a file to upload.</p>
+            ) : (
+              <div>
+                <img src={picUrl} alt="" />
+              </div>
+            )}
           </Dropzone>
 
           <Grid container spacing={24}>
@@ -421,4 +300,8 @@ const mapStateToProps = ({ creatorProfile }) => ({
   creatorProfile
 })
 
-export default connect(mapStateToProps, { push, fetchOwnProfile, updateCreator })(CreatorProfile)
+export default connect(mapStateToProps, {
+  push,
+  fetchOwnProfile,
+  updateCreator
+})(CreatorProfile)

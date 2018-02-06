@@ -31,6 +31,9 @@ export class Account extends PureComponent {
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return null
+    }
     const { type } = this.props.currentUser
     const { value } = this.state
 

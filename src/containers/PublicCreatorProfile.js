@@ -15,7 +15,6 @@ import Chip from 'material-ui/Chip'
 import 'react-dates/lib/css/_datepicker.css'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import './PublicCreatorProfile.css'
 import fetchCreator from '../actions/user/creator/fetch'
 
 const styles = theme => ({
@@ -48,20 +47,16 @@ class PublicCreatorProfile extends PureComponent {
   componentWillMount() {
     const { fetchCreator } = this.props
     const { creatorId } = this.props.match.params
-    console.log(creatorId)
     fetchCreator(creatorId)
   }
 
   submitForm(event) {
     event.preventDefault()
-    if (this.validateAll()) {
-      const apointment = {
-        date: this.state.date,
-        msg: this.state.msg
-      }
-      console.log(apointment)
+    const appointment = {
+      date: this.state.date,
+      msg: this.state.msg
     }
-    return false
+    return appointment
   }
 
   validateAll() {
@@ -75,7 +70,7 @@ class PublicCreatorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl } = this.props.creatorProfile
+    const { user, picUrl, bio } = this.props.creatorProfile
 
     if (!user) return null
 
@@ -119,14 +114,9 @@ class PublicCreatorProfile extends PureComponent {
               >
                 Bio
               </Typography>
-              <p>
-                Tracey Emin’s art is one of disclosure, using her life events as
-                inspiration for works ranging from painting, drawing, video and
-                installation, to photography, needlework and sculpture. Emin
-                reveals her hopes, humiliations, failures and successes in
-                candid and, at times, excoriating work that is frequently both
-                tragic and humorous.
-              </p>
+              <Typography variant="body1" component="p">
+                {bio}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography
