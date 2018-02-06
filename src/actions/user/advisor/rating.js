@@ -26,7 +26,7 @@ export default () => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.message
+          payload: error.response.text
         })
       })
   }
@@ -47,7 +47,7 @@ export const newRating = (rating) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.message
+          payload: error.response.text
         })
       })
   }
@@ -68,7 +68,7 @@ export const updateRating = (rating, ratingId) => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.message
+          payload: error.response.text
         })
       })
   }
