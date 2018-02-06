@@ -100,7 +100,7 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, ratings } = this.props.advisorProfile
+    const { user, picUrl, ratings, bio } = this.props.advisorProfile
     if (!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
 
@@ -159,18 +159,9 @@ class PublicAdvisorProfile extends PureComponent {
               >
                 Bio
               </Typography>
-              <p>
-                Federico Lega, Ph.D, is a Professor of Healthcare Management and
-                Policy at Bocconi University. He received his BA in Economics
-                and Business Administration from Bocconi University, Milan. From
-                the same institution, he received his Ph.D. degree in Business
-                Administration in June 2000 after a period spent as a Visiting
-                Fellow at the Wagner School of Public Management, New York
-                University. Since 2006 he has been the Head of Executive
-                Education for the Healthcare sector at SDA Bocconi School of
-                Management (SDA). From 2002 to 2008, he was Director of the
-                Master in Healthcare Management (MIMS - Italian class).{' '}
-              </p>
+              <Typography variant="body1" component="p">
+                {bio}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography
