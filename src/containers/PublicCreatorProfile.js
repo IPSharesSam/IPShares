@@ -126,7 +126,7 @@ class PublicCreatorProfile extends PureComponent {
               </Typography>
               <Typography type="display1" align="center" />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={12} md={6} lg={3}>
               <Typography
                 type="headline"
                 component="h2"
@@ -163,7 +163,7 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Dress design" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={12} md={6} lg={3}>
               <Typography
                 type="headline"
                 component="h2"
@@ -197,7 +197,7 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Cool name" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={12} md={6} lg={3}>
               <Typography
                 type="headline"
                 component="h2"
@@ -231,7 +231,7 @@ class PublicCreatorProfile extends PureComponent {
                 <ListItemText primary="Teapot" secondary="Jan 8, 2018" />
               </ListItem>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={12} md={6} lg={3}>
               <Typography
                 type="headline"
                 component="h2"
