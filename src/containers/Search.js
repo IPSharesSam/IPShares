@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardContent, CardMedia } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-// import Chip from 'material-ui/Chip'
+import Chip from 'material-ui/Chip'
 import StarRatingComponent from 'react-star-rating-component'
 // import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
@@ -96,38 +96,24 @@ export class TitlebarGridList extends PureComponent {
                       <PublicClient />
                     </Badge> */}
                   </Typography>
+                  {hit.tags.map(tag => {
+                    return <Chip className={classes.chip} label={tag} />
+                  })}
                   <Typography
                     type="subheading"
                     component="h3"
                     style={{ marginTop: 8 }}
                   >
+
+                    {hit.type === 'advisor' ?
                     <StarRatingComponent
                       renderStarIcon={() => <Star />}
                       name="rate2"
                       editing={false}
                       value={hit.averageNumber}
-                    />
+                    /> : <p></p>}
                   </Typography>
-                  {/* {hit.tags.map(tag => {
-                    return <Chip className={classes.chip} label={tag} />
-                  })} */}
                 </CardContent>
-                {/* <CardActions>
-                  <Button
-                    component={Link}
-                    to={profileLink(hit)}
-                    className={classes.button}
-                    color="default"
-                  >
-                    Profile
-                  </Button>
-                  <StarRatingComponent
-                    name="rate2"
-                    editing={false}
-                    starCount={5}
-                    value={hit.averageNumber}
-                  />
-                </CardActions> */}
               </Card>
             </Grid>
           ))}

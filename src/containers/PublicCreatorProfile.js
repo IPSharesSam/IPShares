@@ -70,7 +70,7 @@ class PublicCreatorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, bio } = this.props.creatorProfile
+    const { user, picUrl, bio, tags } = this.props.creatorProfile
 
     if (!user) return null
 
@@ -99,7 +99,7 @@ class PublicCreatorProfile extends PureComponent {
                     style={{ marginBottom: 12 }}
                     align="center"
                   >
-                    <Chip label="Creator Title" className={styles.chip} />
+                    <Chip label={tags} className={styles.chip} />
                   </Typography>
                 </div>
               </header>
