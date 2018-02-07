@@ -8,12 +8,12 @@ export const loading = (url, loading) => ({
   payload: url
 })
 
-export const loadError = (error) => ({
+export const loadError = error => ({
   type: LOAD_ERROR,
   payload: error
 })
 
-export const clearError = (error) => ({
+export const clearError = error => ({
   type: CLEAR_ERROR,
   payload: error
 })

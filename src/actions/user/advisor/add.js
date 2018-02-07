@@ -17,7 +17,6 @@ export const updateAdvisor = advisorProfile => {
     api
       .patch(`advisor/${AdvisorProfileId}`, advisorProfile)
       .then(result => {
-        console.log(result)
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: UPDATE_ADVISOR_PROFILE,
