@@ -112,7 +112,7 @@ class PublicAdvisorProfile extends PureComponent {
             <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img className="AdvisorImage" src={picUrl} alt="Advisor" />
+                  <img style={{ width:'300px', height:'300px' }} className="AdvisorImage" src={picUrl} alt="Advisor" />
                 </div>
                 <div className="AdvisorLabels">
                   <Typography

@@ -98,7 +98,7 @@ export class CreatorProfile extends PureComponent {
       }
       this.setState({
         picUrl:
-          'https://res.cloudinary.com/elexilon/image/upload/h_400,w_800,c_fill,g_face/' +
+          'https://res.cloudinary.com/elexilon/image/upload/h_600,w_600,c_fill,g_face/' +
           response.body.public_id
       })
     })
@@ -128,12 +128,13 @@ export class CreatorProfile extends PureComponent {
     if (!user) return null
 
     return (
-      <div className="wrap">
+      <div>
         <Typography type="title" component="h2">
           Creator profile
         </Typography>
         <form>
           <Dropzone
+            style={{float:'left', width:300, height:300}}
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}
@@ -147,15 +148,17 @@ export class CreatorProfile extends PureComponent {
             )}
           </Dropzone>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={24} style={{marginTop:20}}>
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
                 <TextField
-                  id="streetName"
                   type="text"
                   label="Street"
                   value={streetName}
                   onChange={this.handleChange('streetName')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="streetName-error-text">
                   {this.state.streetNameError}
@@ -165,11 +168,13 @@ export class CreatorProfile extends PureComponent {
             <Grid item xs={4} md={2}>
               <FormControl fullWidth>
                 <TextField
-                  id="streetNumber"
                   type="text"
                   label="Number"
                   value={streetNumber}
                   onChange={this.handleChange('streetNumber')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="streetNumber-error-text">
                   {this.state.streetNumberError}
@@ -182,11 +187,13 @@ export class CreatorProfile extends PureComponent {
             <Grid item xs={6} md={2}>
               <FormControl fullWidth>
                 <TextField
-                  id="city"
                   type="text"
                   label="City"
                   value={city}
                   onChange={this.handleChange('city')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="city-error-text">
                   {this.state.cityError}
@@ -197,11 +204,13 @@ export class CreatorProfile extends PureComponent {
             <Grid item xs={6} md={3}>
               <FormControl fullWidth>
                 <TextField
-                  id="postalCode"
                   type="text"
                   label="Postal Code"
                   value={postalCode}
                   onChange={this.handleChange('postalCode')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="postalCode-error-text">
                   {this.state.postalCodeError}
@@ -212,12 +221,14 @@ export class CreatorProfile extends PureComponent {
             <Grid item xs={12} md={3}>
               <FormControl fullWidth>
                 <TextField
-                  id="country"
                   type="text"
                   label="Country"
                   fullWidth={true}
                   value={country}
                   onChange={this.handleChange('country')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="country-error-text">
                   {this.state.countryError}
@@ -231,11 +242,13 @@ export class CreatorProfile extends PureComponent {
               <FormControl fullWidth>
                 <TextField
                   style={classes.form}
-                  id="phoneNumber"
                   type="text"
                   label="Phone"
                   value={phoneNumber}
                   onChange={this.handleChange('phoneNumber')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="phoneNumber-error-text">
                   {this.state.phoneNumberError}
@@ -246,10 +259,12 @@ export class CreatorProfile extends PureComponent {
               <FormControl fullWidth>
                 <TextField
                   style={classes.form}
-                  id="publicEmail"
                   type="text"
                   label="Email"
                   onChange={this.handleChange('email')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </FormControl>
             </Grid>
@@ -263,7 +278,6 @@ export class CreatorProfile extends PureComponent {
                 style={classes.formBio}
                 className="TextField"
                 placeholder="Write something about yourself"
-                id="bio"
                 multiline={true}
                 InputProps={{ disableUnderline: true }}
                 value={bio}

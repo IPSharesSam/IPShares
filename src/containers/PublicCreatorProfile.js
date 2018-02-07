@@ -81,7 +81,7 @@ class PublicCreatorProfile extends PureComponent {
             <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img className="CreatorImg" src={picUrl} alt="Creator" />
+                  <img style={{ width:'300px', height:'300px' }} className="CreatorImg" src={picUrl} alt="Creator" />
                 </div>
                 <div className="CreatorTitle">
                   <Typography
@@ -317,6 +317,7 @@ class PublicCreatorProfile extends PureComponent {
                 </Typography>
                 <Typography align="center">
                   <img
+                    style={{ width:'300px', height:'300px' }}
                     src="https://www.departnershipverkiezing.nl/wp-content/uploads/2014/09/Jeroen-Roodenburg-150x150.jpg"
                     alt="Jeroen"
                   />
