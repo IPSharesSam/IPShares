@@ -99,7 +99,7 @@ export class AdvisorProfile extends PureComponent {
 
       this.setState({
         picUrl:
-          'https://res.cloudinary.com/elexilon/image/upload/h_400,w_800,c_fill,g_face/' +
+          'https://res.cloudinary.com/elexilon/image/upload/h_600,w_600,c_fill,g_face/' +
           response.body.public_id
       })
     })
@@ -129,12 +129,13 @@ export class AdvisorProfile extends PureComponent {
     if (!user) return null
 
     return (
-      <div className="wrap">
+      <div>
         <Typography type="title" component="h2">
           Advisor profile
         </Typography>
         <form>
           <Dropzone
+            style={{float:'left', width:300, height:300}}
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}
@@ -157,6 +158,9 @@ export class AdvisorProfile extends PureComponent {
                   label="Street"
                   value={streetName}
                   onChange={this.handleChange('streetName')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="streetName-error-text">
                   {this.state.streetNameError}
@@ -171,6 +175,9 @@ export class AdvisorProfile extends PureComponent {
                   label="Number"
                   value={streetNumber}
                   onChange={this.handleChange('streetNumber')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="streetNumber-error-text">
                   {this.state.streetNumberError}
@@ -188,6 +195,9 @@ export class AdvisorProfile extends PureComponent {
                   label="City"
                   value={city}
                   onChange={this.handleChange('city')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="city-error-text">
                   {this.state.cityError}
@@ -203,6 +213,9 @@ export class AdvisorProfile extends PureComponent {
                   label="Postal Code"
                   value={postalCode}
                   onChange={this.handleChange('postalCode')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="postalCode-error-text">
                   {this.state.postalCodeError}
@@ -219,6 +232,9 @@ export class AdvisorProfile extends PureComponent {
                   fullWidth={true}
                   value={country}
                   onChange={this.handleChange('country')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="country-error-text">
                   {this.state.countryError}
@@ -237,6 +253,9 @@ export class AdvisorProfile extends PureComponent {
                   label="Phone"
                   value={phoneNumber}
                   onChange={this.handleChange('phoneNumber')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <FormHelperText id="phoneNumber-error-text">
                   {this.state.phoneNumberError}
@@ -251,6 +270,9 @@ export class AdvisorProfile extends PureComponent {
                   type="text"
                   label="Email"
                   onChange={this.handleChange('email')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </FormControl>
             </Grid>
