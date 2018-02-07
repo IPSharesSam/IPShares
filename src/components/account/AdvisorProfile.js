@@ -59,10 +59,15 @@ export class AdvisorProfile extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
-      picUrl
+      picUrl,
+      phoneNumber,
+      bio,
+      address
     } = nextProps.advisorProfile
-
     this.setState({
+      phoneNumber,
+      bio,
+      address,
       picUrl: !picUrl ? '' : picUrl
     })
   }
@@ -79,7 +84,6 @@ export class AdvisorProfile extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
-    console.log(this.state)
     const { _id } = this.props.advisorProfile
     this.props.updateAdvisor({ ...this.state, AdvisorProfileId: _id })
     return false
@@ -122,8 +126,10 @@ export class AdvisorProfile extends PureComponent {
     const {
       picUrl,
       phoneNumber,
-      bio
+      bio,
+      address
     } = this.state
+
 
     const { user } = this.props.advisorProfile
     if (!user) return null
@@ -151,7 +157,7 @@ export class AdvisorProfile extends PureComponent {
 
           <Grid container spacing={24}>
             <Grid item xs={12}>
-              <Search pushParent={this.childValueToState.bind(this)} />
+              <Search hank={address} pushParent={this.childValueToState.bind(this)} />
             </Grid>
           </Grid>
 
