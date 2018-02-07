@@ -12,6 +12,7 @@ import Typography from 'material-ui/Typography'
 import Calendar from '../components/publicProfile/Calendar'
 import Grid from 'material-ui/Grid'
 import StarRatingComponent from 'react-star-rating-component'
+import Chip from 'material-ui/Chip'
 import 'react-dates/lib/css/_datepicker.css'
 import './PublicProfile.css'
 import { connect } from 'react-redux'
@@ -101,7 +102,7 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, ratings, bio } = this.props.advisorProfile
+    const { user, picUrl, ratings, bio, tags } = this.props.advisorProfile
     if (!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
 
@@ -110,7 +111,7 @@ class PublicAdvisorProfile extends PureComponent {
         <Paper style={{ padding: 24, margin: 24 }}>
           <Grid container spacing={24} style={{ marginBottom: 24 }}>
             <Grid item xs={12} md={5}>
-              <header className="Header-wrap">
+              <header className="Header-wrap" style={{ margin:'auto' }}>
                 <div className="picture">
                   <img style={{ width:'300px', height:'300px' }} className="AdvisorImage" src={picUrl} alt="Advisor" />
                 </div>
@@ -123,6 +124,7 @@ class PublicAdvisorProfile extends PureComponent {
                   >
                     {`${user.firstName} ${user.lastName}`}
                   </Typography>
+                  <div><Chip label={tags} className={{}} /></div>
                   <Badge
                     style={{ margin: '18px' }}
                     className="Badge"
