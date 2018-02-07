@@ -16,6 +16,12 @@ export class GoogleMapsSearch extends PureComponent {
       .catch(error => console.error('Error', error))
   }
 
+  componentWillMount() {
+    this.setState({
+      address: this.props.hank
+    })
+  }
+
   render() {
     const inputProps = {
       value: this.state.address,
