@@ -15,6 +15,7 @@ import Grid from 'material-ui/Grid'
 import Switch from 'material-ui/Switch'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import Search from './GoogleMapsSearch'
 import { fetchOwnProfile } from '../../actions/user/creator/fetch'
 import { updateCreator } from '../../actions/user/creator/update'
 
@@ -134,7 +135,7 @@ export class CreatorProfile extends PureComponent {
         </Typography>
         <form>
           <Dropzone
-            style={{float:'left', width:300, height:300}}
+            style={{ float: 'left', width: 300, height: 300 }}
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}
@@ -142,13 +143,13 @@ export class CreatorProfile extends PureComponent {
             {picUrl === '' ? (
               <p>Drop an image or click to select a file to upload.</p>
             ) : (
-              <div>
-                <img src={picUrl} alt="" />
-              </div>
-            )}
+                <div>
+                  <img src={picUrl} alt="" />
+                </div>
+              )}
           </Dropzone>
 
-          <Grid container spacing={24} style={{marginTop:20}}>
+          <Grid container spacing={24} style={{ marginTop: 20 }}>
             <Grid item xs={8} md={6}>
               <FormControl fullWidth>
                 <TextField

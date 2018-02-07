@@ -15,6 +15,7 @@ import Grid from 'material-ui/Grid'
 import Switch from 'material-ui/Switch'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import Search from './GoogleMapsSearch'
 import { fetchOwnProfile } from '../../actions/user/advisor/fetch'
 import { updateAdvisor } from '../../actions/user/advisor/add'
 
@@ -35,6 +36,17 @@ const classes = {
 }
 
 export class AdvisorProfile extends PureComponent {
+  constructor() {
+    super()
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      phoneNumber: '',
+      email: '',
+      bio: '',
+      address: '',
+      place_id: ''
+    }
+  }
   static propTypes = {
     push: PropTypes.func.isRequired
   }
@@ -47,24 +59,10 @@ export class AdvisorProfile extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
-      picUrl,
-      streetName,
-      streetNumber,
-      postalCode,
-      city,
-      country,
-      phoneNumber,
-      bio
+      picUrl
     } = nextProps.advisorProfile
 
     this.setState({
-      streetName,
-      streetNumber,
-      postalCode,
-      city,
-      country,
-      phoneNumber,
-      bio,
       picUrl: !picUrl ? '' : picUrl
     })
   }
@@ -73,14 +71,15 @@ export class AdvisorProfile extends PureComponent {
     this.props.push('/')
   }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    })
+  handleChange(e) {
+    var change = {}
+    change[e.target.id] = e.target.value
+    this.setState(change)
   }
 
   submitForm(event) {
     event.preventDefault()
+    console.log(this.state)
     const { _id } = this.props.advisorProfile
     this.props.updateAdvisor({ ...this.state, AdvisorProfileId: _id })
     return false
@@ -113,14 +112,15 @@ export class AdvisorProfile extends PureComponent {
     this.handleImageUpload(files[0])
   }
 
+  childValueToState(x, y) {
+    this.setState({
+      address: x,
+      place_id: y
+    })
+  }
   render() {
     const {
       picUrl,
-      streetName,
-      streetNumber,
-      postalCode,
-      city,
-      country,
       phoneNumber,
       bio
     } = this.state
@@ -133,9 +133,9 @@ export class AdvisorProfile extends PureComponent {
         <Typography type="title" component="h2">
           Advisor profile
         </Typography>
-        <form>
+        <form onSubmit={this.submitForm.bind(this)}>
           <Dropzone
-            style={{float:'left', width:300, height:300}}
+            style={{ float: 'left', width: 300, height: 300 }}
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}
@@ -143,103 +143,15 @@ export class AdvisorProfile extends PureComponent {
             {picUrl === '' ? (
               <p>Drop an image or click to select a file to upload.</p>
             ) : (
-              <div>
-                <img src={picUrl} alt="" />
-              </div>
-            )}
+                <div>
+                  <img src={picUrl} alt="" />
+                </div>
+              )}
           </Dropzone>
 
           <Grid container spacing={24}>
-            <Grid item xs={8} md={6}>
-              <FormControl fullWidth>
-                <TextField
-                  id="streetName"
-                  type="text"
-                  label="Street"
-                  value={streetName}
-                  onChange={this.handleChange('streetName')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="streetName-error-text">
-                  {this.state.streetNameError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4} md={2}>
-              <FormControl fullWidth>
-                <TextField
-                  id="streetNumber"
-                  type="text"
-                  label="Number"
-                  value={streetNumber}
-                  onChange={this.handleChange('streetNumber')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="streetNumber-error-text">
-                  {this.state.streetNumberError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={24}>
-            <Grid item xs={6} md={2}>
-              <FormControl fullWidth>
-                <TextField
-                  id="city"
-                  type="text"
-                  label="City"
-                  value={city}
-                  onChange={this.handleChange('city')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="city-error-text">
-                  {this.state.cityError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={6} md={3}>
-              <FormControl fullWidth>
-                <TextField
-                  id="postalCode"
-                  type="text"
-                  label="Postal Code"
-                  value={postalCode}
-                  onChange={this.handleChange('postalCode')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="postalCode-error-text">
-                  {this.state.postalCodeError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} md={3}>
-              <FormControl fullWidth>
-                <TextField
-                  id="country"
-                  type="text"
-                  label="Country"
-                  fullWidth={true}
-                  value={country}
-                  onChange={this.handleChange('country')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="country-error-text">
-                  {this.state.countryError}
-                </FormHelperText>
-              </FormControl>
+            <Grid item xs={12}>
+              <Search pushParent={this.childValueToState.bind(this)} />
             </Grid>
           </Grid>
 
@@ -249,10 +161,10 @@ export class AdvisorProfile extends PureComponent {
                 <TextField
                   style={classes.form}
                   id="phoneNumber"
-                  type="text"
+                  type="phoneNumber"
                   label="Phone"
                   value={phoneNumber}
-                  onChange={this.handleChange('phoneNumber')}
+                  onChange={this.handleChange}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -269,7 +181,7 @@ export class AdvisorProfile extends PureComponent {
                   id="publicEmail"
                   type="text"
                   label="Email"
-                  onChange={this.handleChange('email')}
+                  onChange={this.handleChange}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -290,7 +202,7 @@ export class AdvisorProfile extends PureComponent {
                 multiline={true}
                 InputProps={{ disableUnderline: true }}
                 value={bio}
-                onChange={this.handleChange('bio')}
+                onChange={this.handleChange}
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>
@@ -300,20 +212,16 @@ export class AdvisorProfile extends PureComponent {
             control={
               <Switch
                 checked={this.state.checked}
-                onChange={this.handleChange('publicAdvisor')}
+                onChange={this.handleChange}
                 className="profile-toggle"
                 style={classes.toggle}
               />
             }
             label="Public profile"
           />
+          <Button type="submit" raised color="primary">Update</Button>
+          <Button onClick={this.cancel.bind(this)} color="primary">Cancel</Button>
         </form>
-        <Button onClick={this.submitForm.bind(this)} raised color="primary">
-          Update
-        </Button>
-        <Button onClick={this.cancel.bind(this)} color="primary">
-          Cancel
-        </Button>
       </div>
     )
   }
