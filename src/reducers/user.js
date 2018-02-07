@@ -7,7 +7,7 @@ export default function(state = cu, { type, payload } = {}) {
   switch (type) {
     case USER_SIGNED_IN:
       window.localStorage.setItem('cu', JSON.stringify({ ...payload }))
-      return { payload }
+      return payload
     case USER_SIGNED_OUT:
       window.localStorage.removeItem('cu')
       return null
