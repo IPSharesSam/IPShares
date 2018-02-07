@@ -7,9 +7,8 @@ export default function(state = {}, { type, payload } = {}) {
     case USER_SIGNED_OUT:
       return {}
     case FETCHED_CREATOR:
-      return payload
     case UPDATE_CREATOR_PROFILE:
-      return { ...state, payload }
+      return payload
     default:
       return state
   }

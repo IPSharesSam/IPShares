@@ -8,9 +8,8 @@ export default function(state = {}, { type, payload } = {}) {
     case USER_SIGNED_OUT:
       return {}
     case FETCHED_ADVISOR:
-      return payload
     case UPDATE_ADVISOR_PROFILE:
-      return { ...state, payload }
+      return payload
     case UPDATE_RATING:
       const ratings = state.ratings.map(rating => {
         if (rating._id === payload._id) {
