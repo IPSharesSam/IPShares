@@ -31,10 +31,11 @@ export default function signUp(user) {
         dispatch(push('/account'))
       })
       .catch(error => {
+        console.log(error);
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.response.text
+          payload: error
         })
       })
   }

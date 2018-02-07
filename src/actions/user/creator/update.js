@@ -27,7 +27,7 @@ export const updateCreator = creatorProfile => {
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.response.text
+          payload: error
         })
       })
   }

@@ -22,10 +22,11 @@ export default function signIn(user) {
         })
       })
       .catch(error => {
+        console.log(error);
         dispatch({ type: DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
-          payload: error.response.text
+          payload: error
         })
       })
   }
