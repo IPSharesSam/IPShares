@@ -96,7 +96,7 @@ export class TitlebarGridList extends PureComponent {
                       <PublicClient />
                     </Badge> */}
                   </Typography>
-                  {hit.tags.map(tag => {
+                  {hit.tags.length > 0 && hit.tags.map(tag => {
                     return <Chip className={classes.chip} label={tag} />
                   })}
                   <Typography
@@ -106,12 +106,12 @@ export class TitlebarGridList extends PureComponent {
                   >
 
                     {hit.type === 'advisor' ?
-                    <StarRatingComponent
-                      renderStarIcon={() => <Star />}
-                      name="rate2"
-                      editing={false}
-                      value={hit.averageNumber}
-                    /> : <p></p>}
+                      <StarRatingComponent
+                        renderStarIcon={() => <Star />}
+                        name="rate2"
+                        editing={false}
+                        value={hit.averageNumber}
+                      /> : <p></p>}
                   </Typography>
                 </CardContent>
               </Card>
