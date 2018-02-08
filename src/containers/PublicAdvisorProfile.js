@@ -44,6 +44,21 @@ class PublicAdvisorProfile extends PureComponent {
     fetchAdvisor(advisorId)
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { ratings } = nextProps.advisorProfile
+    const { user } = nextProps
+
+    const currentRating = ratings.filter(r => r.clientId === user._id)[0]
+
+    if(!currentRating) return null
+
+    this.setState({
+      rating: currentRating.rating,
+      comment: currentRating.comment
+    })
+
+  }
+
   submitForm(event) {
     event.preventDefault()
     const appointment = {
@@ -73,10 +88,9 @@ class PublicAdvisorProfile extends PureComponent {
 
     const currentRating = ratings.filter(r => r.clientId === user._id)[0]
     const isNewRating = !currentRating
-    console.log(currentRating, isNewRating)
     isNewRating
       ? this.props.newRating(newRating)
-      : this.props.updateRating(newRating)
+      : this.props.updateRating(newRating, currentRating._id)
     this.setState({ ratingDialogOpen: false })
   }
 
@@ -262,6 +276,7 @@ class PublicAdvisorProfile extends PureComponent {
                     InputProps={{ disableUnderline: true }}
                     onChange={this.handleChange('comment')}
                     rowsMax={12}
+                    value={this.state.comment}
                   />
                 </div>
               </form>
