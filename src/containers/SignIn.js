@@ -146,10 +146,8 @@ export class SignIn extends PureComponent {
               {this.state.passwordError}
             </FormHelperText>
           </FormControl>
+          <Button type="submit" raised color="primary">{'Sign in'}</Button>
         </form>
-        <Button onClick={this.submitForm.bind(this)} raised color="primary">
-          {'Sign in'}
-        </Button>
       </Paper>
     )
   }

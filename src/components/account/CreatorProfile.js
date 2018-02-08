@@ -36,6 +36,18 @@ const classes = {
 }
 
 export class CreatorProfile extends PureComponent {
+  constructor() {
+    super()
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      phoneNumber: '',
+      email: '',
+      bio: '',
+      address: '',
+      place_id: ''
+    }
+  }
+
   static propTypes = {
     push: PropTypes.func.isRequired
   }
@@ -48,6 +60,8 @@ export class CreatorProfile extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
+      tags,
+      publicCreator,
       picUrl,
       streetName,
       streetNumber,
@@ -55,10 +69,13 @@ export class CreatorProfile extends PureComponent {
       city,
       country,
       phoneNumber,
-      bio
+      bio,
+      checked
     } = nextProps.creatorProfile
 
     this.setState({
+      tags,
+      publicCreator,
       streetName,
       streetNumber,
       postalCode,
@@ -66,6 +83,7 @@ export class CreatorProfile extends PureComponent {
       country,
       phoneNumber,
       bio,
+      checked,
       picUrl: !picUrl ? '' : picUrl
     })
   }
@@ -81,10 +99,19 @@ export class CreatorProfile extends PureComponent {
     this.props.push('/')
   }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    })
+  handleChange(e) {
+    console.log(e.target.type, e.target.checked)
+    if (e.target.type === 'checkbox') {
+      this.setState({
+        publicCreator: e.target.checked
+      })
+      console.log(this.state.publicCreator)
+
+    } else {
+        var change = {}
+        change[e.target.id] = e.target.value
+        this.setState(change)
+    }
   }
 
   handleImageUpload(file) {
@@ -113,16 +140,21 @@ export class CreatorProfile extends PureComponent {
     this.handleImageUpload(files[0])
   }
 
+  childValueToState(x, y) {
+    this.setState({
+      address: x,
+      place_id: y
+    })
+  }
+
   render() {
     const {
+      tags,
       picUrl,
-      streetName,
-      streetNumber,
-      postalCode,
-      city,
-      country,
+      address,
       phoneNumber,
-      bio
+      bio,
+      checked
     } = this.state
 
     const { user } = this.props.creatorProfile
@@ -133,7 +165,7 @@ export class CreatorProfile extends PureComponent {
         <Typography type="title" component="h2">
           Creator profile
         </Typography>
-        <form>
+        <form onSubmit={this.submitForm.bind(this)}>
           <Dropzone
             style={{ float: 'left', width: 300, height: 300 }}
             multiple={false}
@@ -149,92 +181,9 @@ export class CreatorProfile extends PureComponent {
               )}
           </Dropzone>
 
-          <Grid container spacing={24} style={{ marginTop: 20 }}>
-            <Grid item xs={8} md={6}>
-              <FormControl fullWidth>
-                <TextField
-                  type="text"
-                  label="Street"
-                  value={streetName}
-                  onChange={this.handleChange('streetName')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="streetName-error-text">
-                  {this.state.streetNameError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4} md={2}>
-              <FormControl fullWidth>
-                <TextField
-                  type="text"
-                  label="Number"
-                  value={streetNumber}
-                  onChange={this.handleChange('streetNumber')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="streetNumber-error-text">
-                  {this.state.streetNumberError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-          </Grid>
-
           <Grid container spacing={24}>
-            <Grid item xs={6} md={2}>
-              <FormControl fullWidth>
-                <TextField
-                  type="text"
-                  label="City"
-                  value={city}
-                  onChange={this.handleChange('city')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="city-error-text">
-                  {this.state.cityError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={6} md={3}>
-              <FormControl fullWidth>
-                <TextField
-                  type="text"
-                  label="Postal Code"
-                  value={postalCode}
-                  onChange={this.handleChange('postalCode')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="postalCode-error-text">
-                  {this.state.postalCodeError}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} md={3}>
-              <FormControl fullWidth>
-                <TextField
-                  type="text"
-                  label="Country"
-                  fullWidth={true}
-                  value={country}
-                  onChange={this.handleChange('country')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormHelperText id="country-error-text">
-                  {this.state.countryError}
-                </FormHelperText>
-              </FormControl>
+            <Grid item xs={12}>
+              <Search hank={address} pushParent={this.childValueToState.bind(this)} />
             </Grid>
           </Grid>
 
@@ -243,10 +192,11 @@ export class CreatorProfile extends PureComponent {
               <FormControl fullWidth>
                 <TextField
                   style={classes.form}
-                  type="text"
+                  id="phoneNumber"
+                  type="phoneNumber"
                   label="Phone"
                   value={phoneNumber}
-                  onChange={this.handleChange('phoneNumber')}
+                  onChange={this.handleChange}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -260,9 +210,25 @@ export class CreatorProfile extends PureComponent {
               <FormControl fullWidth>
                 <TextField
                   style={classes.form}
+                  id="publicEmail"
                   type="text"
                   label="Email"
-                  onChange={this.handleChange('email')}
+                  onChange={this.handleChange}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} md={5}>
+              <FormControl fullWidth>
+                <TextField
+                  style={classes.form}
+                  id="tags"
+                  type="text"
+                  label="Job Title"
+                  value={tags}
+                  onChange={this.handleChange}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -279,10 +245,11 @@ export class CreatorProfile extends PureComponent {
                 style={classes.formBio}
                 className="TextField"
                 placeholder="Write something about yourself"
+                id="bio"
                 multiline={true}
                 InputProps={{ disableUnderline: true }}
                 value={bio}
-                onChange={this.handleChange('bio')}
+                onChange={this.handleChange}
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>
@@ -291,21 +258,18 @@ export class CreatorProfile extends PureComponent {
             style={{ float: 'right' }}
             control={
               <Switch
-                checked={this.state.checked}
-                onChange={this.handleChange('publicAdvisor')}
+                checked={checked}
+                id="publicCreator"
+                onClick={this.handleChange}
                 className="profile-toggle"
                 style={classes.toggle}
               />
             }
             label="Public profile"
           />
+          <Button type="submit" raised color="primary">Update</Button>
+          <Button onClick={this.cancel.bind(this)} color="primary">Cancel</Button>
         </form>
-        <Button onClick={this.submitForm.bind(this)} raised color="primary">
-          Update
-        </Button>
-        <Button onClick={this.cancel.bind(this)} color="primary">
-          Cancel
-        </Button>
       </div>
     )
   }

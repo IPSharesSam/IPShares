@@ -20,7 +20,7 @@ const tileData = [
       'https://www.timeshighereducation.com/sites/default/files/Pictures/web/x/x/v/female_scientist_at_work_160114.jpg'
   },
   {
-    title: 'Scientist',
+    title: 'Writer',
     img:
       'https://cdn-media-1.lifehack.org/wp-content/files/2015/07/15-Signs-Youre-A-Natural-Born-Writer-Even-If-You-Dont-Feel-You-Are.jpg'
   },
@@ -43,6 +43,11 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     transform: 'translateZ(0)'
   },
+  gridImg: {
+    height: 'auto',
+    width: 'auto',
+    flex: 1,
+  },
   title: {
     color: 'rgb(255, 255, 255)'
   },
@@ -60,7 +65,7 @@ function SingleLineGridList(props) {
       <GridList className={classes.gridList} cols={4.0}>
         {tileData.map(tile => (
           <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+            <img className={ classes.gridImg } src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               classes={{

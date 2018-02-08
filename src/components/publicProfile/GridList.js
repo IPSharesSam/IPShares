@@ -38,6 +38,10 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     transform: 'translateZ(0)'
   },
+  gridImg: {
+    height: '100%',
+    widht: '100%',
+  },
   title: {
     color: 'rgb(255, 255, 255)'
   },
@@ -55,7 +59,7 @@ function SingleLineGridList(props) {
       <GridList className={classes.gridList} cols={4.0}>
         {tileData.map(tile => (
           <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+            <img className={classes.gridImg} src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               classes={{
