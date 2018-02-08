@@ -63,13 +63,17 @@ export class AdvisorProfile extends PureComponent {
       picUrl,
       phoneNumber,
       bio,
-      address
+      address,
+      publicAdvisor,
+      checked,
     } = nextProps.advisorProfile
     this.setState({
       tags,
+      checked,
       phoneNumber,
       bio,
       address,
+      publicAdvisor,
       picUrl: !picUrl ? '' : picUrl
     })
   }
@@ -79,9 +83,18 @@ export class AdvisorProfile extends PureComponent {
   }
 
   handleChange(e) {
-    var change = {}
-    change[e.target.id] = e.target.value
-    this.setState(change)
+    console.log(e.target.type, e.target.checked)
+    if (e.target.type === 'checkbox') {
+      this.setState({
+        publicAdvisor: e.target.checked
+      })
+      console.log(this.state.publicAdvisor)
+
+    } else {
+        var change = {}
+        change[e.target.id] = e.target.value
+        this.setState(change)
+    }
   }
 
   submitForm(event) {
@@ -130,7 +143,8 @@ export class AdvisorProfile extends PureComponent {
       picUrl,
       phoneNumber,
       bio,
-      address
+      address,
+      checked,
     } = this.state
 
 
@@ -235,8 +249,9 @@ export class AdvisorProfile extends PureComponent {
             style={{ float: 'right' }}
             control={
               <Switch
-                checked={this.state.checked}
-                onChange={this.handleChange}
+                checked={checked}
+                id="publicAdvisor"
+                onClick={this.handleChange}
                 className="profile-toggle"
                 style={classes.toggle}
               />
