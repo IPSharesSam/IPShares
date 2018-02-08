@@ -245,13 +245,14 @@ class PublicAdvisorProfile extends PureComponent {
                 onSubmit={this.submitStarRatingForm.bind(this)}
                 className="Contact-wrap"
               >
-                <div className="TextField">
+                <div>
                   <TextField
                     className="TextField"
                     placeholder="Write a comment"
                     multiline={true}
                     InputProps={{ disableUnderline: true }}
                     onChange={this.handleChange('comment')}
+                    rowsMax={12}
                   />
                 </div>
               </form>

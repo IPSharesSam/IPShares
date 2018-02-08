@@ -12,12 +12,12 @@
 .TextField {
   padding: 10px;
   min-height: 340px;
-  width: 55%;
+  height: 100%;
+  width: 100%;
   float: left;
 }
 
 .MsgField {
-  margin-top: 30px;
   padding: 10px;
   border: 1px solid #c8c8c8;
   border-radius: 10px;
@@ -36,10 +36,4 @@
 
 .AdvisorImage {
   float: left;
-}
-
-.Calender {
-  width: 40%;
-  padding-top: 20px;
-  float: right;
 }

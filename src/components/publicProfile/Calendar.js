@@ -25,6 +25,7 @@ export class Calendar extends PureComponent {
           }
         }}
         width={'100%'}
+        height={250}
         selectedDate={today}
         disabledDays={[0, 6]}
         minDate={new Date(minDate)}

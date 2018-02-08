@@ -15,7 +15,7 @@ const tileData = [
       'http://scarletoakfs.com/wp-content/uploads/2016/03/101952269-financial-advisor_1910x1000.jpg'
   },
   {
-    title: 'whatUpGansta',
+    title: 'IP expert',
     img:
       'https://fthmb.tqn.com/qQCDGniyAFfWwdIbJow4lDacJJM=/1280x854/filters:no_upscale():fill(transparent,1)/138710659-56a819ce3df78cf7729c1cde.jpg'
   },
