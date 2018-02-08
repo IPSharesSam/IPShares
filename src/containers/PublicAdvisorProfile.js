@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import 'react-dates/initialize'
 import GridList from '../components/publicProfile/GridList'
 import GridListClients from '../components/publicProfile/GridListClients'
+import MapWithMarker from '../components/publicProfile/MapWithMarker'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
@@ -102,7 +103,7 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, ratings, bio, tags } = this.props.advisorProfile
+    const { user, picUrl, ratings, bio, tags, latlng } = this.props.advisorProfile
     if (!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
 
@@ -111,9 +112,9 @@ class PublicAdvisorProfile extends PureComponent {
         <Paper style={{ padding: 24, margin: 24 }}>
           <Grid container spacing={24} style={{ marginBottom: 24 }}>
             <Grid item xs={12} md={5}>
-              <header className="Header-wrap" style={{ margin:'auto' }}>
+              <header className="Header-wrap" style={{ margin: 'auto' }}>
                 <div className="picture">
-                  <img style={{ width:'300px', height:'300px' }} className="AdvisorImage" src={picUrl} alt="Advisor" />
+                  <img style={{ width: '300px', height: '300px' }} className="AdvisorImage" src={picUrl} alt="Advisor" />
                 </div>
                 <div className="AdvisorLabels">
                   <Typography
@@ -124,7 +125,7 @@ class PublicAdvisorProfile extends PureComponent {
                   >
                     {`${user.firstName} ${user.lastName}`}
                   </Typography>
-                  <div><Chip label={tags} className={{}} /></div>
+                  <div><Chip label={tags} /></div>
                   <Badge
                     style={{ margin: '18px' }}
                     className="Badge"
@@ -219,6 +220,14 @@ class PublicAdvisorProfile extends PureComponent {
             </Grid>
             <Grid item xs={12} md={6}>
               <Calendar />
+            </Grid>
+            <Grid item xs={12}>
+              <MapWithMarker
+                latlng={latlng}
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2qRZtMphkUtIpc_icoU7lyLOolwWS9U&libraries=places"
+                mapElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `400px` }} />}
+                loadingElement={<div style={{ height: `100%` }} />} />
             </Grid>
           </Grid>
         </Paper>

@@ -116,10 +116,11 @@ export class AdvisorProfile extends PureComponent {
     this.handleImageUpload(files[0])
   }
 
-  childValueToState(x, y) {
+  childValueToState(x, y, z) {
     this.setState({
       address: x,
-      place_id: y
+      place_id: y,
+      latlng: z
     })
   }
   render() {
