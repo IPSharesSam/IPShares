@@ -26,6 +26,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle
 } from 'material-ui/Dialog'
+import { loadError } from '../actions/user/loading'
 
 class PublicAdvisorProfile extends PureComponent {
   constructor(props) {
@@ -48,8 +49,9 @@ class PublicAdvisorProfile extends PureComponent {
     const { ratings } = nextProps.advisorProfile
     const { user } = nextProps
 
-    const currentRating = ratings.filter(r => r.clientId === user._id)[0]
+    if(!user) return null
 
+    const currentRating = ratings.filter(r => r.clientId.toString() === user._id.toString())[0]
     if(!currentRating) return null
 
     this.setState({
@@ -75,9 +77,22 @@ class PublicAdvisorProfile extends PureComponent {
     const { signedIn, user } = this.props
     const { rating, comment } = this.state
 
-    if (!signedIn) return false //TODO: SEND ERROR signedIn
-    if (rating === 0) return false //TODO: SEND ERROR Rating please
-    if (comment === '') return false //TODO: SEND ERROR Rating message
+    if (!signedIn) {
+      this.props.loadError("You have to login to rate an advisor")
+      return false
+    }
+    if (advisorUser._id.toString() === user._id.toString()) {
+      this.props.loadError("I know you're great, but let's leave this to others...")
+      return false
+    }
+    if (rating === 0) {
+      this.props.loadError("You need to give a rating of 1 to 5 stars")
+      return false
+    }
+    if (comment === '') {
+      this.props.loadError("You need to write a comment")
+      return false
+    }
 
     const newRating = {
       advisorId: advisorUser._id,
@@ -86,7 +101,7 @@ class PublicAdvisorProfile extends PureComponent {
       rating: rating
     }
 
-    const currentRating = ratings.filter(r => r.clientId === user._id)[0]
+    const currentRating = ratings.filter(r => r.clientId.toString() === user._id.toString() )[0]
     const isNewRating = !currentRating
     isNewRating
       ? this.props.newRating(newRating)
@@ -316,5 +331,6 @@ export default connect(mapStateToProps, {
   push,
   fetchAdvisor,
   newRating,
-  updateRating
+  updateRating,
+  loadError
 })(PublicAdvisorProfile)

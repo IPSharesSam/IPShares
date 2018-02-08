@@ -40,7 +40,7 @@ class Error extends React.Component {
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left'
+            horizontal: 'center'
           }}
           open={!!error}
           autoHideDuration={6000}
