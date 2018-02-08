@@ -108,9 +108,9 @@ export class CreatorProfile extends PureComponent {
       console.log(this.state.publicCreator)
 
     } else {
-        var change = {}
-        change[e.target.id] = e.target.value
-        this.setState(change)
+      var change = {}
+      change[e.target.id] = e.target.value
+      this.setState(change)
     }
   }
 
@@ -183,6 +183,7 @@ export class CreatorProfile extends PureComponent {
 
           <Grid container spacing={24}>
             <Grid item xs={12}>
+              <label>address</label>
               <Search hank={address} pushParent={this.childValueToState.bind(this)} />
             </Grid>
           </Grid>
@@ -206,7 +207,7 @@ export class CreatorProfile extends PureComponent {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Grid item xs={6} md={5}>
+            {/* <Grid item xs={6} md={5}>
               <FormControl fullWidth>
                 <TextField
                   style={classes.form}
@@ -219,7 +220,7 @@ export class CreatorProfile extends PureComponent {
                   }}
                 />
               </FormControl>
-            </Grid>
+            </Grid> */}
             <Grid item xs={6} md={5}>
               <FormControl fullWidth>
                 <TextField
