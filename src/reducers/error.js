@@ -1,5 +1,4 @@
 import { LOAD_ERROR, CLEAR_ERROR } from '../actions/user/loading'
-import { instanceOf } from '../../../../../.cache/typescript/2.6/node_modules/@types/prop-types';
 
 export default function (state = null, { type, payload } = {}) {
   switch (type) {
