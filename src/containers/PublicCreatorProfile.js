@@ -70,7 +70,7 @@ class PublicCreatorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, bio, tags } = this.props.creatorProfile
+    const { user, picUrl, bio, tags, companyName } = this.props.creatorProfile
 
     if (!user) return null
 
@@ -81,7 +81,7 @@ class PublicCreatorProfile extends PureComponent {
             <Grid item xs={12} md={5}>
               <header className="Header-wrap">
                 <div className="picture">
-                  <img style={{ width:'300px', height:'300px' }} className="CreatorImg" src={picUrl} alt="Creator" />
+                  <img style={{ width: '300px', height: '300px' }} className="CreatorImg" src={picUrl} alt="Creator" />
                 </div>
                 <div className="CreatorTitle">
                   <Typography
@@ -90,7 +90,7 @@ class PublicCreatorProfile extends PureComponent {
                     style={{ color: '#ff1227', marginBottom: 12 }}
                     align="center"
                   >
-                    {`${user.firstName} ${user.lastName}`}
+                    {`${user.firstName} ${user.lastName} - ${companyName}`}
                   </Typography>
 
                   <Typography
@@ -317,7 +317,7 @@ class PublicCreatorProfile extends PureComponent {
                 </Typography>
                 <Typography align="center">
                   <img
-                    style={{ width:'300px', height:'300px' }}
+                    style={{ width: '300px', height: '300px' }}
                     src="https://www.departnershipverkiezing.nl/wp-content/uploads/2014/09/Jeroen-Roodenburg-150x150.jpg"
                     alt="Jeroen"
                   />

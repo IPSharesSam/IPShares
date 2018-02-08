@@ -132,7 +132,7 @@ class PublicAdvisorProfile extends PureComponent {
   }
 
   render() {
-    const { user, picUrl, ratings, bio, tags, latlng } = this.props.advisorProfile
+    const { user, picUrl, ratings, bio, tags, latlng, companyName } = this.props.advisorProfile
     if (!user) return null
     const ratingAverage = this.calculateRatingAverage(ratings)
 
@@ -152,7 +152,7 @@ class PublicAdvisorProfile extends PureComponent {
                     style={{ color: '#ff1227', marginBottom: 12 }}
                     align="center"
                   >
-                    {`${user.firstName} ${user.lastName}`}
+                    {`${user.firstName} ${user.lastName} - ${companyName}`}
                   </Typography>
                   <div><Chip label={tags} /></div>
                   <Badge

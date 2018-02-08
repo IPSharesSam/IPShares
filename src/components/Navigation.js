@@ -84,27 +84,27 @@ export class Navigation extends PureComponent {
                 </Button>
               </div>
             ) : (
-              <div>
-                <Button
-                  className={classes.button}
-                  raised
-                  color="secondary"
-                  component={Link}
-                  to="/sign-in"
-                >
-                  Sign in
+                <div>
+                  <Button
+                    className={classes.button}
+                    raised
+                    color="secondary"
+                    component={Link}
+                    to="/sign-in"
+                  >
+                    Sign in
                 </Button>
-                <Button
-                  className={classes.button}
-                  raised
-                  color="inherit"
-                  component={Link}
-                  to="/sign-up"
-                >
-                  Sign up
+                  <Button
+                    className={classes.button}
+                    raised
+                    color="inherit"
+                    component={Link}
+                    to="/sign-up"
+                  >
+                    Sign up
                 </Button>
-              </div>
-            )}
+                </div>
+              )}
           </Toolbar>
         </AppBar>
       </div>
