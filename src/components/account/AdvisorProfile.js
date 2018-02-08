@@ -59,12 +59,14 @@ export class AdvisorProfile extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
+      tags,
       picUrl,
       phoneNumber,
       bio,
       address
     } = nextProps.advisorProfile
     this.setState({
+      tags,
       phoneNumber,
       bio,
       address,
@@ -124,6 +126,7 @@ export class AdvisorProfile extends PureComponent {
   }
   render() {
     const {
+      tags,
       picUrl,
       phoneNumber,
       bio,
@@ -187,6 +190,21 @@ export class AdvisorProfile extends PureComponent {
                   id="publicEmail"
                   type="text"
                   label="Email"
+                  onChange={this.handleChange}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} md={5}>
+              <FormControl fullWidth>
+                <TextField
+                  style={classes.form}
+                  id="tags"
+                  type="text"
+                  label="Job Title"
+                  value={tags}
                   onChange={this.handleChange}
                   InputLabelProps={{
                     shrink: true,

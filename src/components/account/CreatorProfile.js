@@ -48,6 +48,7 @@ export class CreatorProfile extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
+      tags,
       picUrl,
       streetName,
       streetNumber,
@@ -59,6 +60,7 @@ export class CreatorProfile extends PureComponent {
     } = nextProps.creatorProfile
 
     this.setState({
+      tags,
       streetName,
       streetNumber,
       postalCode,
@@ -115,6 +117,7 @@ export class CreatorProfile extends PureComponent {
 
   render() {
     const {
+      tags,
       picUrl,
       streetName,
       streetNumber,
@@ -133,7 +136,7 @@ export class CreatorProfile extends PureComponent {
         <Typography type="title" component="h2">
           Creator profile
         </Typography>
-        <form>
+        <form onSubmit={this.submitForm.bind(this)}>
           <Dropzone
             style={{ float: 'left', width: 300, height: 300 }}
             multiple={false}
@@ -269,6 +272,20 @@ export class CreatorProfile extends PureComponent {
                 />
               </FormControl>
             </Grid>
+            <Grid item xs={6} md={5}>
+              <FormControl fullWidth>
+                <TextField
+                  style={classes.form}
+                  type="text"
+                  label="Job Title"
+                  value={tags}
+                  onChange={this.handleChange('tags')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
+            </Grid>
           </Grid>
           <ExpansionPanel style={classes.heading}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -299,13 +316,9 @@ export class CreatorProfile extends PureComponent {
             }
             label="Public profile"
           />
-        </form>
-        <Button onClick={this.submitForm.bind(this)} raised color="primary">
-          Update
-        </Button>
-        <Button onClick={this.cancel.bind(this)} color="primary">
-          Cancel
-        </Button>
+        <Button type="submit" raised color="primary">Update</Button>
+        <Button onClick={this.cancel.bind(this)} color="primary">Cancel</Button>
+      </form>
       </div>
     )
   }
