@@ -49,10 +49,10 @@ class PublicAdvisorProfile extends PureComponent {
     const { ratings } = nextProps.advisorProfile
     const { user } = nextProps
 
-    if(!user) return null
+    if (!user) return null
 
     const currentRating = ratings.filter(r => r.clientId.toString() === user._id.toString())[0]
-    if(!currentRating) return null
+    if (!currentRating) return null
 
     this.setState({
       rating: currentRating.rating,
@@ -79,19 +79,19 @@ class PublicAdvisorProfile extends PureComponent {
 
     if (!signedIn) {
       this.props.loadError("You have to login to rate an advisor")
-      return false
+      return null
     }
     if (advisorUser._id.toString() === user._id.toString()) {
       this.props.loadError("I know you're great, but let's leave this to others...")
-      return false
+      return null
     }
     if (rating === 0) {
       this.props.loadError("You need to give a rating of 1 to 5 stars")
-      return false
+      return null
     }
     if (comment === '') {
       this.props.loadError("You need to write a comment")
-      return false
+      return null
     }
 
     const newRating = {
@@ -101,7 +101,7 @@ class PublicAdvisorProfile extends PureComponent {
       rating: rating
     }
 
-    const currentRating = ratings.filter(r => r.clientId.toString() === user._id.toString() )[0]
+    const currentRating = ratings.filter(r => r.clientId.toString() === user._id.toString())[0]
     const isNewRating = !currentRating
     isNewRating
       ? this.props.newRating(newRating)
