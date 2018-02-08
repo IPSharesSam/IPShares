@@ -96,9 +96,9 @@ export class TitlebarGridList extends PureComponent {
                       <PublicClient />
                     </Badge> */}
                   </Typography>
-                  {hit.tags.length > 0 && hit.tags.map(tag => {
-                    return <Chip className={classes.chip} label={tag} />
-                  })}
+                  {/* {hit.tags.length > 0 ? hit.tags.map((tag, index) => {
+                    return <Chip key={index} className={classes.chip} label={tag} />
+                  }) : null} */}
                   <Typography
                     type="subheading"
                     component="h3"
