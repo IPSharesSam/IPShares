@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 export class GoogleMapsSearch extends PureComponent {
   constructor(props) {
@@ -10,7 +10,9 @@ export class GoogleMapsSearch extends PureComponent {
   onSelectPlace = (x) => {
     geocodeByAddress(x)
       .then(result => {
-        this.props.pushParent(result[0].formatted_address, result[0].place_id)
+        getLatLng(result[0]).then(res => {
+          this.props.pushParent(result[0].formatted_address, result[0].place_id, res)
+        })
         this.setState({ address: result[0].formatted_address })
       })
       .catch(error => console.error('Error', error))
