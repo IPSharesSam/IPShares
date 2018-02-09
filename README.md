@@ -11,7 +11,7 @@ You need the following env variables to run the application. Note that the nev v
 
 Example .env config below:
 
-REACT_APP_SEARCH_KEY='***'
-REACT_APP_APP_ID='***'
+REACT_APP_ALGOLIA_SEARCH_KEY='***'
+REACT_APP_ALGOLIA_APP_ID='***'
 REACT_APP_CLOUDINARY_UPLOAD_URL='***'
 REACT_APP_CLOUDINARY_UPLOAD_PRESET='***'

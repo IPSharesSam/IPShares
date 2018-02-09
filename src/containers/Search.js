@@ -127,8 +127,8 @@ export class TitlebarGridList extends PureComponent {
     return (
       <Paper style={{ padding: 24 }}>
         <InstantSearch
-          appId={process.env.REACT_APP_APP_ID}
-          apiKey={process.env.REACT_APP_SEARCH_KEY}
+          appId={process.env.REACT_APP_ALGOLIA_APP_ID}
+          apiKey={process.env.REACT_APP_ALGOLIA_SEARCH_KEY}
           indexName="profiles"
         >
           <Grid container spacing={24}>
