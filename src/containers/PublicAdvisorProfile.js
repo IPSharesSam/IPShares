@@ -253,7 +253,7 @@ class PublicAdvisorProfile extends PureComponent {
             <Grid item xs={12}>
               <MapWithMarker
                 latlng={latlng}
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2qRZtMphkUtIpc_icoU7lyLOolwWS9U&libraries=places"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places"
                 mapElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `400px` }} />}
                 loadingElement={<div style={{ height: `100%` }} />} />
